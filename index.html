@@ -145,7 +145,7 @@
 
   /* GAP ANALYSIS */
   .gap-section{width:100%;max-width:1200px;}
-  .gap-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+  .gap-title{font-size:20px;font-weight:700;color:#f59e0b;letter-spacing:-.3px;margin-bottom:20px;padding-top:16px;border-top:1px solid var(--border);}
   .gap-domain{margin-bottom:20px;}
   .gap-domain-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
   .gap-domain-name::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -338,8 +338,8 @@
         <div class="example-radar-title">Manager track <span class="example-badge">Example</span></div>
         <canvas id="example-radar-mgr" style="width:100%;max-width:520px;" width="520" height="400"></canvas>
         <div class="example-radar-legend">
-          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Associate Manager (current)</span>
-          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Manager (next level)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Manager (current)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Lead Manager (next level)</span>
         </div>
       </div>
     </div>
@@ -988,15 +988,13 @@ function updateAll(){
     if(oCurrentLabel) oCurrentLabel.textContent = 'Approaching';
     oLevel.textContent = firstLevel;
     oLevel.style.color = '#888';
-    const nextText = next2 ? ' — focus on: ' + next2.level.label : '';
-    oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLevel + '. Keep developing across all domains.' + nextText;
+    oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLevel + '. Keep developing across all domains.';
   } else {
     const currentLevelLabel = BASE_LEVELS[currentTrack][reachedIdx].label;
     if(oCurrentLabel) oCurrentLabel.textContent = 'Current level';
     oLevel.textContent = currentLevelLabel;
-    oLevel.style.color = p.color;
-    const nextText = next2 ? ' → Next level: ' + next2.level.label : ' → Top level reached';
-    oDesc.textContent = p.desc + ' (avg ' + overall.toFixed(1) + ' / 4.0)' + nextText;
+    oLevel.style.color = '#4f8ef7';
+    oDesc.textContent = p.desc;
   }
 }
 
@@ -1019,8 +1017,8 @@ const BASE_LEVELS = {
     { label:'Principal Engineer', scores:{ technical:4, execution:4, collaboration:4, leadership:3, strategic:2 } },
   ],
   manager: [
-    { label:'Associate Manager', scores:{ technical:1, execution:2, collaboration:2, leadership:3, strategic:2 } },
-    { label:'Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:3, strategic:3 } },
+    { label:'Manager', scores:{ technical:1, execution:2, collaboration:2, leadership:3, strategic:2 } },
+    { label:'Lead Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:3, strategic:3 } },
     { label:'Principal Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:4, strategic:4 } },
   ],
 };
@@ -1032,7 +1030,7 @@ function setTrack(track) {
   document.getElementById('btn-manager').className  = 'track-btn' + (track==='manager'  ? ' active-manager'  : '');
   document.getElementById('track-desc').textContent = track === 'engineer'
     ? '5 levels: Associate → Engineer → Senior → Lead → Principal'
-    : '3 levels: Associate → Manager → Principal';
+    : '3 levels: Manager → Lead Manager → Principal Manager';
   document.getElementById('random-btn').style.display = 'inline-block';
 }
 
@@ -1505,7 +1503,7 @@ function drawExampleRadarMgr(){
   next.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
   c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#10b981';c.lineWidth=1.5;c.fill();c.stroke();
   c.setLineDash([]);
-  // Associate Manager current solid: T=1,E=2,C=2,L=3,S=2
+  // Manager current solid: T=1,E=2,C=2,L=3,S=2
   const cur=[1,2,2,3,2];
   c.beginPath();
   cur.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
