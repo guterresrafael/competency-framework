@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>April9 Competency Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#1e1e1e;
+    --surface:#2a2a2a;
+    --surface2:#333333;
+    --border:#3a3a3a;
+    --accent:#ff4d3d;
+    --accent-hover:#e63c2c;
+    --text:#ffffff;
+    --text-muted:#a0a0a0;
+    --text-dim:#555;
+    --c0:#666;--c1:#64748b;--c2:#3b82f6;--c3:#10b981;--c4:#ff4d3d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.6;}
+
+  /* HEADER */
+  .header{padding:0;border-bottom:1px solid var(--border);background:#111111;position:sticky;top:0;z-index:100;}
+  .header-inner{max-width:1200px;margin:0 auto;padding:16px 64px;display:flex;align-items:center;gap:16px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-img{height:40px;width:auto;display:block;}
+  .header-divider{width:1px;height:20px;background:var(--border);}
+  .header-title{font-size:13px;color:var(--text-muted);}
+
+
+  /* TRACK SELECTOR */
+  .track-selector{padding:0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .track-selector-inner{max-width:1200px;margin:0 auto;padding:20px 64px;display:flex;align-items:center;gap:16px;}
+  .track-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;}
+  .track-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;padding:8px 24px;border-radius:24px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;letter-spacing:.01em;transition:all .15s;}
+  .track-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .track-btn.active-engineer,.track-btn.active-manager{border-color:var(--accent);background:var(--accent);color:#fff;font-weight:700;}
+  .track-desc{font-size:12px;color:var(--text-muted);margin-left:8px;}
+  .random-btn{font-family:'Space Mono',monospace;font-size:10px;padding:6px 14px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;letter-spacing:.05em;transition:all .15s;margin-left:auto;}
+  .random-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+  .layout{display:flex;flex-direction:column;}
+  .left{padding:40px 0;}
+  .left-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
+
+  /* DOMAIN */
+  .domain-block{margin-bottom:56px;}
+  .domain-heading{padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;margin-bottom:20px;}
+  .domain-heading-top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .domain-tag{font-family:'Space Mono',monospace;font-size:9px;color:#fff;background:var(--accent);padding:3px 8px;border-radius:20px;font-weight:700;letter-spacing:.08em;white-space:nowrap;}
+  .domain-name{font-size:17px;font-weight:700;flex:1;letter-spacing:-.3px;}
+  .domain-avg-badge{font-family:'Space Mono',monospace;font-size:10px;padding:4px 12px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);transition:all .2s;}
+  .domain-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+  /* COMPETENCY */
+  .comp-block{margin-bottom:12px;margin-left:48px;background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--border);border-radius:2px;overflow:hidden;}
+  .comp-header{padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);}
+  .comp-header-top{display:flex;align-items:center;gap:10px;margin-bottom:5px;}
+  .comp-tag{font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);border:1px solid var(--accent);padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+  .comp-name{font-weight:600;font-size:13px;flex:1;}
+  .comp-avg-badge{font-family:'Space Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;border:1px solid var(--border);color:var(--text-dim);transition:all .2s;white-space:nowrap;}
+  .comp-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+  .comp-body{padding:16px 16px 16px 20px;display:flex;flex-direction:column;gap:14px;}
+
+  /* CRITERIA */
+  .criteria-block{border:1px solid var(--border);border-left:2px solid var(--text-dim);border-radius:2px;overflow:hidden;}
+
+  .criteria-header{padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border);}
+  .criteria-header-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  .criteria-dot-tag{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);border:1px solid var(--border);padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+  .criteria-name{font-size:12px;font-weight:600;flex:1;}
+  .criteria-score-lbl{font-family:'Space Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--text-dim);white-space:nowrap;transition:all .2s;}
+  .criteria-desc{font-size:11px;color:var(--text-muted);line-height:1.5;padding-left:2px;}
+
+  /* PROFICIENCY RADIO */
+  .proficiency-row{padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface2);}
+  .proficiency-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:inline-block;border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+  .proficiency-pills{display:flex;flex-direction:column;gap:4px;}
+  .pill{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:2px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;user-select:none;font-family:'Plus Jakarta Sans',sans-serif;}
+  .pill:hover{border-color:var(--text-muted);background:rgba(255,255,255,.03);}
+  .pill-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+  .pill-radio::after{content:'';width:6px;height:6px;border-radius:50%;background:transparent;transition:all .15s;}
+  .pill-content{display:flex;flex-direction:column;gap:3px;}
+  .pill-name{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;}
+  .pill-desc{font-size:12px;color:var(--text-muted);line-height:1.5;}
+  .pill.sel-0{border-color:#6b7280;background:rgba(156,163,175,.08);}
+  .pill.sel-0 .pill-radio{border-color:#6b7280;}.pill.sel-0 .pill-radio::after{background:#9ca3af;}
+  .pill.sel-0 .pill-name{color:#9ca3af;}
+  .pill.sel-0 .pill-desc{color:#9ca3af;opacity:.8;}
+  .pill.sel-1{border-color:#3b82f6;background:rgba(59,130,246,.1);}
+  .pill.sel-1 .pill-radio{border-color:#3b82f6;}.pill.sel-1 .pill-radio::after{background:#3b82f6;}
+  .pill.sel-1 .pill-name{color:#93c5fd;}
+  .pill.sel-1 .pill-desc{color:#93c5fd;opacity:.8;}
+  .pill.sel-2{border-color:#10b981;background:rgba(16,185,129,.1);}
+  .pill.sel-2 .pill-radio{border-color:#10b981;}.pill.sel-2 .pill-radio::after{background:#10b981;}
+  .pill.sel-2 .pill-name{color:#6ee7b7;}
+  .pill.sel-2 .pill-desc{color:#6ee7b7;opacity:.8;}
+  .pill.sel-3{border-color:#f97316;background:rgba(249,115,22,.08);}
+  .pill.sel-3 .pill-radio{border-color:#f97316;}.pill.sel-3 .pill-radio::after{background:#f97316;}
+  .pill.sel-3 .pill-name{color:#fb923c;}
+  .pill.sel-3 .pill-desc{color:#fb923c;opacity:.8;}
+  .pill.sel-4{border-color:var(--accent);background:rgba(255,77,61,.1);}
+  .pill.sel-4 .pill-radio{border-color:var(--accent);}.pill.sel-4 .pill-radio::after{background:var(--accent);}
+  .pill.sel-4 .pill-name{color:var(--accent);}
+  .pill.sel-4 .pill-desc{color:var(--accent);opacity:.8;}
+
+  /* LEVEL DESC BOX */
+  .level-desc-box{display:none;}
+
+  /* CALCULATE BAR */
+  .calculate-bar{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .calculate-bar-inner2{max-width:1200px;margin:0 auto;padding:24px 64px;display:flex;align-items:center;gap:20px;}
+  .calculate-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;padding:12px 32px;border-radius:24px;border:none;background:var(--accent);color:#fff;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;}
+  .calculate-btn:hover{opacity:.85;}
+  .calculate-hint{font-size:12px;color:var(--text-muted);}
+
+  /* RESULTS */
+  .right{display:none;padding:48px 0;flex-direction:column;align-items:center;gap:28px;background:var(--bg);}
+  .right-inner{max-width:1200px;margin:0 auto;padding:0 64px;width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:28px;}
+  .right.visible{display:flex;}
+  .results-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:start;width:100%;max-width:1200px;}
+  .summary{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:20px 22px;}
+  .summary-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+  .bar-rows{display:flex;flex-direction:column;gap:10px;}
+  .bar-row{display:flex;align-items:center;gap:12px;}
+  .bar-label{font-size:11px;width:120px;color:var(--text-muted);}
+  .bar-track{flex:1;height:4px;background:var(--surface2);border-radius:0;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:0;transition:width .4s,background .3s;}
+  .bar-val{font-family:'Space Mono',monospace;font-size:10px;width:120px;min-width:120px;text-align:right;color:var(--text-dim);transition:color .2s;white-space:nowrap;}
+  .overall-box{width:100%;max-width:1200px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:20px 24px;}
+  .overall-level{font-size:20px;font-weight:700;margin-bottom:4px;letter-spacing:-.3px;}
+  .overall-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+  .reset-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);width:100%;}
+  .reset-bar-inner{max-width:1200px;margin:0 auto;padding:24px 64px;display:flex;align-items:center;gap:20px;}
+  .reset-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;padding:12px 32px;border-radius:24px;border:none;background:var(--accent);color:#fff;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;}
+  .reset-btn:hover{opacity:.85;}
+
+  /* REFERENCE SECTION */
+  #reference-levels{padding:48px;border-top:3px solid var(--border);background:var(--bg);}
+  #reference-levels .ref-header-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+  #reference-levels .ref-header-title{font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px;}
+  #reference-levels .ref-header-desc{font-size:13px;color:var(--text-muted);margin-bottom:40px;}
+
+  /* GAP ANALYSIS */
+  .gap-section{width:100%;max-width:1200px;}
+  .gap-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+  .gap-domain{margin-bottom:20px;}
+  .gap-domain-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  .gap-domain-name::after{content:'';flex:1;height:1px;background:var(--border);}
+  .gap-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;margin-bottom:8px;}
+  .gap-item-name{font-size:12px;font-weight:600;color:var(--text);flex:1;}
+  .gap-item-current{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
+  .gap-arrow{color:var(--text-dim);font-size:12px;}
+  .gap-item-required{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
+  .gap-empty{font-size:13px;color:#10b981;padding:16px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:2px;text-align:center;}
+  .gap-group-header{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;margin-top:8px;border-bottom:1px solid var(--border);margin-bottom:12px;}
+  .results-header{width:100%;max-width:1200px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .level-display{flex:1;}
+  .level-current-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+  .level-current-name{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:4px;}
+  .level-next-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;margin-top:16px;}
+  .level-next-name{font-size:16px;font-weight:600;color:#10b981;}
+  .level-desc-small{font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:6px;}
+
+  /* EVIDENCE */
+  .evidence-row{display:none;padding:10px 14px;border-top:1px solid var(--border);background:var(--bg);align-items:center;gap:12px;}
+  .evidence-row.visible{display:flex;}
+  .evidence-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);padding:2px 8px;border-radius:2px;white-space:nowrap;}
+  .evidence-select{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:6px 10px;border-radius:2px;outline:none;cursor:pointer;transition:border-color .15s;min-width:160px;}
+  .evidence-select:focus{border-color:var(--accent);}
+  .evidence-select option{background:var(--surface2);color:var(--text);}
+  .evidence-required{font-size:11px;color:var(--accent);font-style:italic;}
+  .evidence-input{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:2px;outline:none;transition:border-color .15s;flex:1;min-width:0;}
+  .evidence-input:focus{border-color:var(--accent);}
+  .evidence-input::placeholder{color:var(--text-dim);}
+
+  /* INTRO SECTIONS */
+  .intro-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--bg);}
+  .domains-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .profiles-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--bg);}
+  .section-divider{padding:48px 0 32px;border-bottom:1px solid var(--border);background:var(--surface);}
+  .intro-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
+  .intro-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+  .intro-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
+  .intro-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:100%;}
+
+  /* LEVEL PILLS ROW */
+  .levels-row{display:flex;align-items:center;gap:10px;margin-top:32px;flex-wrap:wrap;}
+  .level-pill{font-family:'Space Mono',monospace;font-size:11px;padding:6px 14px;border-radius:2px;border:1px solid;display:flex;align-items:center;gap:7px;}
+  .lp-dot{width:7px;height:7px;border-radius:50%;}
+  .lp-arrow{color:var(--text-muted);font-size:13px;}
+  .lp-0{border-color:#6b7280;color:#9ca3af;}.lp-0 .lp-dot{background:#9ca3af;}
+  .lp-1{border-color:#3b82f6;color:#93c5fd;}.lp-1 .lp-dot{background:#3b82f6;}
+  .lp-2{border-color:#10b981;color:#6ee7b7;}.lp-2 .lp-dot{background:#10b981;}
+  .lp-3{border-color:#f97316;color:#fb923c;}.lp-3 .lp-dot{background:#f97316;}
+  .lp-4{border-color:#ff4d3d;color:#ff4d3d;}.lp-4 .lp-dot{background:#ff4d3d;}
+  .lp-0-text{color:#9ca3af;}.lp-1-text{color:#93c5fd;}.lp-2-text{color:#6ee7b7;}.lp-3-text{color:#fb923c;}.lp-4-text{color:#ff4d3d;}
+
+  /* LEVELS DESC GRID */
+  .levels-desc-grid{display:flex;flex-direction:column;gap:8px;margin-top:24px;border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+  .ldg-item{display:flex;align-items:baseline;gap:16px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
+  .ldg-item:last-child{border-bottom:none;}
+  .ldg-name{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;min-width:100px;}
+  .ldg-text{font-size:13px;color:var(--text-muted);}
+
+  /* DOMAINS GRID */
+  .domains-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:32px;}
+  .domain-card{background:var(--surface2);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:2px;padding:20px 18px;}
+  .domain-card-icon{color:var(--accent);margin-bottom:10px;display:flex;}
+  .domain-icon-inline{display:inline-flex;align-items:center;color:var(--accent);margin-right:4px;}
+  .domain-icon-inline svg{stroke:var(--accent);}
+  .domain-card-icon svg{stroke:var(--accent);}
+  .domain-card-name{font-size:15px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px;}
+  .domain-card-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+  /* PROFILES TABLE */
+  .profiles-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:32px;}
+  .profiles-table th{font-family:'Space Mono',monospace;font-size:10px;font-weight:600;color:var(--text-muted);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);letter-spacing:.05em;text-transform:uppercase;}
+  .profiles-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  .pt-section td{background:var(--surface2);font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;}
+  .pt-level{font-weight:600;color:var(--text);white-space:nowrap;}
+  .pt-pill{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;padding:3px 9px;border-radius:2px;border:1px solid;}
+
+
+  /* STRUCTURE SECTION */
+  .structure-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .struct-blocks{display:flex;flex-direction:column;gap:0;margin-top:40px;}
+  .struct-block{background:#141414;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:2px;padding:24px 28px;}
+  .struct-block-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .struct-icon{color:var(--accent);display:flex;align-items:center;}
+  .struct-icon svg{stroke:var(--accent);}
+  .struct-name{font-size:16px;font-weight:700;letter-spacing:-.2px;}
+  .struct-desc{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:100%;}
+  .struct-arrow{font-size:20px;color:var(--text-muted);padding:8px 28px;line-height:1;}
+
+  .struct-levels{display:flex;flex-direction:column;gap:6px;margin-top:16px;}
+  .struct-level{display:flex;align-items:baseline;gap:14px;padding:8px 12px;background:#1a1a1a;border-radius:2px;}
+  .sl-pill{font-family:'Space Mono',monospace;font-size:10px;padding:3px 9px;border-radius:2px;border:1px solid;min-width:90px;text-align:center;flex-shrink:0;}
+  .sl-desc{font-size:12px;color:var(--text-muted);line-height:1.5;}
+
+  .struct-evidence-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .ev-pill-neutral{border-color:#555!important;color:var(--text)!important;min-width:90px;text-align:center;background:var(--surface2);}
+  .struct-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .struct-ex-pill{font-family:'Space Mono',monospace;font-size:10px;padding:4px 12px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);background:var(--surface2);}
+  .struct-ex-more{border-style:dashed;color:var(--text-dim);font-style:italic;}
+  .ev-pill{font-family:'Space Mono',monospace;font-size:10px;padding:5px 14px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);}
+
+
+  .example-radars-row{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:48px;width:100%;}
+  .example-radar-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:12px;}
+  .example-radar-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+  .example-badge{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;border:1px solid #444;color:#666;letter-spacing:.08em;text-transform:uppercase;font-weight:400;}
+  .example-radar-legend{display:flex;gap:24px;font-size:12px;color:var(--text-muted);}
+  .erl-item{display:flex;align-items:center;gap:8px;}
+  .erl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+  /* FOOTER */
+  .footer-bar{background:#111111;border-top:1px solid #2a2a2a;padding:0;position:sticky;bottom:0;z-index:100;}
+  .footer-inner{max-width:1200px;margin:0 auto;padding:14px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .footer-left{display:flex;align-items:center;gap:14px;}
+  .footer-logo{height:24px;width:auto;}
+  .footer-divider{width:1px;height:16px;background:#2a2a2a;}
+  .footer-name{font-size:12px;color:#888;}
+  .footer-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .footer-item{font-family:'Space Mono',monospace;font-size:10px;color:#aaa;display:flex;align-items:center;gap:6px;}
+  .footer-item-label{color:#666;text-transform:uppercase;letter-spacing:.08em;font-size:9px;}
+  .footer-sep{color:#444;font-size:12px;}
+
+
+  /* INSPIRATION */
+  .inspiration-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--bg);}
+  .inspiration-layout{display:grid;grid-template-columns:200px 1fr;gap:48px;align-items:start;margin-top:32px;}
+  .inspiration-book{display:flex;flex-direction:column;gap:14px;}
+  .book-cover{width:160px;height:auto;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,.5);display:block;}
+  .book-cover-fallback{width:160px;height:220px;background:#141414;border:1px solid var(--border);border-radius:4px;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;font-size:13px;font-weight:600;}
+  .book-cover-author{font-size:11px;color:var(--text-muted);font-weight:400;}
+  .book-meta{display:flex;flex-direction:column;gap:4px;}
+  .book-title{font-size:13px;font-weight:600;color:var(--text);}
+  .book-author{font-size:11px;color:var(--text-muted);}
+  .inspiration-refs{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+  .inspiration-ref{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .15s;}
+  .inspiration-ref:hover{color:var(--accent);}
+  .ref-icon{color:var(--accent);}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <img class="logo-img" src="https://april9.com.au/img/logo-white.svg" alt="April9" />
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-title">Competency Framework</div>
+  </div>
+
+</div>
+
+<!-- FRAMEWORK OVERVIEW -->
+<div class="intro-section">
+  <div class="intro-inner">
+    <div class="intro-label">About this framework</div>
+    <h2 class="intro-title">April9 Competency Framework</h2>
+    <p class="intro-desc">A unified framework for engineers and managers across five domains. It defines what good looks like at every level — from someone just starting out to someone setting direction across the organisation. The same framework applies to both tracks: what changes is the depth and scope expected at each level.</p>
+
+    <div class="example-radars-row">
+      <div class="example-radar-wrap">
+        <div class="example-radar-title">Engineer track <span class="example-badge">Example</span></div>
+        <canvas id="example-radar" style="width:100%;max-width:520px;" width="520" height="400"></canvas>
+        <div class="example-radar-legend">
+          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Engineer (current)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Senior Engineer (next level)</span>
+        </div>
+      </div>
+      <div class="example-radar-wrap">
+        <div class="example-radar-title">Manager track <span class="example-badge">Example</span></div>
+        <canvas id="example-radar-mgr" style="width:100%;max-width:520px;" width="520" height="400"></canvas>
+        <div class="example-radar-legend">
+          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Associate Manager (current)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Manager (next level)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STRUCTURE -->
+<div class="structure-section">
+  <div class="intro-inner">
+    <div class="intro-label">How it works</div>
+    <h2 class="intro-title">Framework structure</h2>
+    <p class="intro-desc">Each domain is broken down into four levels of specificity. Understanding how they relate helps you navigate and fill in the assessment.</p>
+
+    <div class="struct-blocks">
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">01</span>
+          <span class="struct-name">Domain</span>
+        </div>
+        <p class="struct-desc">The framework is organised into five capability areas that cover how people work, deliver, relate to others, grow their influence, and contribute to the broader direction of the organisation. Each domain is relevant to both engineers and managers — the expected depth varies by level and track.</p>
+        <div class="domains-grid" style="margin-top:24px;">
+          <div class="domain-card">
+            <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <div class="domain-card-name">Technical</div>
+            <div class="domain-card-desc">Applies technical capability to build, improve, and maintain effective solutions.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="domain-card-name">Execution</div>
+            <div class="domain-card-desc">Drives reliable delivery through planning, prioritization, and self-management.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="domain-card-name">Collaboration</div>
+            <div class="domain-card-desc">Builds effective working relationships through communication, feedback, and teamwork.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="domain-card-name">Leadership</div>
+            <div class="domain-card-desc">Creates direction, supports teams, and helps others grow.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div class="domain-card-name">Strategic</div>
+            <div class="domain-card-desc">Connects work to broader business, product, and organisational goals.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="struct-arrow">↓</div>
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">02</span>
+          <span class="struct-name">Competency</span>
+        </div>
+        <p class="struct-desc">Within each domain, competencies group related skills and behaviours that serve a shared purpose. They provide the mid-level structure between the broad capability area and the specific observable behaviours used for assessment.</p>
+        <div class="struct-levels" style="margin-top:16px;">
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Code Quality & Testing</span>
+            <span class="sl-desc">Groups skills around writing, testing, and maintaining high-quality code.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Decision Making</span>
+            <span class="sl-desc">Groups skills around reasoning clearly, evaluating trade-offs, and owning outcomes.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Communication & Knowledge Sharing</span>
+            <span class="sl-desc">Groups skills around expressing ideas clearly and helping others build context.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral" style="letter-spacing:.2em;border-style:dashed;color:var(--text-muted)!important;border-color:#555!important;background:transparent;">···</span>
+            <span class="sl-desc">And more competencies across all five domains.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="struct-arrow">↓</div>
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">03</span>
+          <span class="struct-name">Criteria</span>
+        </div>
+        <p class="struct-desc">Criteria are the specific, observable behaviours that define what a competency looks like in practice. Each criteria is assessed independently, allowing for a precise and honest picture of where someone stands across different aspects of the same skill area.</p>
+        <div class="struct-levels" style="margin-top:16px;">
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Writing Code</span>
+            <span class="sl-desc">Produces code that is readable, maintainable, and handles edge cases appropriately.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Mentoring</span>
+            <span class="sl-desc">Supports the growth of others through guidance, feedback, and shared experience.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Work Breakdown</span>
+            <span class="sl-desc">Breaks work into clear, manageable steps that can be tracked and delivered incrementally.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral" style="letter-spacing:.2em;border-style:dashed;color:var(--text-muted)!important;border-color:#555!important;background:transparent;">···</span>
+            <span class="sl-desc">And more criteria within each competency.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="struct-arrow">↓</div>
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">04</span>
+          <span class="struct-name">Proficiency</span>
+        </div>
+        <p class="struct-desc">Each criteria is rated on a five-level scale that reflects how independently and consistently a behaviour is demonstrated. The scale is the same across all criteria and both tracks, making it possible to compare profiles and identify growth areas in a structured way.</p>
+        <div class="struct-levels">
+          <div class="struct-level">
+            <span class="sl-pill lp-0">Unaware</span>
+            <span class="sl-desc">Has no knowledge of the subject.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-1">Foundation</span>
+            <span class="sl-desc">Understands what it is and why it matters.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-2">Working</span>
+            <span class="sl-desc">Applies it with some support when needed.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-3">Independent</span>
+            <span class="sl-desc">Applies it fully without needing guidance.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-4">Expert</span>
+            <span class="sl-desc">Broad knowledge, helps others, and creates standards.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="struct-arrow">↓</div>
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">05</span>
+          <span class="struct-name">Evidence</span>
+        </div>
+        <p class="struct-desc">At higher proficiency levels, a claim of capability should be grounded in something concrete. Evidence serves as a reference point that makes the assessment more credible and actionable — both for the person filling it in and for anyone reviewing it.</p>
+        <div class="struct-levels" style="margin-top:16px;">
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Project</span>
+            <span class="sl-desc">A specific deliverable or initiative where the skill was applied and produced a concrete outcome.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Training</span>
+            <span class="sl-desc">A course, workshop, or structured learning programme completed to develop this capability.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Peer Review</span>
+            <span class="sl-desc">Validation from a colleague, manager, or collaborator who observed the behaviour directly.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Experience</span>
+            <span class="sl-desc">Previous work or responsibilities that demonstrate the capability in a real context.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill ev-pill-neutral">Certificate</span>
+            <span class="sl-desc">A formal credential issued by a recognised institution confirming the level of knowledge or skill.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROFILES -->
+<div class="profiles-section">
+  <div class="intro-inner">
+    <div class="intro-label">Reference profiles</div>
+    <h2 class="intro-title">Expected proficiency by level</h2>
+    <p class="intro-desc">The radars below show the expected proficiency in each domain for each role. These are the benchmarks used in the self assessment to calculate your current level and identify gaps.</p>
+    <div id="ref-grids" style="display:flex;flex-direction:column;gap:48px;margin-top:32px;width:100%;"></div>
+  </div>
+</div>
+
+<!-- SELF ASSESSMENT ANCHOR -->
+
+<div class="assess-intro" style="background:var(--surface);border-bottom:1px solid var(--border);">
+  <div class="intro-inner" style="padding-top:40px;padding-bottom:0;">
+    <div class="intro-label">Self assessment</div>
+    <h2 class="intro-title" style="font-size:22px;">Assess your proficiency</h2>
+    <p class="intro-desc" style="margin-bottom:0;">Select your track, then rate yourself on each criteria. Your results will show your current level, next level, and which criteria to focus on.</p>
+  </div>
+</div>
+<div class="track-selector">
+  <div class="track-selector-inner">
+    <span class="track-label">Track</span>
+    <button class="track-btn" id="btn-engineer" onclick="setTrack('engineer')">Engineer</button>
+    <button class="track-btn" id="btn-manager"  onclick="setTrack('manager')">Manager</button>
+    <span class="track-desc" id="track-desc">Select your track to begin.</span>
+    <button class="random-btn" id="random-btn" style="display:none" onclick="generateRandomProfile()">↺ Random profile</button>
+  </div>
+</div>
+<div id="assessment-content" style="display:none">
+<div class="layout">
+  <div class="left">
+    <div class="left-inner" id="left-panel"></div>
+  </div>
+</div>
+  <div class="calculate-bar">
+    <div class="calculate-bar-inner2">
+      <button class="calculate-btn" onclick="calculate()">Calculate Results</button>
+      <span class="calculate-hint">Complete the assessment above and click to see your profile and radar.</span>
+    </div>
+  </div>
+  <div class="right" id="results-panel">
+    <div class="right-inner">
+    <div class="results-grid">
+      <div><canvas id="radar" width="400" height="400"></canvas></div>
+      <div>
+        <div class="summary">
+          <div class="summary-title">Domain Scores</div>
+          <div class="bar-rows" id="bar-rows"></div>
+        </div>
+      </div>
+    </div>
+    <div class="results-header">
+      <div class="level-display">
+        <div class="level-current-label" id="level-current-label">Current level</div>
+        <div class="level-current-name" id="overall-level" style="color:var(--accent)">—</div>
+        <div class="level-desc-small" id="overall-desc">Complete the assessment to see your profile.</div>
+        <div class="level-next-label" id="next-label" style="display:none">Next level</div>
+        <div class="level-next-name" id="next-level-name"></div>
+      </div>
+    </div>
+<div class="gap-section" id="gap-section" style="display:none">
+      <div class="gap-title">Criteria to improve</div>
+      <div id="gap-list"></div>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="reset-bar" id="reset-bar" style="display:none;"><div class="reset-bar-inner"><button class="reset-btn" onclick="resetAll()">Reset all</button><span class="calculate-hint">Clears all selections and collapses the results panel.</span></div></div>
+
+  <script>
+
+const LEVELS=['Unaware','Foundation','Working','Independent','Expert'];
+const COLORS=['#9ca3af','#3b82f6','#10b981','#f97316','#ff4d3d'];
+const PROFILES=[
+  {name:'Associate Engineer',   color:'#94a3b8',desc:'Just getting started. Building awareness across all domains.'},
+  {name:'Engineer',      color:'#64748b',desc:'Building the foundation. Performing with close guidance.'},
+  {name:'Senior Engineer',   color:'#3b82f6',desc:'Delivering independently on routine work.'},
+  {name:'Lead Engineer',     color:'#10b981',desc:'Operating autonomously and starting to elevate others.'},
+  {name:'Principal Engineer',color:'#f59e0b',desc:'Leading across teams and shaping technical direction.'},
+];
+
+const DOMAIN_ICONS={technical:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',execution:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',collaboration:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',leadership:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',strategic:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'};
+const FRAMEWORK=[
+  { id:'technical', label:'Technical',
+    desc:'Applies technical capability to build, improve, and maintain effective solutions.',
+    tag:'01',
+    competencies:[
+      { id:'cqt', label:'Code Quality & Testing',
+        desc:'Writes clean, testable, and reliable code that meets the team\'s quality standards.',
+        criteria:[
+          { id:'wc', label:'Writing Code', desc:'Produces code that is readable, maintainable, and handles edge cases and errors appropriately.',
+            levels:['Has no knowledge of what code quality means or how it is achieved.','Has a general idea of what readable and maintainable code looks like and why it matters.','Writes functions that are testable and understandable by others, sometimes needing guidance on edge cases.','Consistently writes production-ready code that accounts for edge cases and errors without needing guidance.','Has broad knowledge of code quality practices, helps others raise their standards, and establishes quality conventions for the team.']},
+          { id:'tst', label:'Testing', desc:'Applies the appropriate level and type of testing to ensure software correctness and reliability.',
+            levels:['Has no knowledge of software testing or why it matters.','Understands what software testing is and why it matters.','Writes unit tests independently and higher-level tests with some support. Tests edge cases and error paths.','Writes unit, integration, and end-to-end tests without needing guidance.','Has broad knowledge of testing approaches, helps teams identify gaps, and drives testing standards across the organisation.']},
+        ]},
+      { id:'dbo', label:'Debugging & Observability',
+        desc:'Identifies, diagnoses, and resolves issues effectively while ensuring systems are monitorable.',
+        criteria:[
+          { id:'dbg', label:'Debugging', desc:'Uses systematic approaches to identify and resolve software issues efficiently.',
+            levels:['Has no knowledge of debugging concepts or tools.','Understands what debugging is and that tools exist to support it.','Uses a systematic approach to debug issues within a single service, sometimes needing support on complex cases.','Proficient at diagnosing issues within and across services without needing support.','Has broad debugging expertise, helps others resolve complex issues, and leads incident response across the organisation.']},
+          { id:'obs', label:'Observability', desc:'Ensures systems are instrumented and monitored in a way that supports stability and performance.',
+            levels:['Has no knowledge of monitoring or observability concepts.','Understands what monitoring and observability mean and why they matter.','Is aware of the team’s monitoring approach and uses operational data, sometimes needing guidance on improvements.','Helps tune and improve team monitoring. Uses operational data to suggest stability and performance improvements.','Drives monitoring work within the team. Uses operational data to lead improvements in stability and performance.']},
+        ]},
+      { id:'sda', label:'Software Design & Architecture',
+        desc:'Designs solutions that are well-structured, scalable, and aligned with the system\'s architecture.',
+        criteria:[
+          { id:'ucs', label:'Understanding Code & Systems', desc:'Builds the context needed to work effectively within and across codebases and system boundaries.',
+            levels:['Has no knowledge of how codebases or software domains are structured.','Understands what a codebase and domain are and why context matters to work within them.','Understands a portion of the team’s domain and can work productively within it, sometimes needing context from others.','Understands the team\u2019s domain at a high level and has expertise in a significant portion of it.','Has deep expertise in the team\u2019s full domain, including services, interactions, and data flows. Understands adjacent domains.']},
+          { id:'arc', label:'Software Architecture', desc:'Designs systems and services that are robust, scalable, and aligned with long-term technical goals.',
+            levels:['Has no knowledge of software architecture concepts or design patterns.','Understands what software architecture means and why design decisions have long-term consequences.','Designs functions aligned with the overall service architecture, sometimes needing guidance on broader implications.','Consistently designs code aligned with the overall architecture without needing guidance. Uses abstractions and code isolation effectively.','Has broad architectural knowledge, helps teams make sound design decisions, and drives architecture practices across the organisation.']},
+        ]},
+      { id:'sec', label:'Security',
+        desc:'Applies security principles to protect systems, data, and users from vulnerabilities and threats.',
+        criteria:[
+          { id:'spr', label:'Security Practices', desc:'Integrates security awareness and best practices into everyday engineering work.',
+            levels:['Has no knowledge of software security concepts or why they matter.','Understands what security means in a software context and why it is important.','Approaches work with a security lens and looks for vulnerabilities, sometimes needing guidance on complex decisions.','Consistently applies security principles independently and proactively identifies risks in their own work and in code reviews.','Has broad security knowledge, helps teams apply security practices, and sets security standards across the organisation.']},
+        ]},
+    ]},
+  { id:'execution', label:'Execution',
+    desc:'Drives reliable delivery through planning, prioritization, and self-management.',
+    tag:'02',
+    competencies:[
+      { id:'del', label:'Delivery',
+        desc:'Plans, scopes, and delivers work reliably and consistently.',
+        criteria:[
+          { id:'wb', label:'Work Breakdown', desc:'Breaks work into clear, manageable steps that support effective execution.',
+            levels:['Has no knowledge of work breakdown or task decomposition.','Understands why breaking work into smaller steps supports better execution.','Breaks down routine work into manageable steps with some support when complexity increases.','Breaks down work clearly and effectively in all situations without needing guidance.','Has broad knowledge of work breakdown practices, helps others structure complex work, and establishes decomposition standards for the team.']},
+          { id:'pri', label:'Prioritization', desc:'Identifies what matters most and focuses effort in the right order.',
+            levels:['Has no knowledge of prioritization concepts or techniques.','Understands what prioritization means and why focusing on the right things matters.','Prioritises routine work independently, sometimes needing support when trade-offs are complex.','Prioritises effectively in all situations and adjusts without needing guidance.','Has broad knowledge of prioritisation approaches, helps teams balance competing priorities, and shapes prioritisation practices across the organisation.']},
+          { id:'ada', label:'Adaptability', desc:'Adjusts effectively to changing priorities, context, or requirements.',
+            levels:['Has no awareness of how to handle changing priorities or requirements.','Understands that priorities and requirements change and why adaptability is important.','Adapts to routine changes independently, sometimes needing support in more complex or uncertain situations.','Adapts effectively to any change or uncertainty without needing guidance.','Has broad experience navigating change, helps others adapt effectively, and creates clarity for the team in uncertain environments.']},
+        ]},
+      { id:'smg', label:'Self-Management',
+        desc:'Manages personal workload, commitments, and time with consistency and ownership.',
+        criteria:[
+          { id:'rel', label:'Reliability', desc:'Delivers work consistently and can be counted on to follow through.',
+            levels:['Has no awareness of what reliable delivery means.','Understands what consistent and reliable delivery looks like and why it matters.','Usually follows through on commitments, occasionally needing support to stay on track.','Delivers reliably and consistently in all situations without needing support.','Has a strong track record of reliability, helps strengthen team consistency, and sets the standard for delivery across the organisation.']},
+          { id:'acc', label:'Accountability', desc:'Takes ownership of work, commitments, and outcomes.',
+            levels:['Has no awareness of what ownership or accountability mean in a work context.','Understands what taking ownership of work and outcomes means.','Takes ownership of routine work and communicates proactively when support is needed.','Owns all work and follows through on commitments consistently without needing prompting.','Has broad ownership across complex work, helps others stay accountable, and builds a culture of accountability in the team.']},
+          { id:'eff', label:'Efficiency', desc:'Uses time, effort, and resources in a practical and effective way.',
+            levels:['Has no awareness of how to use time and resources effectively.','Understands why using time and resources well is important.','Completes work with reasonable use of time and resources, sometimes needing guidance on trade-offs.','Works efficiently in all situations and avoids unnecessary effort without needing guidance.','Has broad knowledge of efficient practices, helps others work smarter, and improves ways of working across the team.']},
+        ]},
+    ]},
+  { id:'collaboration', label:'Collaboration',
+    desc:'Builds effective working relationships through communication, feedback, and teamwork.',
+    tag:'03',
+    competencies:[
+      { id:'cks', label:'Communication & Knowledge Sharing',
+        desc:'Communicates clearly and ensures knowledge flows effectively within and across teams.',
+        criteria:[
+          { id:'com', label:'Effective Communication', desc:'Conveys information clearly, concisely, and in a way that is appropriate for the audience.',
+            levels:['Has no awareness of what effective communication in a team context looks like.','Understands what clear and audience-oriented communication looks like and why it matters.','Communicates clearly in most situations, sometimes needing support adapting to different audiences.','Communicates effectively on all topics and adapts to any audience without needing guidance.','Has broad communication skills, helps others communicate more clearly, and drives communication standards across the team.']},
+          { id:'ksh', label:'Knowledge Sharing', desc:'Shares knowledge proactively and contributes to documentation and team learning.',
+            levels:['Has no awareness of knowledge sharing practices or why they matter.','Understands why sharing knowledge benefits the team.','Shares knowledge regularly and contributes to documentation, occasionally needing encouragement to do so proactively.','Shares knowledge consistently and contributes to documentation without needing prompting.','Has broad knowledge sharing practices, encourages others to share, and drives documentation culture across the organisation.']},
+        ]},
+      { id:'trb', label:'Teamwork & Relationship Building',
+        desc:'Works well with others and builds strong, trust-based working relationships.',
+        criteria:[
+          { id:'twk', label:'Teamwork', desc:'Actively contributes to team success by helping others and sharing credit.',
+            levels:['Has no awareness of what active teamwork or collaboration looks like.','Understands what active contribution to team success looks like.','Helps teammates overcome obstacles when requested, sometimes stepping in proactively.','Consistently helps teammates resolve blockers and complete work without needing to be asked.','Has a strong record of enabling team success, helps others collaborate effectively, and champions a culture of shared credit across teams.']},
+          { id:'rel2', label:'Relationship Building', desc:'Develops and maintains strong working relationships with teammates, stakeholders, and partners.',
+            levels:['Has no awareness of what building professional working relationships involves.','Understands why building strong working relationships matters.','Builds working relationships with teammates and direct stakeholders, sometimes needing support broadening them.','Builds strong relationships with all relevant teammates and stakeholders independently.','Has broad relationship networks across the organisation, leverages them to help teams, and strengthens collaboration at a systemic level.']},
+        ]},
+      { id:'fbk', label:'Feedback: Giving & Receiving',
+        desc:'Exchanges feedback openly and constructively to support growth and improvement.',
+        criteria:[
+          { id:'dfb', label:'Delivering Feedback', desc:'Provides praise and constructive feedback in a useful and respectful manner.',
+            levels:['Has no awareness of what constructive feedback looks like or why it matters.','Understands what useful and constructive feedback looks like and why it matters.','Delivers praise and constructive feedback to teammates, sometimes needing guidance on framing.','Delivers feedback effectively to teammates and stakeholders in all situations without needing guidance.','Has broad experience giving feedback, helps others improve how they give feedback, and drives a feedback culture across the team.']},
+          { id:'sfb', label:'Seeking & Receiving Feedback', desc:'Actively seeks feedback and uses it as a tool for growth.',
+            levels:['Has no awareness of why seeking feedback is valuable.','Understands why seeking and receiving feedback supports growth.','Seeks feedback from teammates and applies it, occasionally needing encouragement to do so consistently.','Actively seeks and applies feedback in all situations without needing prompting.','Has strong habits around seeking feedback, helps others embrace it as a growth tool, and drives a feedback culture across the organisation.']},
+        ]},
+    ]},
+  { id:'leadership', label:'Leadership',
+    desc:'Creates direction, supports teams, and helps others grow.',
+    tag:'04',
+    competencies:[
+      { id:'mnt', label:'Mentoring & Development',
+        desc:'Supports the growth of others through guidance, knowledge sharing, and active mentorship.',
+        criteria:[
+          { id:'men', label:'Mentoring', desc:'Guides and supports others in their professional and technical development.',
+            levels:['Has no awareness of what mentoring or developing others involves.','Understands what mentoring means and why developing others matters.','Mentors teammates in an open and empathetic manner, sometimes needing guidance on how to approach it.','Mentors teammates consistently and seeks mentoring opportunities independently.','Has broad mentoring experience, helps others grow as mentors, and builds a culture of mentoring across the organisation.']},
+        ]},
+      { id:'dec', label:'Decision Making',
+        desc:'Makes clear, well-reasoned decisions and takes ownership of their outcomes.',
+        criteria:[
+          { id:'dkm', label:'Decision Making', desc:'Makes sound decisions that are objective, well-reasoned, and aligned with team and organisational goals.',
+            levels:['Has no awareness of what sound decision making involves.','Understands what well-reasoned decisions look like and that bias can affect them.','Makes reasonable decisions with some support when trade-offs are complex or stakes are high.','Makes clear, well-reasoned decisions independently and takes full ownership of outcomes.','Has broad decision-making experience, helps teams make sound decisions, and ensures accountability is embedded across the organisation.']},
+        ]},
+      { id:'aln', label:'Driving Alignment',
+        desc:'Builds shared understanding and agreement around goals, priorities, and direction.',
+        criteria:[
+          { id:'alg', label:'Alignment', desc:'Ensures individuals and teams are working toward shared goals and a common direction.',
+            levels:['Has no awareness of what team alignment means or why it matters.','Understands what team alignment means and why working toward shared goals matters.','Contributes to team alignment conversations, sometimes needing guidance to connect them to broader strategy.','Ensures the team stays aligned on shared goals independently and uses strategy as a basis for decisions.','Has broad experience driving alignment, helps teams stay focused on shared goals, and builds alignment practices across the organisation.']},
+        ]},
+    ]},
+  { id:'strategic', label:'Strategic',
+    desc:'Connects work to broader business, product, and organisational goals.',
+    tag:'05',
+    competencies:[
+      { id:'bac', label:'Business Acumen',
+        desc:'Understands how the business works and how technology decisions affect its outcomes.',
+        criteria:[
+          { id:'bus', label:'Business Understanding', desc:'Understands the team\'s domain, business context, and how engineering work contributes to organisational goals.',
+            levels:['Has no awareness of the business context in which the team operates.','Understands that the team operates within a business context and that engineering contributes to it.','Understands the team’s domain and how it contributes to business strategy, sometimes needing support on broader context.','Has a thorough understanding of the team\u2019s domain and strategy. Has a basic understanding of adjacent teams\u2019 business domains.','Has a thorough understanding of the team\u2019s domain and how it maps to market trends. Understands adjacent teams\u2019 strategies and interaction points.']},
+          { id:'stw', label:'Strategic Work', desc:'Engages with and contributes to the organisation\u2019s engineering strategy.',
+            levels:['Has no awareness of what an engineering strategy is.','Understands what engineering strategy means and that it guides how technical work is prioritised.','Understands the engineering strategy and is aware of its implications for the team, sometimes needing guidance to engage with it.','Engages with the engineering strategy independently and applies it to the team’s work without needing guidance.','Collaborates on the team\u2019s engineering work based on organisational strategy. Sometimes contributes to org-wide strategic work.']},
+        ]},
+      { id:'prd', label:'Product Thinking',
+        desc:'Thinks about the product from the user\'s perspective and connects technical work to product value.',
+        criteria:[
+          { id:'paw', label:'Product Awareness', desc:'Understands the product, its users, and how engineering decisions affect the product experience.',
+            levels:['Has no awareness of the product or who it serves.','Understands what the product does and who it serves.','Understands the product area and how it fits into the business, occasionally making improvement suggestions.','Thoroughly understands the product and connects technical work to product value without needing guidance.','Has broad product knowledge, helps teams connect technical decisions to product value, and shapes roadmaps across the organisation.']},
+        ]},
+    ]},
+];
+
+const scores={};
+FRAMEWORK.forEach(d=>d.competencies.forEach(c=>c.criteria.forEach(cr=>{scores[cr.id]=null;})));
+
+// BUILD LEFT
+const left=document.getElementById('left-panel');
+FRAMEWORK.forEach(domain=>{
+  const block=document.createElement('div');
+  block.className='domain-block';
+  block.innerHTML=`
+    <div class="domain-heading">
+      <div class="domain-heading-top">
+        <span class="domain-tag">DOMAIN</span>
+        <span class="domain-name">${domain.label}</span>
+        <span class="domain-avg-badge" id="davg-${domain.id}">—</span>
+      </div>
+      <div class="domain-desc">${domain.desc}</div>
+    </div>`;
+
+  domain.competencies.forEach(comp=>{
+    const cb=document.createElement('div');
+    cb.className='comp-block';
+    cb.innerHTML=`
+      <div class="comp-header">
+        <div class="comp-header-top">
+          <span class="comp-tag">COMPETENCY</span>
+          <span class="comp-name">${comp.label}</span>
+          <span class="comp-avg-badge" id="cavg-${comp.id}">—</span>
+        </div>
+        <div class="comp-desc">${comp.desc}</div>
+      </div>
+      <div class="comp-body" id="cbody-${comp.id}"></div>`;
+    block.appendChild(cb);
+
+    const body=cb.querySelector(`#cbody-${comp.id}`);
+    comp.criteria.forEach(cr=>{
+      const crEl=document.createElement('div');
+      crEl.className='criteria-block';
+      crEl.id=`crblock-${cr.id}`;
+      crEl.innerHTML=`
+        <div class="criteria-header">
+          <div class="criteria-header-top">
+            <span class="criteria-dot-tag">CRITERIA</span>
+            <span class="criteria-name">${cr.label}</span>
+            <span class="criteria-score-lbl" id="crscore-${cr.id}">not set</span>
+
+          </div>
+          <div class="criteria-desc">${cr.desc}</div>
+        </div>
+        <div class="proficiency-row">
+          <div class="proficiency-label">Proficiency</div>
+          <div class="proficiency-pills">${cr.levels.map((desc,i)=>`
+            <div class="pill" id="pill-${cr.id}-${i}" onclick="setScore('${cr.id}',${i})">
+              <div class="pill-radio"></div>
+              <span class="pill-name">${LEVELS[i]}</span>
+              <span class="pill-desc">${desc}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div class="evidence-row" id="evrow-${cr.id}">
+          <span class="evidence-label">Evidence</span>
+          <select class="evidence-select" id="evsel-${cr.id}" onchange="onEvidenceChange('${cr.id}')">
+            <option value="">Select type</option>
+            <option value="experience">Experience</option>
+            <option value="project">Project</option>
+            <option value="training">Training</option>
+            <option value="peer-review">Peer Review</option>
+            <option value="certificate">Certificate</option>
+          </select>
+          <input class="evidence-input" type="text" id="evinput-${cr.id}" placeholder="Describe your evidence..." oninput="updateAll()" />
+        </div>
+        </div>`;
+      body.appendChild(crEl);
+    });
+  });
+  left.appendChild(block);
+});
+
+// BUILD BARS
+const barsEl=document.getElementById('bar-rows');
+FRAMEWORK.forEach(domain=>{
+  const row=document.createElement('div');
+  row.className='bar-row';
+  row.innerHTML=`<span class="bar-label">${domain.label}</span><div class="bar-track"><div class="bar-fill" id="bfill-${domain.id}" style="width:0%"></div></div><span class="bar-val" id="bval-${domain.id}">—</span>`;
+  barsEl.appendChild(row);
+});
+
+function setScore(crId,val){
+  scores[crId]=val;
+  // pills
+  LEVELS.forEach((_,i)=>{
+    document.getElementById(`pill-${crId}-${i}`).className='pill'+(i===val?` sel-${val}`:'');
+  });
+  // badge
+  const lbl=document.getElementById(`crscore-${crId}`);
+  lbl.textContent=LEVELS[val];lbl.style.color=COLORS[val];lbl.style.borderColor=COLORS[val]+'55';
+  // show evidence field for Independent (3) and Expert (4)
+  const evrow=document.getElementById(`evrow-${crId}`);
+  if(evrow){
+    if(val>=3){
+      evrow.classList.add('visible');
+      // don't collapse yet — wait for evidence to be filled
+    } else {
+      evrow.classList.remove('visible');
+      const evsel=document.getElementById(`evsel-${crId}`);
+      if(evsel) evsel.value='';
+      const evinput=document.getElementById(`evinput-${crId}`);
+      if(evinput) evinput.value='';
+      // collapse immediately for non-evidence levels
+      const block=document.getElementById(`crblock-${crId}`);
+      if(block) setTimeout(()=>block.classList.add('collapsed'), 300);
+    }
+  } else {
+    // no evidence row — collapse immediately
+    const block=document.getElementById(`crblock-${crId}`);
+    if(block) setTimeout(()=>block.classList.add('collapsed'), 300);
+  }
+  updateAll();
+}
+
+function onEvidenceChange(crId){
+  const evsel=document.getElementById(`evsel-${crId}`);
+
+  updateAll();
+}
+
+function resetAll(){
+  document.getElementById('reset-bar').style.display='none';
+  document.getElementById('results-panel').classList.remove('visible');
+  document.getElementById('gap-section').style.display='none';
+  // Reset track
+  currentTrack = null;
+  document.getElementById('btn-engineer').className = 'track-btn';
+  document.getElementById('btn-manager').className  = 'track-btn';
+  document.getElementById('track-desc').textContent = 'Select your track to begin.';
+  document.getElementById('assessment-content').style.display = 'none';
+  document.getElementById('random-btn').style.display = 'none';
+  scrollToEl(document.getElementById('assessment-content'));
+  FRAMEWORK.forEach(d=>d.competencies.forEach(c=>c.criteria.forEach(cr=>{
+    scores[cr.id]=null;
+    LEVELS.forEach((_,i)=>{document.getElementById(`pill-${cr.id}-${i}`).className='pill';});
+    const lbl=document.getElementById(`crscore-${cr.id}`);
+    lbl.textContent='not set';lbl.style.color='';lbl.style.borderColor='';
+
+    const evrow=document.getElementById(`evrow-${cr.id}`);
+    if(evrow) evrow.classList.remove('visible');
+    const evsel=document.getElementById(`evsel-${cr.id}`);
+    if(evsel) evsel.value='';
+    const evinput=document.getElementById(`evinput-${cr.id}`);
+    if(evinput) evinput.value='';
+
+  })));
+  updateAll();
+}
+
+function avg(vals){const f=vals.filter(v=>v!==null);return f.length?f.reduce((a,b)=>a+b,0)/f.length:null;}
+function compAvg(comp){return avg(comp.criteria.map(cr=>scores[cr.id]));}
+function domainAvg(domain){return avg(domain.competencies.map(c=>compAvg(c)));}
+
+function updateAll(){
+  FRAMEWORK.forEach(domain=>{
+    domain.competencies.forEach(comp=>{
+      const a=compAvg(comp);
+      const badge=document.getElementById(`cavg-${comp.id}`);
+      if(a===null){badge.textContent='—';badge.style.color='';badge.style.borderColor='';}
+      else{const i=Math.round(a);badge.textContent=LEVELS[i];badge.style.color=COLORS[i];badge.style.borderColor=COLORS[i]+'55';}
+    });
+    const da=domainAvg(domain);
+    const dbadge=document.getElementById(`davg-${domain.id}`);
+    const bfill=document.getElementById(`bfill-${domain.id}`);
+    const bval=document.getElementById(`bval-${domain.id}`);
+    if(da===null){dbadge.textContent='—';dbadge.style.color='';dbadge.style.borderColor='';bfill.style.width='0%';bval.textContent='—';bval.style.color='';}
+    else{
+      const i=Math.round(da);
+      dbadge.textContent=LEVELS[i];dbadge.style.color=COLORS[i];dbadge.style.borderColor=COLORS[i]+'55';
+      bfill.style.width=((da/4)*100)+'%';bfill.style.background=COLORS[i];
+      bval.textContent=LEVELS[i]+' ('+da.toFixed(1)+')';bval.style.color=COLORS[i];
+    }
+  });
+  drawRadar();
+  const allDomains = FRAMEWORK.every(d => domainAvg(d) !== null);
+  const avgs=FRAMEWORK.map(d=>domainAvg(d)).filter(v=>v!==null);
+  const oLevel=document.getElementById('overall-level');
+  const oDesc=document.getElementById('overall-desc');
+  const oCurrentLabel=document.getElementById('level-current-label');
+  if(!allDomains){
+    oLevel.textContent='—';oLevel.style.color='';
+    oDesc.textContent='Complete all domains to see your profile.';
+    return;
+  }
+  const overall=avgs.reduce((a,b)=>a+b,0)/avgs.length;
+  // Determine current level: first level where user meets ALL domain scores
+  let reachedIdx = -1;
+  if (currentTrack) {
+    const levels = BASE_LEVELS[currentTrack];
+    for (let i = 0; i < levels.length; i++) {
+      const meetsAll = FRAMEWORK.every(domain => {
+        const da = domainAvg(domain);
+        return da !== null && da >= levels[i].scores[domain.id];
+      });
+      if (meetsAll) reachedIdx = i;
+      else break;
+    }
+  }
+  const idx=Math.min(4,Math.round(overall));
+  const p=PROFILES[idx];
+  const next2 = getNextBaseLevel();
+
+  if(reachedIdx === -1){
+    // Does not meet first level
+    const firstLevel = currentTrack ? BASE_LEVELS[currentTrack][0].label : '';
+    if(oCurrentLabel) oCurrentLabel.textContent = 'Approaching';
+    oLevel.textContent = firstLevel;
+    oLevel.style.color = '#888';
+    const nextText = next2 ? ' — focus on: ' + next2.level.label : '';
+    oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLevel + '. Keep developing across all domains.' + nextText;
+  } else {
+    const currentLevelLabel = BASE_LEVELS[currentTrack][reachedIdx].label;
+    if(oCurrentLabel) oCurrentLabel.textContent = 'Current level';
+    oLevel.textContent = currentLevelLabel;
+    oLevel.style.color = p.color;
+    const nextText = next2 ? ' → Next level: ' + next2.level.label : ' → Top level reached';
+    oDesc.textContent = p.desc + ' (avg ' + overall.toFixed(1) + ' / 4.0)' + nextText;
+  }
+}
+
+const canvas=document.getElementById('radar');
+const ctx=canvas.getContext('2d');
+const CX=200,CY=200,R=155,N=5;
+const angles=Array.from({length:N},(_,i)=>(i/N)*2*Math.PI-Math.PI/2);
+function pt(a,r){return[CX+r*Math.cos(a),CY+r*Math.sin(a)];}
+
+
+// ── TRACK & BASE LEVELS ──────────────────────────────────────────────────
+let currentTrack = null;
+
+const BASE_LEVELS = {
+  engineer: [
+    { label:'Associate Engineer', scores:{ technical:2, execution:2, collaboration:1, leadership:1, strategic:1 } },
+    { label:'Engineer', scores:{ technical:3, execution:3, collaboration:2, leadership:1, strategic:1 } },
+    { label:'Senior Engineer', scores:{ technical:4, execution:3, collaboration:3, leadership:2, strategic:1 } },
+    { label:'Lead Engineer', scores:{ technical:4, execution:4, collaboration:3, leadership:2, strategic:2 } },
+    { label:'Principal Engineer', scores:{ technical:4, execution:4, collaboration:4, leadership:3, strategic:2 } },
+  ],
+  manager: [
+    { label:'Associate Manager', scores:{ technical:1, execution:2, collaboration:2, leadership:3, strategic:2 } },
+    { label:'Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:3, strategic:3 } },
+    { label:'Principal Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:4, strategic:4 } },
+  ],
+};
+
+function setTrack(track) {
+  currentTrack = track;
+  document.getElementById('assessment-content').style.display = 'block';
+  document.getElementById('btn-engineer').className = 'track-btn' + (track==='engineer' ? ' active-engineer' : '');
+  document.getElementById('btn-manager').className  = 'track-btn' + (track==='manager'  ? ' active-manager'  : '');
+  document.getElementById('track-desc').textContent = track === 'engineer'
+    ? '5 levels: Associate → Engineer → Senior → Lead → Principal'
+    : '3 levels: Associate → Manager → Principal';
+  document.getElementById('random-btn').style.display = 'inline-block';
+  scrollToEl(document.getElementById('assessment-content'));
+}
+
+
+function generateRandomProfile(){
+  if(!currentTrack) return;
+  const levels = BASE_LEVELS[currentTrack];
+  // Pick a random mid level — not the first, not the last
+  const midLevels = levels.slice(1, levels.length - 1);
+  const targetLevel = midLevels[Math.floor(Math.random() * midLevels.length)];
+
+  // For each criteria, set a score that is within ±1 of the target domain score
+  // but never below 0 or above 4
+  FRAMEWORK.forEach(domain => {
+    const base = targetLevel.scores[domain.id];
+    domain.competencies.forEach(comp => {
+      comp.criteria.forEach(cr => {
+        const delta = Math.floor(Math.random() * 3) - 1; // -1, 0, or +1
+        const val = Math.max(0, Math.min(3, base + delta)); // max Independent, no Expert
+        scores[cr.id] = val;
+        LEVELS.forEach((_,i) => {
+          const pill = document.getElementById(`pill-${cr.id}-${i}`);
+          if(pill) pill.className = 'pill' + (i === val ? ` sel-${val}` : '');
+        });
+        const lbl = document.getElementById(`crscore-${cr.id}`);
+        if(lbl){ lbl.textContent=LEVELS[val]; lbl.style.color=COLORS[val]; lbl.style.borderColor=COLORS[val]+'55'; }
+        // Show evidence field if val >= 3
+        const evrow = document.getElementById(`evrow-${cr.id}`);
+        if(evrow){ val >= 3 ? evrow.classList.add('visible') : evrow.classList.remove('visible'); }
+      });
+    });
+  });
+
+  updateAll();
+
+  // Show results
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('visible');
+  document.getElementById('reset-bar').style.display = 'block';
+  showGapAnalysis();
+  setTimeout(()=>scrollToEl(panel), 100);
+}
+
+function getNextBaseLevel() {
+  if (!currentTrack) return null;
+  const levels = BASE_LEVELS[currentTrack];
+  // All domains must be evaluated
+  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
+  if (!allSet) return null;
+  for (let i = 0; i < levels.length; i++) {
+    const level = levels[i];
+    const isAbove = FRAMEWORK.every(domain => {
+      const da = domainAvg(domain);
+      return da !== null && da >= level.scores[domain.id];
+    });
+    if (!isAbove) return { level, index: i };
+  }
+  return { level: levels[levels.length - 1], index: levels.length - 1 };
+}
+
+function drawRadar(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let ring=1;ring<=5;ring++){
+    const r=(ring/5)*R;
+    ctx.beginPath();
+    angles.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.closePath();ctx.strokeStyle='#2a3145';ctx.lineWidth=1;ctx.stroke();
+  }
+  ctx.font='9px IBM Plex Mono,monospace';ctx.fillStyle='#3a4558';ctx.textAlign='left';
+  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;ctx.fillText(ring,CX+4,CY-r+4);}
+  angles.forEach(a=>{const[x,y]=pt(a,R);ctx.beginPath();ctx.moveTo(CX,CY);ctx.lineTo(x,y);ctx.strokeStyle='#2a3145';ctx.lineWidth=1;ctx.stroke();});
+  if(FRAMEWORK.some(d=>domainAvg(d)!==null)){
+    ctx.beginPath();
+    FRAMEWORK.forEach((domain,i)=>{
+      const da=domainAvg(domain);
+      const r=da!==null?((da+1)/5)*R:R*0.04;
+      const[x,y]=pt(angles[i],r);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    // Grey if approaching (no level reached), blue otherwise
+    const isApproachingRadar = currentTrack && (()=>{
+      const lvls=BASE_LEVELS[currentTrack];
+      return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
+    })();
+    const radarFill = isApproachingRadar ? 'rgba(150,150,150,0.1)' : 'rgba(79,142,247,0.15)';
+    const radarStroke = isApproachingRadar ? '#888888' : '#4f8ef7';
+    ctx.fillStyle=radarFill;ctx.strokeStyle=radarStroke;ctx.lineWidth=2.5;
+    ctx.fill();ctx.stroke();
+    FRAMEWORK.forEach((domain,i)=>{
+      const da=domainAvg(domain);if(da===null)return;
+      const r=((da+1)/5)*R;const[x,y]=pt(angles[i],r);
+      ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);
+      ctx.fillStyle=isApproachingRadar?'#888':COLORS[Math.round(da)];ctx.strokeStyle='#0f1117';ctx.lineWidth=2;
+      ctx.fill();ctx.stroke();
+    });
+  }
+  // next level polygon — blue when approaching, green when improving
+  const next = getNextBaseLevel();
+  if (next) {
+    const isAppr2 = currentTrack && (()=>{
+      const lvls=BASE_LEVELS[currentTrack];
+      return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
+    })();
+    ctx.beginPath();
+    FRAMEWORK.forEach((domain,i)=>{
+      const r = ((next.level.scores[domain.id]+1)/5)*R;
+      const[x,y]=pt(angles[i],r);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.fillStyle='rgba(255,255,255,0.0)';
+    ctx.strokeStyle=isAppr2?'#4f8ef7':'#10b981';
+    ctx.lineWidth=1.5;
+    ctx.setLineDash([5,4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  FRAMEWORK.forEach((domain,i)=>{
+    const[x,y]=pt(angles[i],R+28);
+    const da=domainAvg(domain);
+    ctx.textAlign='center';
+    ctx.font='bold 11px IBM Plex Mono,monospace';ctx.fillStyle='#e2e8f0';
+    ctx.fillText(domain.label,x,y);
+    if(da!==null){ctx.font='9px IBM Plex Mono,monospace';ctx.fillStyle=COLORS[Math.round(da)];ctx.fillText(LEVELS[Math.round(da)],x,y+13);}
+  });
+
+  // next level label
+  if (next) {
+    ctx.textAlign='center';
+    ctx.font='10px IBM Plex Mono,monospace';
+    ctx.fillStyle='#10b981';
+    ctx.fillText('── next: ' + next.level.label, CX, CY+R+52);
+  }
+}
+function calculate(){
+  updateAll();
+  showGapAnalysis();
+  const panel=document.getElementById('results-panel');
+  panel.classList.add('visible');
+  document.getElementById('reset-bar').style.display='block';
+  setTimeout(()=>scrollToEl(panel), 50);
+}
+
+function showGapAnalysis(){
+  const gapSection = document.getElementById('gap-section');
+  const gapList    = document.getElementById('gap-list');
+  const nextLabel  = document.getElementById('next-label');
+  const nextName   = document.getElementById('next-level-name');
+
+  if(!currentTrack){ gapSection.style.display='none'; return; }
+
+  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
+  if(!allSet){ gapSection.style.display='none'; return; }
+
+  // Compute current level label
+  const levels = BASE_LEVELS[currentTrack];
+  let reachedIdx2 = -1;
+  for(let i=0; i<levels.length; i++){
+    const meetsAll = FRAMEWORK.every(domain=>{
+      const da=domainAvg(domain);
+      return da!==null && da>=levels[i].scores[domain.id];
+    });
+    if(meetsAll) reachedIdx2=i; else break;
+  }
+  const currentLevelLabel = reachedIdx2>=0 ? levels[reachedIdx2].label : levels[0].label;
+
+  // Find next level
+  let nextLevel = null;
+  for(let i=0; i<levels.length; i++){
+    const meetsAll = FRAMEWORK.every(domain=>{
+      const da=domainAvg(domain);
+      return da!==null && da>=levels[i].scores[domain.id];
+    });
+    if(!meetsAll){ nextLevel=levels[i]; break; }
+  }
+
+  if(!nextLevel){
+    nextLabel.style.display='none';
+    nextName.textContent='';
+    gapList.innerHTML='<div class="gap-empty">You meet all criteria for the top level. Keep it up!</div>';
+    gapSection.style.display='block';
+    return;
+  }
+
+  nextLabel.style.display='block';
+  nextName.textContent=nextLevel.label;
+  // Blue if approaching, green if improving
+  const isAppr3 = currentTrack && (()=>{
+    const lvls=BASE_LEVELS[currentTrack];
+    return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
+  })();
+  nextName.style.color = isAppr3 ? '#4f8ef7' : '#10b981';
+
+  // Check if current == next (person is AT this level but not above)
+  const levels2 = BASE_LEVELS[currentTrack];
+  const currentIdx = levels2.findIndex(l => l.label === currentLevelLabel);
+  const nextIdx    = levels2.findIndex(l => l.label === nextLevel.label);
+  // isMaintain only when person actually reached that level (reachedIdx2 >= 0) AND next == current
+  const isMaintain = reachedIdx2 >= 0 && currentIdx >= 0 && nextIdx === currentIdx;
+  const isApproaching = reachedIdx2 === -1;
+  document.querySelector('.gap-title').textContent = isApproaching
+    ? 'Criteria to reach ' + nextLevel.label
+    : isMaintain
+      ? 'Criteria to maintain this level'
+      : 'Criteria to improve for next level';
+
+  // Find criteria gaps — split into high and low priority
+  const highGaps = [];
+  const lowGaps  = [];
+
+  FRAMEWORK.forEach(domain=>{
+    const required = nextLevel.scores[domain.id];
+    const domainScore = domainAvg(domain);
+    const domainMet = domainScore !== null && domainScore >= required;
+
+    domain.competencies.forEach(comp=>{
+      comp.criteria.forEach(cr=>{
+        const val = scores[cr.id];
+        if(val === null || val < required){
+          const gap = { domain, comp, cr, current: val, required };
+          // High priority: domain score itself is below target
+          // Low priority: domain score is met overall, but this specific criteria is below
+          if(!domainMet) highGaps.push(gap);
+          else lowGaps.push(gap);
+        }
+      });
+    });
+  });
+
+  if(!highGaps.length && !lowGaps.length){
+    gapList.innerHTML='<div class="gap-empty">No gaps found for the next level.</div>';
+  } else {
+    const colorMap = ['#9ca3af','#3b82f6','#10b981','#f97316','#ff4d3d'];
+
+    function renderGapGroup(gaps, label, labelColor){
+      if(!gaps.length) return '';
+      // Group by domain
+      const byDomain = {};
+      gaps.forEach(g=>{
+        if(!byDomain[g.domain.id]) byDomain[g.domain.id]={ domain:g.domain, items:[] };
+        byDomain[g.domain.id].items.push(g);
+      });
+      let html = `<div class="gap-group-header" style="color:${labelColor}">${label}</div>`;
+      Object.values(byDomain).forEach(({domain,items})=>{
+        html+=`<div class="gap-domain"><div class="gap-domain-name" style="color:${labelColor}"><span style="display:inline-flex;align-items:center;margin-right:8px;">${DOMAIN_ICONS[domain.id]||''}</span>${domain.label}</div>`;
+        items.forEach(({cr,current,required})=>{
+          const curLabel = current===null ? 'Not set' : LEVELS[current];
+          const curColor = current===null ? '#555555' : colorMap[current];
+          const reqLabel = LEVELS[required];
+          const reqColor = colorMap[required];
+          html+=`<div class="gap-item" style="border-left-color:${labelColor}40;">
+            <span class="gap-item-name">${cr.label}</span>
+            <span class="gap-item-current" style="background:${curColor}22;color:${curColor};border:1px solid ${curColor}55">${curLabel}</span>
+            <span class="gap-arrow">→</span>
+            <span class="gap-item-required" style="background:${reqColor}22;color:${reqColor};border:1px solid ${reqColor}55">${reqLabel}</span>
+          </div>`;
+        });
+        html+='</div>';
+      });
+      return html;
+    }
+
+    gapList.innerHTML =
+      renderGapGroup(highGaps, '▲ High priority', '#ff4d3d') +
+      renderGapGroup(lowGaps,  '▽ Low priority',  '#f97316');
+  }
+
+  gapSection.style.display='block';
+}
+drawRadar();
+
+// ── REFERENCE LEVEL RADARS ───────────────────────────────────────────────
+function drawReferenceRadars() {
+  const container = document.getElementById('ref-grids');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const tracks = [
+    { label: 'Engineer Track', levels: BASE_LEVELS.engineer },
+    { label: 'Manager Track',  levels: BASE_LEVELS.manager  },
+  ];
+
+  tracks.forEach(track => {
+    const section = document.createElement('div');
+
+    const trackLabel = document.createElement('div');
+    trackLabel.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;";
+    trackLabel.textContent = track.label;
+    section.appendChild(trackLabel);
+
+    const grid = document.createElement('div');
+    grid.style.cssText = 'display:flex;flex-direction:column;gap:32px;width:100%;';
+
+    const rows = [track.levels];
+    rows.forEach(rowLevels => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;flex-wrap:wrap;gap:32px;justify-content:flex-start;';
+      rowLevels.forEach(level => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:10px;';
+
+      const cvs = document.createElement('canvas');
+      cvs.width  = 220;
+      cvs.height = 220;
+      wrap.appendChild(cvs);
+
+      const lbl = document.createElement('div');
+      lbl.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--text);text-align:center;";
+      lbl.textContent = level.label;
+      wrap.appendChild(lbl);
+
+      row.appendChild(wrap);
+
+      // draw
+      const c  = cvs.getContext('2d');
+      const cx = 110, cy = 110, r = 80;
+      const N  = 5;
+      const ang = Array.from({length:N}, (_,i) => (i/N)*2*Math.PI - Math.PI/2);
+      const pt  = (a, rv) => [cx + rv*Math.cos(a), cy + rv*Math.sin(a)];
+      const domains = FRAMEWORK.map(d => d.id);
+
+      // grid rings
+      for (let ring = 1; ring <= 4; ring++) {
+        const rv = (ring/4)*r;
+        c.beginPath();
+        ang.forEach((a,i) => { const [x,y]=pt(a,rv); i===0?c.moveTo(x,y):c.lineTo(x,y); });
+        c.closePath();
+        c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
+      }
+
+      // axes
+      ang.forEach(a => {
+        const [x,y]=pt(a,r);
+        c.beginPath();c.moveTo(cx,cy);c.lineTo(x,y);
+        c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
+      });
+
+      // level polygon
+      c.beginPath();
+      FRAMEWORK.forEach((domain,i) => {
+        const val = level.scores[domain.id];
+        const rv  = val > 0 ? ((val)/4)*r : 4;
+        const [x,y] = pt(ang[i], rv);
+        i===0?c.moveTo(x,y):c.lineTo(x,y);
+      });
+      c.closePath();
+      c.fillStyle='rgba(79,142,247,0.18)';c.strokeStyle='#4f8ef7';c.lineWidth=2;
+      c.fill();c.stroke();
+
+      // dots
+      FRAMEWORK.forEach((domain,i) => {
+        const val = level.scores[domain.id];
+        const rv  = val > 0 ? ((val)/4)*r : 4;
+        const [x,y] = pt(ang[i], rv);
+        c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);
+        c.fillStyle=COLORS[val];c.strokeStyle='#0f1117';c.lineWidth=1.5;
+        c.fill();c.stroke();
+      });
+
+      // domain labels
+      FRAMEWORK.forEach((domain,i) => {
+        const [x,y] = pt(ang[i], r+18);
+        c.textAlign='center';
+        c.font='bold 9px IBM Plex Mono,monospace';
+        c.fillStyle='#7d8ba8';
+        c.fillText(domain.label, x, y);
+      });
+
+      // level score labels inside
+      FRAMEWORK.forEach((domain,i) => {
+        const val  = level.scores[domain.id];
+        const rv   = val > 0 ? ((val)/4)*r : 4;
+        const [x,y]= pt(ang[i], rv);
+        c.textAlign='center';
+        c.font='bold 8px IBM Plex Mono,monospace';
+        c.fillStyle=COLORS[val];
+        c.fillText(LEVELS[val].substring(0,3), x, y - 8);
+      });
+      });
+      grid.appendChild(row);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+}
+
+
+function scrollToEl(el, extraOffset=0){
+  const header = document.querySelector('.header');
+  const headerH = header ? header.offsetHeight : 0;
+  const footer = document.querySelector('.footer-bar');
+  const footerH = footer ? footer.offsetHeight : 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16 - extraOffset;
+  window.scrollTo({top, behavior:'smooth'});
+}
+drawReferenceRadars();
+
+function drawExampleRadar(){
+  const cvs=document.getElementById('example-radar');
+  if(!cvs)return;
+  const c=cvs.getContext('2d');
+  const CX=230,CY=185,R=140,N=5;
+  const ang=Array.from({length:N},(_,i)=>(i/N)*2*Math.PI-Math.PI/2);
+  const pt=(a,r)=>[CX+r*Math.cos(a),CY+r*Math.sin(a)];
+  const domains=['Technical','Execution','Collaboration','Leadership','Strategic'];
+
+  // grid
+  for(let ring=1;ring<=5;ring++){
+    const r=(ring/5)*R;
+    c.beginPath();
+    ang.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+    c.closePath();c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
+  }
+  ang.forEach(a=>{const[x,y]=pt(a,R);c.beginPath();c.moveTo(CX,CY);c.lineTo(x,y);c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();});
+
+  // next level dotted — Senior Engineer: T=4,E=3,C=3,L=2,S=1
+  const next=[4,3,3,2,1];
+  c.setLineDash([6,4]);
+  c.beginPath();
+  next.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#10b981';c.lineWidth=1.5;c.fill();c.stroke();
+  c.setLineDash([]);
+
+  // current — Engineer: T=3,E=3,C=2,L=1,S=1
+  const cur=[3,3,2,1,1];
+  c.beginPath();
+  cur.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(79,142,247,0.15)';c.strokeStyle='#4f8ef7';c.lineWidth=2.5;c.fill();c.stroke();
+  cur.forEach((v,i)=>{
+    const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);
+    c.beginPath();c.arc(x,y,4.5,0,Math.PI*2);
+    c.fillStyle='#4f8ef7';c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
+  });
+
+  // labels
+  domains.forEach((name,i)=>{
+    const[x,y]=pt(ang[i],R+24);
+    c.textAlign='center';c.font='bold 11px IBM Plex Mono,monospace';c.fillStyle='#e2e8f0';
+    c.fillText(name,x,y);
+  });
+
+  // scale
+  c.font='9px IBM Plex Mono,monospace';c.fillStyle='#3a4558';c.textAlign='left';
+  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;c.fillText(ring,CX+4,CY-r+4);}
+}
+
+function drawExampleRadarMgr(){
+  const cvs=document.getElementById('example-radar-mgr');
+  if(!cvs) return;
+  const c=cvs.getContext('2d');
+  const CX=260,CY=200,R=155,N=5;
+  const ang=Array.from({length:N},(_,i)=>(i/N)*2*Math.PI-Math.PI/2);
+  const pt=(a,r)=>[CX+r*Math.cos(a),CY+r*Math.sin(a)];
+  const domains=['Technical','Execution','Collaboration','Leadership','Strategic'];
+  for(let ring=1;ring<=5;ring++){
+    const r=(ring/5)*R;
+    c.beginPath();
+    ang.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+    c.closePath();c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
+  }
+  ang.forEach(a=>{const[x,y]=pt(a,R);c.beginPath();c.moveTo(CX,CY);c.lineTo(x,y);c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();});
+  // Manager next dotted: T=1,E=2,C=3,L=3,S=3
+  const next=[1,2,3,3,3];
+  c.setLineDash([5,4]);
+  c.beginPath();
+  next.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#10b981';c.lineWidth=1.5;c.fill();c.stroke();
+  c.setLineDash([]);
+  // Associate Manager current solid: T=1,E=2,C=2,L=3,S=2
+  const cur=[1,2,2,3,2];
+  c.beginPath();
+  cur.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(79,142,247,0.15)';c.strokeStyle='#4f8ef7';c.lineWidth=2.5;c.fill();c.stroke();
+  cur.forEach((v,i)=>{
+    const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);
+    c.beginPath();c.arc(x,y,4,0,Math.PI*2);
+    c.fillStyle='#4f8ef7';c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
+  });
+  domains.forEach((name,i)=>{
+    const[x,y]=pt(ang[i],R+30);
+    c.textAlign='center';c.font='bold 11px IBM Plex Mono,monospace';c.fillStyle='#e2e8f0';
+    c.fillText(name,x,y);
+  });
+  c.font='9px IBM Plex Mono,monospace';c.fillStyle='#3a4558';c.textAlign='left';
+  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;c.fillText(ring,CX+4,CY-r+4);}
+}
+window.addEventListener('load', ()=>{ drawExampleRadar(); drawExampleRadarMgr(); });
+
+
+</script>
+
+<!-- INSPIRATION -->
+<div class="inspiration-section">
+  <div class="intro-inner">
+    <div class="intro-label">References</div>
+    <h2 class="intro-title">Where this framework comes from</h2>
+    <div class="inspiration-layout">
+      <div class="inspiration-book">
+        <img
+          src="https://covers.openlibrary.org/b/isbn/1491973897-L.jpg"
+          alt="The Manager's Path — Camille Fournier"
+          class="book-cover"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <div class="book-cover-fallback" style="display:none;">
+          <span>The Manager&#x2019;s Path</span>
+          <span class="book-cover-author">Camille Fournier</span>
+        </div>
+        <div class="book-meta">
+          <div class="book-title">The Manager&#x2019;s Path</div>
+          <div class="book-author">Camille Fournier · O&#x2019;Reilly, 2017</div>
+        </div>
+      </div>
+      <div class="inspiration-text">
+        <p class="intro-desc">This framework is grounded in <em>The Manager&#x2019;s Path</em> by Camille Fournier — a practical guide that maps each stage of the technical leadership journey, from engineer to CTO. It defines what good looks like at every level and remains one of the most widely referenced books on engineering management in the industry.</p>
+        <p class="intro-desc" style="margin-top:16px;">Many technology companies have used the book as a foundation for their own career frameworks. Spotify, Rent the Runway, CircleCI, and Dropbox are among those that published engineering ladders and competency matrices that trace back to the same thinking. Rent the Runway&#x2019;s multi-track ladder served as a direct structural reference when shaping this framework.</p>
+        <div class="inspiration-refs">
+          <a class="inspiration-ref" href="https://www.amazon.com.au/dp/1491973897" target="_blank" rel="noopener">
+            <span class="ref-icon">↗</span> The Manager&#x2019;s Path on Amazon
+          </a>
+          <a class="inspiration-ref" href="https://dresscode.renttherunway.com/blog/ladder" target="_blank" rel="noopener">
+            <span class="ref-icon">↗</span> Rent the Runway Engineering Ladder
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer-bar">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img class="footer-logo" src="https://april9.com.au/img/logo-white.svg" alt="April9" />
+      <span class="footer-divider"></span>
+      <span class="footer-name">Competency Framework</span>
+    </div>
+    <div class="footer-meta">
+      <span class="footer-item"><span class="footer-item-label">Version</span>0.1</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Tracks</span>Engineer · Manager</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Domains</span>5</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Competencies</span>14</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Criteria</span>25</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Levels</span>5</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
