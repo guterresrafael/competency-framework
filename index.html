@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>April9 Competency Framework</title>
+<title>Career Progression Framework v1.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -16,8 +16,20 @@
     --text:#ffffff;
     --text-muted:#a0a0a0;
     --text-dim:#555;
-    --c0:#666;--c1:#64748b;--c2:#3b82f6;--c3:#10b981;--c4:#ff4d3d;
+    --c0:#666;--c1:#64748b;--c2:#ff4d3d;--c3:#16a34a;--c4:#ff4d3d;
+    /* Domain colours */
+    --d-technical:#3b82f6;
+    --d-execution:#ff4d3d;
+    --d-collaboration:#16a34a;
+    --d-leadership:#d97706;
+    --d-strategic:#7c3aed;
   }
+  /* Per-domain accent overrides */
+  .domain-technical  { --accent: var(--d-technical);  }
+  .domain-execution  { --accent: var(--d-execution);  }
+  .domain-collaboration { --accent: var(--d-collaboration); }
+  .domain-leadership { --accent: var(--d-leadership); }
+  .domain-strategic  { --accent: var(--d-strategic);  }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.6;}
 
@@ -89,12 +101,12 @@
   .pill.sel-0 .pill-radio{border-color:#6b7280;}.pill.sel-0 .pill-radio::after{background:#9ca3af;}
   .pill.sel-0 .pill-name{color:#9ca3af;}
   .pill.sel-0 .pill-desc{color:#9ca3af;opacity:.8;}
-  .pill.sel-1{border-color:#3b82f6;background:rgba(59,130,246,.1);}
-  .pill.sel-1 .pill-radio{border-color:#3b82f6;}.pill.sel-1 .pill-radio::after{background:#3b82f6;}
+  .pill.sel-1{border-color:#ff4d3d;background:rgba(59,130,246,.1);}
+  .pill.sel-1 .pill-radio{border-color:#ff4d3d;}.pill.sel-1 .pill-radio::after{background:#ff4d3d;}
   .pill.sel-1 .pill-name{color:#93c5fd;}
   .pill.sel-1 .pill-desc{color:#93c5fd;opacity:.8;}
-  .pill.sel-2{border-color:#10b981;background:rgba(16,185,129,.1);}
-  .pill.sel-2 .pill-radio{border-color:#10b981;}.pill.sel-2 .pill-radio::after{background:#10b981;}
+  .pill.sel-2{border-color:#16a34a;background:rgba(16,185,129,.1);}
+  .pill.sel-2 .pill-radio{border-color:#16a34a;}.pill.sel-2 .pill-radio::after{background:#16a34a;}
   .pill.sel-2 .pill-name{color:#6ee7b7;}
   .pill.sel-2 .pill-desc{color:#6ee7b7;opacity:.8;}
   .pill.sel-3{border-color:#f97316;background:rgba(249,115,22,.08);}
@@ -145,7 +157,7 @@
 
   /* GAP ANALYSIS */
   .gap-section{width:100%;max-width:1200px;}
-  .gap-title{font-size:20px;font-weight:700;color:#f59e0b;letter-spacing:-.3px;margin-bottom:20px;padding-top:16px;border-top:1px solid var(--border);}
+  .gap-title{font-size:20px;font-weight:700;color:#7c3aed;letter-spacing:-.3px;margin-bottom:20px;padding-top:16px;border-top:1px solid var(--border);}
   .gap-domain{margin-bottom:20px;}
   .gap-domain-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
   .gap-domain-name::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -154,7 +166,7 @@
   .gap-item-current{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
   .gap-arrow{color:var(--text-dim);font-size:12px;}
   .gap-item-required{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
-  .gap-empty{font-size:13px;color:#10b981;padding:16px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:2px;text-align:center;}
+  .gap-empty{font-size:13px;color:#16a34a;padding:16px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:2px;text-align:center;}
   .gap-group-header{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;margin-top:8px;border-bottom:1px solid var(--border);margin-bottom:12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .gap-group-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:0;text-transform:none;font-weight:400;}
   .results-header{width:100%;max-width:1200px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;}
@@ -162,7 +174,7 @@
   .level-current-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
   .level-current-name{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:4px;}
   .level-next-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;margin-top:16px;}
-  .level-next-name{font-size:16px;font-weight:600;color:#10b981;}
+  .level-next-name{font-size:16px;font-weight:600;color:#16a34a;}
   .level-desc-small{font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:6px;}
 
   /* EVIDENCE */
@@ -193,11 +205,12 @@
   .lp-dot{width:7px;height:7px;border-radius:50%;}
   .lp-arrow{color:var(--text-muted);font-size:13px;}
   .lp-0{border-color:#6b7280;color:#9ca3af;}.lp-0 .lp-dot{background:#9ca3af;}
-  .lp-1{border-color:#3b82f6;color:#93c5fd;}.lp-1 .lp-dot{background:#3b82f6;}
-  .lp-2{border-color:#10b981;color:#6ee7b7;}.lp-2 .lp-dot{background:#10b981;}
+  .lp-1{border-color:#ff4d3d;color:#93c5fd;}.lp-1 .lp-dot{background:#ff4d3d;}
+  .lp-2{border-color:#16a34a;color:#6ee7b7;}.lp-2 .lp-dot{background:#16a34a;}
   .lp-3{border-color:#f97316;color:#fb923c;}.lp-3 .lp-dot{background:#f97316;}
   .lp-4{border-color:#ff4d3d;color:#ff4d3d;}.lp-4 .lp-dot{background:#ff4d3d;}
-  .lp-0-text{color:#9ca3af;}.lp-1-text{color:#93c5fd;}.lp-2-text{color:#6ee7b7;}.lp-3-text{color:#fb923c;}.lp-4-text{color:#ff4d3d;}
+  .lp-5{border-color:#7c3aed;color:#7c3aed;}.lp-5 .lp-dot{background:#7c3aed;}
+  .lp-0-text{color:#9ca3af;}.lp-1-text{color:#93c5fd;}.lp-2-text{color:#6ee7b7;}.lp-3-text{color:#fb923c;}.lp-4-text{color:#ff4d3d;}.lp-5-text{color:#eab308;}
 
   /* LEVELS DESC GRID */
   .levels-desc-grid{display:flex;flex-direction:column;gap:8px;margin-top:24px;border:1px solid var(--border);border-radius:2px;overflow:hidden;}
@@ -249,13 +262,25 @@
   .ev-pill{font-family:'Space Mono',monospace;font-size:10px;padding:5px 14px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);}
 
 
-  .example-radars-row{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:48px;width:100%;}
+  .example-radars-row{margin-top:40px;display:flex;gap:0;width:100%;align-items:flex-start;}
+  .example-radar-wrap{flex:1;}
+  .example-radar-divider{width:1px;background:#555555;align-self:stretch;margin:0 40px;flex-shrink:0;}
   .example-radar-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:12px;}
   .example-radar-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
-  .example-badge{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;border:1px solid #444;color:#666;letter-spacing:.08em;text-transform:uppercase;font-weight:400;}
+  .example-badge{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;font-weight:400;}
   .example-radar-legend{display:flex;gap:24px;font-size:12px;color:var(--text-muted);}
   .erl-item{display:flex;align-items:center;gap:8px;}
   .erl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+
+  /* PROCESS SECTION */
+  .process-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .process-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:40px;}
+  .process-cards{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+  .process-card{background:var(--surface);padding:20px 24px;display:flex;flex-direction:column;gap:8px;}
+  .process-card-head{display:flex;align-items:center;gap:12px;}
+  .process-card-desc{font-size:12px;color:var(--text-muted);line-height:1.7;padding-left:36px;}
+  .process-diagram-wrap{display:flex;justify-content:center;align-items:flex-start;}
 
   /* FOOTER */
   .footer-bar{background:#111111;border-top:1px solid #2a2a2a;padding:0;position:sticky;bottom:0;z-index:100;}
@@ -271,7 +296,7 @@
 
 
   /* INSPIRATION */
-  .inspiration-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .inspiration-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--bg);}
   .inspiration-layout{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start;margin-top:32px;}
   .inspiration-book{display:flex;flex-direction:column;gap:14px;}
   .book-cover{width:160px;height:auto;border-radius:4px;box-shadow:0 8px 32px rgba(0,0,0,.5);display:block;}
@@ -287,12 +312,12 @@
 
 
   /* COMPENSATION */
-  .compensation-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--surface);}
+  .compensation-section{padding:56px 0;border-bottom:1px solid var(--border);background:var(--bg);}
   .comp-bands{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
   .comp-band{border:1px solid var(--border);border-radius:2px;padding:24px;background:#141414;display:flex;flex-direction:column;gap:12px;}
-  .comp-band-1{border-top:3px solid #3b82f6;}
+  .comp-band-1{border-top:3px solid #16a34a;}
   .comp-band-2{border-top:3px solid #f97316;}
-  .comp-band-3{border-top:3px solid #10b981;}
+  .comp-band-3{border-top:3px solid #ff4d3d;}
   .comp-band-header{display:flex;align-items:baseline;gap:12px;}
   .comp-band-label{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--text);}
   .comp-band-sub{font-size:12px;color:var(--text-muted);}
@@ -309,37 +334,47 @@
 <body>
 <div class="header">
   <div class="header-inner">
-    <div class="logo">
-      <img class="logo-img" src="https://april9.com.au/img/logo-white.svg" alt="April9" />
-    </div>
+    <div class="header-title" style="font-size:14px;font-weight:600;color:var(--text);">Career Progression Framework</div>
     <div class="header-divider"></div>
-    <div class="header-title">Competency Framework</div>
+    <div class="footer-meta" style="margin-left:0;">
+      <span class="footer-item"><span class="footer-item-label">Version</span>1.0</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Tracks</span>Technology · Business</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Domains</span>5</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Competencies</span>14</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Criteria</span>48</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Levels</span>6</span>
+    </div>
   </div>
-
 </div>
 
 <!-- FRAMEWORK OVERVIEW -->
 <div class="intro-section">
   <div class="intro-inner">
     <div class="intro-label">About this framework</div>
-    <h2 class="intro-title">April9 Competency Framework</h2>
-    <p class="intro-desc">A unified framework for engineers and managers across five domains. It defines what good looks like at every level — from someone just starting out to someone setting direction across the organisation. The same framework applies to both tracks: what changes is the depth and scope expected at each level.</p>
+    <h2 class="intro-title">Career Progression Framework</h2>
+    <p class="intro-desc">A single framework for the Technology and Business tracks across five domains. It defines what good looks like at every level — from someone just starting out to someone shaping the direction of the organisation. What changes between tracks is the depth and scope expected at each level.</p>
 
     <div class="example-radars-row">
       <div class="example-radar-wrap">
-        <div class="example-radar-title">Engineer track <span class="example-badge">Example</span></div>
+        <div class="example-radar-title" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-left:3px solid #3b82f6;background:var(--surface2);border-radius:2px;display:inline-flex;align-items:center;gap:12px;margin-bottom:16px;">Technology Track <span class="example-badge">Example</span></div>
         <canvas id="example-radar" style="width:100%;max-width:520px;" width="520" height="400"></canvas>
         <div class="example-radar-legend">
-          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Engineer (current)</span>
-          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Senior Engineer (next level)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Mid (current)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#16a34a"></span>Senior (next level)</span>
         </div>
       </div>
-      <div class="example-radar-wrap">
-        <div class="example-radar-title">Manager track <span class="example-badge">Example</span></div>
+      <div class="example-radar-divider"></div>
+      <div class="example-radar-wrap" style="padding-left:48px;">
+        <div class="example-radar-title" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-left:3px solid #7c3aed;background:var(--surface2);border-radius:2px;display:inline-flex;align-items:center;gap:12px;margin-bottom:16px;">Business Track <span class="example-badge">Example</span></div>
         <canvas id="example-radar-mgr" style="width:100%;max-width:520px;" width="520" height="400"></canvas>
         <div class="example-radar-legend">
-          <span class="erl-item"><span class="erl-dot" style="background:#4f8ef7"></span>Manager (current)</span>
-          <span class="erl-item"><span class="erl-dot" style="background:#10b981"></span>Lead Manager (next level)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#7c3aed"></span>Senior (current)</span>
+          <span class="erl-item"><span class="erl-dot" style="background:#16a34a"></span>Lead (next level)</span>
         </div>
       </div>
     </div>
@@ -352,7 +387,7 @@
   <div class="intro-inner">
     <div class="intro-label">How it works</div>
     <h2 class="intro-title">Framework structure</h2>
-    <p class="intro-desc">Each domain is broken down into four levels of specificity. Understanding how they relate helps you navigate and fill in the assessment.</p>
+    <p class="intro-desc">Understanding how the framework is structured helps you navigate each section and make sense of what is expected at each level.</p>
 
     <div class="struct-blocks">
 
@@ -361,29 +396,29 @@
           <span class="struct-num">01</span>
           <span class="struct-name">Domain</span>
         </div>
-        <p class="struct-desc">The framework is organised into five capability areas that cover how people work, deliver, relate to others, grow their influence, and contribute to the broader direction of the organisation. Each domain is relevant to both engineers and managers — the expected depth varies by level and track.</p>
+        <p class="struct-desc">The framework is organised into five capability areas that cover how people work, deliver, build relationships, grow their influence, and contribute to the broader direction of the organisation. Each domain applies to both the Technology and Business tracks — the expected depth varies by level and track.</p>
         <div class="domains-grid" style="margin-top:24px;">
-          <div class="domain-card">
+          <div class="domain-card domain-technical">
             <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
             <div class="domain-card-name">Technical</div>
             <div class="domain-card-desc">Applies technical capability to build, improve, and maintain effective solutions.</div>
           </div>
-          <div class="domain-card">
+          <div class="domain-card domain-execution">
             <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div class="domain-card-name">Execution</div>
             <div class="domain-card-desc">Drives reliable delivery through planning, prioritization, and self-management.</div>
           </div>
-          <div class="domain-card">
+          <div class="domain-card domain-collaboration">
             <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="domain-card-name">Collaboration</div>
             <div class="domain-card-desc">Builds effective working relationships through communication, feedback, and teamwork.</div>
           </div>
-          <div class="domain-card">
+          <div class="domain-card domain-leadership">
             <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
             <div class="domain-card-name">Leadership</div>
             <div class="domain-card-desc">Creates direction, supports teams, and helps others grow.</div>
           </div>
-          <div class="domain-card">
+          <div class="domain-card domain-strategic">
             <div class="domain-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
             <div class="domain-card-name">Strategic</div>
             <div class="domain-card-desc">Connects work to broader business, product, and organisational goals.</div>
@@ -454,10 +489,10 @@
           <span class="struct-num">04</span>
           <span class="struct-name">Proficiency</span>
         </div>
-        <p class="struct-desc">Each criteria is rated on a five-level scale that reflects how independently and consistently a behaviour is demonstrated. The scale is the same across all criteria and both tracks, making it possible to compare profiles and identify growth areas in a structured way.</p>
+        <p class="struct-desc">Each criteria is rated on a six-level scale that reflects how independently and consistently a behaviour is demonstrated. The scale is the same across all criteria and both tracks, making it possible to compare profiles and identify growth areas in a structured way.</p>
         <div class="struct-levels">
           <div class="struct-level">
-            <span class="sl-pill lp-0">Unaware</span>
+            <span class="sl-pill lp-0">Novice</span>
             <span class="sl-desc">Has no knowledge of the subject.</span>
           </div>
           <div class="struct-level">
@@ -474,7 +509,11 @@
           </div>
           <div class="struct-level">
             <span class="sl-pill lp-4">Expert</span>
-            <span class="sl-desc">Broad knowledge, helps others, and creates standards.</span>
+            <span class="sl-desc">Sets the standard and develops others across the organisation.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-5">Specialist</span>
+            <span class="sl-desc">Has set standards across multiple organisations at industry level.</span>
           </div>
         </div>
       </div>
@@ -511,6 +550,38 @@
         </div>
       </div>
 
+      <div class="struct-arrow">↓</div>
+
+      <div class="struct-block">
+        <div class="struct-block-header">
+          <span class="struct-num">06</span>
+          <span class="struct-name">Career Levels</span>
+        </div>
+        <p class="struct-desc">Each track has five career levels that reflect increasing scope, autonomy, and impact. Proficiency benchmarks define the minimum expected score per domain at each level. Both tracks share the same five-step progression — what changes is the weighting across domains.</p>
+        <div class="struct-levels" style="margin-top:16px;">
+          <div class="struct-level">
+            <span class="sl-pill lp-1">Junior</span>
+            <span class="sl-desc">Building foundational skills with close guidance. Learning the craft and the context.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-2">Mid</span>
+            <span class="sl-desc">Delivering independently on routine work. Developing depth in key areas.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-3">Senior</span>
+            <span class="sl-desc">Operating autonomously across complex work. Starting to elevate others.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-4">Lead</span>
+            <span class="sl-desc">Leading across teams. Shaping direction and enabling others to deliver.</span>
+          </div>
+          <div class="struct-level">
+            <span class="sl-pill lp-5">Principal</span>
+            <span class="sl-desc">Defining standards and strategy at an organisational level. Operating beyond the immediate team.</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -520,24 +591,90 @@
   <div class="intro-inner">
     <div class="intro-label">Reference profiles</div>
     <h2 class="intro-title">Expected proficiency by level</h2>
-    <p class="intro-desc">The radars below show the expected proficiency in each domain for each role. These are the benchmarks used in the self assessment to calculate your current level and identify gaps.</p>
+    <p class="intro-desc">The radars below show the expected proficiency in each domain for each role across both tracks. These are the reference benchmarks used to identify growth areas and plan development.</p>
     <div id="ref-grids" style="display:flex;flex-direction:column;gap:48px;margin-top:32px;width:100%;"></div>
   </div>
 </div>
 
+
+<!-- TECHNICAL PROFILES -->
+<div class="profiles-section" style="background:var(--surface);">
+  <div class="intro-inner">
+    <div class="intro-label">Technical profiles</div>
+    <h2 class="intro-title">Competency weights by technical role</h2>
+    <p class="intro-desc">Within the Technology track, each technical profile applies different weights to the six Technical competencies. Weights determine how much each competency contributes to the overall Technical domain score — allowing the framework to reflect the actual focus of each role.</p>
+    <div style="margin-top:32px;overflow-x:auto;">
+      <table class="profiles-table">
+        <thead>
+          <tr>
+            <th style="min-width:260px;">Competency</th>
+            <th style="text-align:center;min-width:160px;color:#3b82f6;">Engineer & Architect</th>
+            <th style="text-align:center;min-width:160px;color:#3b82f6;">Support & QA</th>
+            <th style="text-align:center;min-width:160px;color:#3b82f6;">Infra & DevOps</th>
+          </tr>
+        </thead>
+        <tbody id="tech-profiles-tbody"></tbody>
+      </table>
+    </div>
+    <div style="display:flex;gap:24px;margin-top:20px;flex-wrap:wrap;align-items:center;">
+      <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;">Legend</span>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);">
+        <span class="pt-pill" style="min-width:90px;text-align:center;border-color:#ff4d3d;color:#ff4d3d;">Primary</span>
+        Core to this role (1.0)
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);">
+        <span class="pt-pill" style="min-width:90px;text-align:center;border-color:#f97316;color:#f97316;">Secondary</span>
+        Relevant but not central (0.5)
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);">
+        <span class="pt-pill" style="min-width:90px;text-align:center;border-color:#16a34a;color:#16a34a;">Supporting</span>
+        Awareness expected (0.25)
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const ROWS = [
+    ['Software Development',                     'Primary','Secondary','Supporting'],
+    ['Quality Assurance',                         'Secondary','Primary','Supporting'],
+    ['Software Design & Architecture',            'Primary','Supporting','Secondary'],
+    ['Infrastructure & Platforms',                'Supporting','Secondary','Primary'],
+    ['Security & Compliance',                     'Secondary','Supporting','Primary'],
+    ['Incident Management & Support Operations',  'Supporting','Primary','Secondary'],
+  ];
+  const PILL = {
+    'Primary':    'border-color:#ff4d3d;color:#ff4d3d;',
+    'Secondary':  'border-color:#f97316;color:#f97316;',
+    'Supporting': 'border-color:#16a34a;color:#16a34a;',
+  };
+  const tbody = document.getElementById('tech-profiles-tbody');
+  if (!tbody) return;
+  ROWS.forEach(([comp, eng, sup, devops]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:var(--text);font-weight:500;">${comp}</td>
+      ${[eng,sup,devops].map(w=>`<td style="text-align:center;">
+        <span class="pt-pill" style="min-width:90px;text-align:center;${PILL[w]}">${w}</span>
+      </td>`).join('')}`;
+    tbody.appendChild(tr);
+  });
+})();
+</script>
 
 <!-- COMPENSATION -->
 <div class="compensation-section">
   <div class="intro-inner">
     <div class="intro-label">Compensation</div>
     <h2 class="intro-title">Salary bands within each level</h2>
-    <p class="intro-desc">Each level has three salary bands — I, II, and III — that reflect how far a person has progressed within the level. Band III signals readiness for promotion, but the final decision rests with the manager. Moving to the next level requires a formal promotion, not just meeting the proficiency thresholds.</p>
+    <p class="intro-desc">Each career level has three salary bands — I, II, and III — that reflect how far someone has progressed within that level. Band III signals readiness for a promotion conversation, but the final decision requires a formal review. Moving to the next level is a promotion, not an automatic outcome of meeting the proficiency benchmarks.</p>
 
     <div class="comp-bands">
       <div class="comp-band comp-band-1">
         <div class="comp-band-header">
           <span class="comp-band-label">I</span>
-          <span class="comp-band-sub">Entry Level</span>
+          <span class="comp-band-sub">Learning</span>
         </div>
         <p class="comp-band-desc">The person meets the minimum domain requirements for their current level. No domain score exceeds the minimum — they are establishing the foundation of the role.</p>
         <div class="comp-band-3riteria">
@@ -547,7 +684,7 @@
       <div class="comp-band comp-band-2">
         <div class="comp-band-header">
           <span class="comp-band-label">II</span>
-          <span class="comp-band-sub">Advancing</span>
+          <span class="comp-band-sub">Established</span>
         </div>
         <p class="comp-band-desc">Some domain scores exceed the current level minimum. The person is demonstrating growth within the role and building capability beyond what is expected.</p>
         <div class="comp-band-3riteria">
@@ -557,7 +694,7 @@
       <div class="comp-band comp-band-3">
         <div class="comp-band-header">
           <span class="comp-band-label">III</span>
-          <span class="comp-band-sub">Ready for Promotion</span>
+          <span class="comp-band-sub">Mastering</span>
         </div>
         <p class="comp-band-desc">Most domain scores exceed the current level minimum. The person is consistently performing above the role expectations and is ready for a promotion conversation.</p>
         <div class="comp-band-3riteria">
@@ -569,75 +706,185 @@
   </div>
 </div>
 
-<!-- SELF ASSESSMENT ANCHOR -->
 
-<div class="assess-intro" style="background:var(--bg);">
-  <div class="intro-inner" style="padding-top:40px;padding-bottom:0;">
-    <div class="intro-label">Self assessment</div>
-    <h2 class="intro-title" style="font-size:22px;">Assess your proficiency</h2>
-    <p class="intro-desc" style="margin-bottom:0;">Select your track, then rate yourself on each criteria. Your results will show your current level, next level, and which criteria to focus on.</p>
-  </div>
-</div>
-<div class="track-selector">
-  <div class="track-selector-inner">
-    <span class="track-label">Track</span>
-    <button class="track-btn" id="btn-engineer" onclick="setTrack('engineer')">Engineer</button>
-    <button class="track-btn" id="btn-manager"  onclick="setTrack('manager')">Manager</button>
-    <span class="track-desc" id="track-desc">Select your track to begin.</span>
-    <button class="random-btn" id="random-btn" style="display:none" onclick="generateRandomProfile()">↺ Random profile</button>
-  </div>
-</div>
-<div id="assessment-content" style="display:none">
-<div class="layout">
-  <div class="left">
-    <div class="left-inner" id="left-panel"></div>
-  </div>
-</div>
-  <div class="calculate-bar">
-    <div class="calculate-bar-inner2">
-      <button class="calculate-btn" onclick="calculate()">Calculate Results</button>
-      <span class="calculate-hint">Complete the assessment above and click to see your profile and radar.</span>
+<!-- PROCESS -->
+<div class="process-section">
+  <div class="intro-inner">
+    <div class="intro-label">Career Progression</div>
+    <h2 class="intro-title">How the process works</h2>
+    <p class="intro-desc">A structured 12-month cycle connecting self-assessment, leadership input, goal setting, and continuous development. The cycle repeats annually, with a check-in at the 6-month mark.</p>
+
+    <div class="process-layout">
+      <div class="process-cards">
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#f97316;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/><path d="M12 8v4l3 3"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">Career review & new cycle</span>
+          </div>
+          <p class="process-card-desc">Revisit the framework, align on updates, and set the stage for a new assessment cycle.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#ff4d3d;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">Self-assessment</span>
+          </div>
+          <p class="process-card-desc">Rate yourself on each criteria at your current level of operation. Evidence required for Independent and Expert ratings.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#16a34a;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">Leader assessment</span>
+          </div>
+          <p class="process-card-desc">Leader completes the same assessment independently to surface blind spots and prepare for an evidence-based conversation.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#7c3aed;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">Individual Development Plan meeting</span>
+          </div>
+          <p class="process-card-desc">Compare assessments, align on gaps, and co-build a signed Individual Development Plan with clear goals and milestones.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#f472b6;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">6-month checklist</span>
+          </div>
+          <p class="process-card-desc">Structured mid-point check-in to review progress, assess milestones, and update the plan where needed.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-head">
+            <span style="color:#eab308;display:flex;flex-shrink:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <span style="font-size:13px;font-weight:700;color:var(--text);">12-month review</span>
+          </div>
+          <p class="process-card-desc">Full cycle close — recognise achievements, document gaps, and conclude the plan before starting a new cycle.</p>
+        </div>
+      </div>
+
+      <div class="process-diagram-wrap">
+      <svg width="100%" height="auto" viewBox="0 0 600 600" style="max-width:560px;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#4a5568"/>
+          </marker>
+        </defs>
+        <circle cx="300" cy="300" r="220" fill="none" stroke="#2a3145" stroke-width="1" stroke-dasharray="6,4"/>
+        <line x1="354.0" y1="111.2" x2="436.5" y2="158.8" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="490.5" y1="222.4" x2="490.5" y2="377.6" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="436.5" y1="441.2" x2="354.0" y2="488.8" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="246.0" y1="488.8" x2="163.5" y2="441.2" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="109.5" y1="377.6" x2="109.5" y2="222.4" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="163.5" y1="158.8" x2="246.0" y2="111.2" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <circle cx="300" cy="300" r="52" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="1.5"/>
+        <text x="300" y="296" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" font-weight="700" fill="#ffffff">12-month</text>
+        <text x="300" y="313" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="#888888" letter-spacing="2">CYCLE</text>
+
+        <rect x="240.0" y="44.0" width="120" height="72" rx="4" fill="#041414" stroke="#f97316" stroke-width="1.5"/>
+        <g transform="translate(300.0,60.0)" stroke="#f97316" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0 M12 8v4l3 3"/>
+          </g>
+        </g>
+        <text x="300.0" y="84.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#f97316">Career review</text>
+        <text x="300.0" y="97.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#f97316">& new cycle</text>
+        <rect x="430.5" y="154.0" width="120" height="72" rx="4" fill="#091414" stroke="#ff4d3d" stroke-width="1.5"/>
+        <g transform="translate(490.5,170.0)" stroke="#ff4d3d" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/>
+          </g>
+        </g>
+        <text x="490.5" y="194.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#ff4d3d">Self-</text>
+        <text x="490.5" y="207.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#ff4d3d">assessment</text>
+        <rect x="430.5" y="374.0" width="120" height="72" rx="4" fill="#04140f" stroke="#16a34a" stroke-width="1.5"/>
+        <g transform="translate(490.5,390.0)" stroke="#16a34a" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75"/>
+          </g>
+        </g>
+        <text x="490.5" y="414.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#16a34a">Leader</text>
+        <text x="490.5" y="427.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#16a34a">assessment</text>
+        <rect x="240.0" y="484.0" width="120" height="72" rx="4" fill="#16100a" stroke="#7c3aed" stroke-width="1.5"/>
+        <g transform="translate(300.0,500.0)" stroke="#7c3aed" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8"/>
+          </g>
+        </g>
+        <text x="300.0" y="524.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#7c3aed">IDP</text>
+        <text x="300.0" y="537.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#7c3aed">meeting</text>
+        <rect x="49.5" y="374.0" width="120" height="72" rx="4" fill="#160a18" stroke="#f472b6" stroke-width="1.5"/>
+        <g transform="translate(109.5,390.0)" stroke="#f472b6" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </g>
+        </g>
+        <text x="109.5" y="414.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#f472b6">6-month</text>
+        <text x="109.5" y="427.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#f472b6">checklist</text>
+        <rect x="49.5" y="154.0" width="120" height="72" rx="4" fill="#160a10" stroke="#eab308" stroke-width="1.5"/>
+        <g transform="translate(109.5,170.0)" stroke="#eab308" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="translate(-9,-9) scale(0.75)">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </g>
+        </g>
+        <text x="109.5" y="194.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#eab308">12-month</text>
+        <text x="109.5" y="207.0" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="700" fill="#eab308">review</text>
+      </svg>
+      </div>
     </div>
   </div>
-  <div class="right" id="results-panel">
-    <div class="right-inner">
-    <div class="results-grid">
-      <div><canvas id="radar" width="400" height="400"></canvas></div>
-      <div>
-        <div class="summary">
-          <div class="summary-title">Domain Scores</div>
-          <div class="bar-rows" id="bar-rows"></div>
+</div>
+
+<!-- INSPIRATION -->
+<div class="inspiration-section">
+  <div class="intro-inner">
+    <div class="intro-label">References</div>
+    <h2 class="intro-title">Where this framework comes from</h2>
+    <div class="inspiration-layout">
+      <div class="inspiration-book">
+        <img
+          src="https://covers.openlibrary.org/b/isbn/1491973897-L.jpg"
+          alt="The Manager's Path — Camille Fournier"
+          class="book-cover"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <div class="book-cover-fallback" style="display:none;">
+          <span>The Manager&#x2019;s Path</span>
+          <span class="book-cover-author">Camille Fournier</span>
+        </div>
+        <div class="book-meta">
+          <div class="book-title">The Manager&#x2019;s Path</div>
+          <div class="book-author">Camille Fournier · O&#x2019;Reilly, 2017</div>
+        </div>
+      </div>
+      <div class="inspiration-text">
+        <p class="intro-desc">This framework is grounded in <em>The Manager&#x2019;s Path</em> by Camille Fournier — a practical guide that maps each stage of the technical leadership journey, from engineer to CTO. It defines what good looks like at every level and remains one of the most widely referenced books on engineering management in the industry.</p>
+        <p class="intro-desc" style="margin-top:16px;">Many technology companies have used the book as a foundation for their own career frameworks. Spotify, Rent the Runway, CircleCI, and Dropbox are among those that published engineering ladders and competency matrices that trace back to the same thinking. Rent the Runway&#x2019;s multi-track ladder served as a direct structural reference when shaping this framework.</p>
+        <div class="inspiration-refs">
+          <a class="inspiration-ref" href="https://www.amazon.com.au/dp/1491973897" target="_blank" rel="noopener">
+            <span class="ref-icon">↗</span> The Manager&#x2019;s Path on Amazon
+          </a>
+          <a class="inspiration-ref" href="https://dresscode.renttherunway.com/blog/ladder" target="_blank" rel="noopener">
+            <span class="ref-icon">↗</span> Rent the Runway Engineering Ladder
+          </a>
         </div>
       </div>
     </div>
-    <div class="results-header">
-      <div class="level-display">
-        <div class="level-current-label" id="level-current-label">Current level</div>
-        <div class="level-current-name" id="overall-level" style="color:var(--accent)">—</div>
-        <div class="level-desc-small" id="overall-desc">Complete the assessment to see your profile.</div>
-        <div class="level-next-label" id="next-label" style="display:none">Next level</div>
-        <div class="level-next-name" id="next-level-name"></div>
-      </div>
-    </div>
-<div class="gap-section" id="gap-section" style="display:none">
-      <div class="gap-title">Criteria to improve</div>
-      <div id="gap-list"></div>
-    </div>
-    </div>
   </div>
 </div>
-<div class="reset-bar" id="reset-bar" style="display:none;"><div class="reset-bar-inner"><button class="reset-btn" onclick="resetAll()">Reset all</button><span class="calculate-hint">Clears all selections and collapses the results panel.</span></div></div>
 
-  <script>
+
+
+
+<script>
+
 
 const LEVELS=['Unaware','Foundation','Working','Independent','Expert'];
-const COLORS=['#9ca3af','#3b82f6','#10b981','#f97316','#ff4d3d'];
+const COLORS=['#9ca3af','#ff4d3d','#16a34a','#f97316','#ff4d3d'];
 const PROFILES=[
-  {name:'Associate Engineer',   color:'#94a3b8',desc:'Just getting started. Building awareness across all domains.'},
-  {name:'Engineer',      color:'#64748b',desc:'Building the foundation. Performing with close guidance.'},
-  {name:'Senior Engineer',   color:'#3b82f6',desc:'Delivering independently on routine work.'},
-  {name:'Lead Engineer',     color:'#10b981',desc:'Operating autonomously and starting to elevate others.'},
-  {name:'Principal Engineer',color:'#f59e0b',desc:'Leading across teams and shaping technical direction.'},
+  {name:'Junior',    color:'#94a3b8',desc:'Just getting started. Building awareness across all domains.'},
+  {name:'Mid',       color:'#64748b',desc:'Building the foundation. Performing with close guidance.'},
+  {name:'Senior',    color:'#ff4d3d',desc:'Delivering independently on routine work.'},
+  {name:'Lead',      color:'#16a34a',desc:'Operating autonomously and starting to elevate others.'},
+  {name:'Principal', color:'#7c3aed',desc:'Leading across teams and shaping technical direction.'},
 ];
 
 const DOMAIN_ICONS={technical:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',execution:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',collaboration:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',leadership:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',strategic:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>'};
@@ -775,562 +1022,52 @@ const FRAMEWORK=[
     ]},
 ];
 
-const scores={};
-FRAMEWORK.forEach(d=>d.competencies.forEach(c=>c.criteria.forEach(cr=>{scores[cr.id]=null;})));
-
-// BUILD LEFT
-const left=document.getElementById('left-panel');
-FRAMEWORK.forEach(domain=>{
-  const block=document.createElement('div');
-  block.className='domain-block';
-  block.innerHTML=`
-    <div class="domain-heading">
-      <div class="domain-heading-top">
-        <span class="domain-tag">DOMAIN</span>
-        <span class="domain-name">${domain.label}</span>
-        <span class="domain-avg-badge" id="davg-${domain.id}">—</span>
-      </div>
-      <div class="domain-desc">${domain.desc}</div>
-    </div>`;
-
-  domain.competencies.forEach(comp=>{
-    const cb=document.createElement('div');
-    cb.className='comp-block';
-    cb.innerHTML=`
-      <div class="comp-header">
-        <div class="comp-header-top">
-          <span class="comp-tag">COMPETENCY</span>
-          <span class="comp-name">${comp.label}</span>
-          <span class="comp-avg-badge" id="cavg-${comp.id}">—</span>
-        </div>
-        <div class="comp-desc">${comp.desc}</div>
-      </div>
-      <div class="comp-body" id="cbody-${comp.id}"></div>`;
-    block.appendChild(cb);
-
-    const body=cb.querySelector(`#cbody-${comp.id}`);
-    comp.criteria.forEach(cr=>{
-      const crEl=document.createElement('div');
-      crEl.className='criteria-block';
-      crEl.id=`crblock-${cr.id}`;
-      crEl.innerHTML=`
-        <div class="criteria-header">
-          <div class="criteria-header-top">
-            <span class="criteria-dot-tag">CRITERIA</span>
-            <span class="criteria-name">${cr.label}</span>
-            <span class="criteria-score-lbl" id="crscore-${cr.id}">not set</span>
-
-          </div>
-          <div class="criteria-desc">${cr.desc}</div>
-        </div>
-        <div class="proficiency-row">
-          <div class="proficiency-label">Proficiency</div>
-          <div class="proficiency-pills">${cr.levels.map((desc,i)=>`
-            <div class="pill" id="pill-${cr.id}-${i}" onclick="setScore('${cr.id}',${i})">
-              <div class="pill-radio"></div>
-              <span class="pill-name">${LEVELS[i]}</span>
-              <span class="pill-desc">${desc}</span>
-            </div>`).join('')}
-          </div>
-        </div>
-        <div class="evidence-row" id="evrow-${cr.id}">
-          <span class="evidence-label">Evidence</span>
-          <select class="evidence-select" id="evsel-${cr.id}" onchange="onEvidenceChange('${cr.id}')">
-            <option value="">Select type</option>
-            <option value="experience">Experience</option>
-            <option value="project">Project</option>
-            <option value="training">Training</option>
-            <option value="peer-review">Peer Review</option>
-            <option value="certificate">Certificate</option>
-          </select>
-          <input class="evidence-input" type="text" id="evinput-${cr.id}" placeholder="Describe your evidence..." oninput="updateAll()" />
-        </div>
-        </div>`;
-      body.appendChild(crEl);
-    });
-  });
-  left.appendChild(block);
-});
-
-// BUILD BARS
-const barsEl=document.getElementById('bar-rows');
-FRAMEWORK.forEach(domain=>{
-  const row=document.createElement('div');
-  row.className='bar-row';
-  row.innerHTML=`<span class="bar-label">${domain.label}</span><div class="bar-track"><div class="bar-fill" id="bfill-${domain.id}" style="width:0%"></div></div><span class="bar-val" id="bval-${domain.id}">—</span>`;
-  barsEl.appendChild(row);
-});
-
-function setScore(crId,val){
-  scores[crId]=val;
-  // pills
-  LEVELS.forEach((_,i)=>{
-    document.getElementById(`pill-${crId}-${i}`).className='pill'+(i===val?` sel-${val}`:'');
-  });
-  // badge
-  const lbl=document.getElementById(`crscore-${crId}`);
-  lbl.textContent=LEVELS[val];lbl.style.color=COLORS[val];lbl.style.borderColor=COLORS[val]+'55';
-  // show evidence field for Independent (3) and Expert (4)
-  const evrow=document.getElementById(`evrow-${crId}`);
-  if(evrow){
-    if(val>=3){
-      evrow.classList.add('visible');
-      // don't collapse yet — wait for evidence to be filled
-    } else {
-      evrow.classList.remove('visible');
-      const evsel=document.getElementById(`evsel-${crId}`);
-      if(evsel) evsel.value='';
-      const evinput=document.getElementById(`evinput-${crId}`);
-      if(evinput) evinput.value='';
-      // collapse immediately for non-evidence levels
-      const block=document.getElementById(`crblock-${crId}`);
-      if(block) setTimeout(()=>block.classList.add('collapsed'), 300);
-    }
-  } else {
-    // no evidence row — collapse immediately
-    const block=document.getElementById(`crblock-${crId}`);
-    if(block) setTimeout(()=>block.classList.add('collapsed'), 300);
-  }
-  updateAll();
-}
-
-function onEvidenceChange(crId){
-  const evsel=document.getElementById(`evsel-${crId}`);
-
-  updateAll();
-}
-
-function resetAll(){
-  document.getElementById('reset-bar').style.display='none';
-  document.getElementById('results-panel').classList.remove('visible');
-  document.getElementById('gap-section').style.display='none';
-  // Reset track
-  currentTrack = null;
-  document.getElementById('btn-engineer').className = 'track-btn';
-  document.getElementById('btn-manager').className  = 'track-btn';
-  document.getElementById('track-desc').textContent = 'Select your track to begin.';
-  document.getElementById('assessment-content').style.display = 'none';
-  document.getElementById('random-btn').style.display = 'none';
-  scrollToEl(document.getElementById('assessment-content'));
-  FRAMEWORK.forEach(d=>d.competencies.forEach(c=>c.criteria.forEach(cr=>{
-    scores[cr.id]=null;
-    LEVELS.forEach((_,i)=>{document.getElementById(`pill-${cr.id}-${i}`).className='pill';});
-    const lbl=document.getElementById(`crscore-${cr.id}`);
-    lbl.textContent='not set';lbl.style.color='';lbl.style.borderColor='';
-
-    const evrow=document.getElementById(`evrow-${cr.id}`);
-    if(evrow) evrow.classList.remove('visible');
-    const evsel=document.getElementById(`evsel-${cr.id}`);
-    if(evsel) evsel.value='';
-    const evinput=document.getElementById(`evinput-${cr.id}`);
-    if(evinput) evinput.value='';
-
-  })));
-  updateAll();
-}
-
-function avg(vals){const f=vals.filter(v=>v!==null);return f.length?f.reduce((a,b)=>a+b,0)/f.length:null;}
-function compAvg(comp){return avg(comp.criteria.map(cr=>scores[cr.id]));}
-function domainAvg(domain){return avg(domain.competencies.map(c=>compAvg(c)));}
-
-function updateAll(){
-  FRAMEWORK.forEach(domain=>{
-    domain.competencies.forEach(comp=>{
-      const a=compAvg(comp);
-      const badge=document.getElementById(`cavg-${comp.id}`);
-      if(a===null){badge.textContent='—';badge.style.color='';badge.style.borderColor='';}
-      else{const i=Math.round(a);badge.textContent=LEVELS[i];badge.style.color=COLORS[i];badge.style.borderColor=COLORS[i]+'55';}
-    });
-    const da=domainAvg(domain);
-    const dbadge=document.getElementById(`davg-${domain.id}`);
-    const bfill=document.getElementById(`bfill-${domain.id}`);
-    const bval=document.getElementById(`bval-${domain.id}`);
-    if(da===null){dbadge.textContent='—';dbadge.style.color='';dbadge.style.borderColor='';bfill.style.width='0%';bval.textContent='—';bval.style.color='';}
-    else{
-      const i=Math.round(da);
-      dbadge.textContent=LEVELS[i];dbadge.style.color=COLORS[i];dbadge.style.borderColor=COLORS[i]+'55';
-      bfill.style.width=((da/4)*100)+'%';bfill.style.background=COLORS[i];
-      bval.textContent=LEVELS[i]+' ('+da.toFixed(1)+')';bval.style.color=COLORS[i];
-    }
-  });
-  drawRadar();
-  const allDomains = FRAMEWORK.every(d => domainAvg(d) !== null);
-  const avgs=FRAMEWORK.map(d=>domainAvg(d)).filter(v=>v!==null);
-  const oLevel=document.getElementById('overall-level');
-  const oDesc=document.getElementById('overall-desc');
-  const oCurrentLabel=document.getElementById('level-current-label');
-  if(!allDomains){
-    oLevel.textContent='—';oLevel.style.color='';
-    oDesc.textContent='Complete all domains to see your profile.';
-    return;
-  }
-  const overall=avgs.reduce((a,b)=>a+b,0)/avgs.length;
-  // Determine current level: first level where user meets ALL domain scores
-  let reachedIdx = -1;
-  if (currentTrack) {
-    const levels = BASE_LEVELS[currentTrack];
-    for (let i = 0; i < levels.length; i++) {
-      const meetsAll = FRAMEWORK.every(domain => {
-        const da = domainAvg(domain);
-        return da !== null && da >= levels[i].scores[domain.id];
-      });
-      if (meetsAll) reachedIdx = i;
-      else break;
-    }
-  }
-  const idx=Math.min(4,Math.round(overall));
-  const p=PROFILES[idx];
-  const next2 = getNextBaseLevel();
-
-  if(reachedIdx === -1){
-    // Does not meet first level
-    const firstLevel = currentTrack ? BASE_LEVELS[currentTrack][0].label : '';
-    if(oCurrentLabel) oCurrentLabel.textContent = 'Approaching';
-    oLevel.textContent = firstLevel;
-    oLevel.style.color = '#888';
-    oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLevel + '. Keep developing across all domains.';
-  } else {
-    const currentLevelLabel = BASE_LEVELS[currentTrack][reachedIdx].label;
-    if(oCurrentLabel) oCurrentLabel.textContent = 'Current level';
-    oLevel.textContent = currentLevelLabel;
-    oLevel.style.color = '#4f8ef7';
-    oDesc.textContent = p.desc;
-  }
-}
-
-const canvas=document.getElementById('radar');
-const ctx=canvas.getContext('2d');
-const CX=200,CY=200,R=155,N=5;
-const angles=Array.from({length:N},(_,i)=>(i/N)*2*Math.PI-Math.PI/2);
-function pt(a,r){return[CX+r*Math.cos(a),CY+r*Math.sin(a)];}
-
-
-// ── TRACK & BASE LEVELS ──────────────────────────────────────────────────
-let currentTrack = null;
 
 const BASE_LEVELS = {
-  engineer: [
-    { label:'Associate Engineer', scores:{ technical:2, execution:2, collaboration:1, leadership:1, strategic:1 } },
-    { label:'Engineer', scores:{ technical:3, execution:3, collaboration:2, leadership:1, strategic:1 } },
-    { label:'Senior Engineer', scores:{ technical:4, execution:3, collaboration:3, leadership:2, strategic:1 } },
-    { label:'Lead Engineer', scores:{ technical:4, execution:4, collaboration:3, leadership:2, strategic:2 } },
-    { label:'Principal Engineer', scores:{ technical:4, execution:4, collaboration:4, leadership:3, strategic:2 } },
+  technology: [
+    { label:'Junior',    scores:{ technical:2, execution:2, collaboration:1, leadership:1, strategic:1 } },
+    { label:'Mid',       scores:{ technical:3, execution:3, collaboration:2, leadership:1, strategic:1 } },
+    { label:'Senior',    scores:{ technical:4, execution:3, collaboration:3, leadership:2, strategic:1 } },
+    { label:'Lead',      scores:{ technical:4, execution:4, collaboration:3, leadership:3, strategic:1 } },
+    { label:'Principal', scores:{ technical:4, execution:4, collaboration:4, leadership:3, strategic:2 } },
   ],
-  manager: [
-    { label:'Manager', scores:{ technical:1, execution:2, collaboration:2, leadership:3, strategic:2 } },
-    { label:'Lead Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:3, strategic:3 } },
-    { label:'Principal Manager', scores:{ technical:1, execution:2, collaboration:3, leadership:4, strategic:4 } },
+  business: [
+    { label:'Junior',    scores:{ technical:1, execution:2, collaboration:2, leadership:1, strategic:1 } },
+    { label:'Mid',       scores:{ technical:1, execution:2, collaboration:3, leadership:2, strategic:2 } },
+    { label:'Senior',    scores:{ technical:1, execution:2, collaboration:3, leadership:3, strategic:3 } },
+    { label:'Lead',      scores:{ technical:1, execution:3, collaboration:3, leadership:4, strategic:3 } },
+    { label:'Principal', scores:{ technical:1, execution:3, collaboration:4, leadership:4, strategic:4 } },
   ],
 };
 
-function setTrack(track) {
-  currentTrack = track;
-  document.getElementById('assessment-content').style.display = 'block';
-  document.getElementById('btn-engineer').className = 'track-btn' + (track==='engineer' ? ' active-engineer' : '');
-  document.getElementById('btn-manager').className  = 'track-btn' + (track==='manager'  ? ' active-manager'  : '');
-  document.getElementById('track-desc').textContent = track === 'engineer'
-    ? '5 levels: Associate → Engineer → Senior → Lead → Principal'
-    : '3 levels: Manager → Lead Manager → Principal Manager';
-  document.getElementById('random-btn').style.display = 'inline-block';
-}
 
-
-function generateRandomProfile(){
-  if(!currentTrack) return;
-  const levels = BASE_LEVELS[currentTrack];
-  // Pick a random mid level — not the first, not the last
-  const midLevels = levels.slice(1, levels.length - 1);
-  const targetLevel = midLevels[Math.floor(Math.random() * midLevels.length)];
-
-  // For each criteria, set a score within ±1 of the target domain score
-  // but NEVER below the target level minimum (guarantee level is met)
-  FRAMEWORK.forEach(domain => {
-    const base = targetLevel.scores[domain.id];
-    domain.competencies.forEach(comp => {
-      comp.criteria.forEach(cr => {
-        const delta = Math.floor(Math.random() * 2); // 0 or +1 only (no -1 to guarantee minimum)
-        const val = Math.min(3, base + delta); // max Independent, no Expert
-        scores[cr.id] = val;
-        LEVELS.forEach((_,i) => {
-          const pill = document.getElementById(`pill-${cr.id}-${i}`);
-          if(pill) pill.className = 'pill' + (i === val ? ` sel-${val}` : '');
-        });
-        const lbl = document.getElementById(`crscore-${cr.id}`);
-        if(lbl){ lbl.textContent=LEVELS[val]; lbl.style.color=COLORS[val]; lbl.style.borderColor=COLORS[val]+'55'; }
-        // Show evidence field if val >= 3
-        const evrow = document.getElementById(`evrow-${cr.id}`);
-        if(evrow){ val >= 3 ? evrow.classList.add('visible') : evrow.classList.remove('visible'); }
-      });
-    });
-  });
-
-  updateAll();
-
-  // Show results
-  const panel = document.getElementById('results-panel');
-  panel.classList.add('visible');
-  document.getElementById('reset-bar').style.display = 'block';
-  showGapAnalysis();
-  setTimeout(()=>scrollToEl(panel), 100);
-}
-
-function getNextBaseLevel() {
-  if (!currentTrack) return null;
-  const levels = BASE_LEVELS[currentTrack];
-  // All domains must be evaluated
-  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
-  if (!allSet) return null;
-  for (let i = 0; i < levels.length; i++) {
-    const level = levels[i];
-    const isAbove = FRAMEWORK.every(domain => {
-      const da = domainAvg(domain);
-      return da !== null && da >= level.scores[domain.id];
-    });
-    if (!isAbove) return { level, index: i };
-  }
-  return { level: levels[levels.length - 1], index: levels.length - 1 };
-}
-
-function drawRadar(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let ring=1;ring<=5;ring++){
-    const r=(ring/5)*R;
-    ctx.beginPath();
-    angles.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
-    ctx.closePath();ctx.strokeStyle='#2a3145';ctx.lineWidth=1;ctx.stroke();
-  }
-  ctx.font='9px IBM Plex Mono,monospace';ctx.fillStyle='#3a4558';ctx.textAlign='left';
-  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;ctx.fillText(ring,CX+4,CY-r+4);}
-  angles.forEach(a=>{const[x,y]=pt(a,R);ctx.beginPath();ctx.moveTo(CX,CY);ctx.lineTo(x,y);ctx.strokeStyle='#2a3145';ctx.lineWidth=1;ctx.stroke();});
-  if(FRAMEWORK.some(d=>domainAvg(d)!==null)){
-    ctx.beginPath();
-    FRAMEWORK.forEach((domain,i)=>{
-      const da=domainAvg(domain);
-      const r=da!==null?((da+1)/5)*R:R*0.04;
-      const[x,y]=pt(angles[i],r);
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    });
-    ctx.closePath();
-    // Grey if approaching (no level reached), blue otherwise
-    const isApproachingRadar = currentTrack && (()=>{
-      const lvls=BASE_LEVELS[currentTrack];
-      return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
-    })();
-    const radarFill = isApproachingRadar ? 'rgba(150,150,150,0.1)' : 'rgba(79,142,247,0.15)';
-    const radarStroke = isApproachingRadar ? '#888888' : '#4f8ef7';
-    ctx.fillStyle=radarFill;ctx.strokeStyle=radarStroke;ctx.lineWidth=2.5;
-    ctx.fill();ctx.stroke();
-    FRAMEWORK.forEach((domain,i)=>{
-      const da=domainAvg(domain);if(da===null)return;
-      const r=((da+1)/5)*R;const[x,y]=pt(angles[i],r);
-      ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);
-      ctx.fillStyle=isApproachingRadar?'#888':COLORS[Math.round(da)];ctx.strokeStyle='#0f1117';ctx.lineWidth=2;
-      ctx.fill();ctx.stroke();
-    });
-  }
-  // next level polygon — blue when approaching, green when improving
-  const next = getNextBaseLevel();
-  if (next) {
-    const isAppr2 = currentTrack && (()=>{
-      const lvls=BASE_LEVELS[currentTrack];
-      return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
-    })();
-    ctx.beginPath();
-    FRAMEWORK.forEach((domain,i)=>{
-      const r = ((next.level.scores[domain.id]+1)/5)*R;
-      const[x,y]=pt(angles[i],r);
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    });
-    ctx.closePath();
-    ctx.fillStyle='rgba(255,255,255,0.0)';
-    ctx.strokeStyle=isAppr2?'#4f8ef7':'#10b981';
-    ctx.lineWidth=1.5;
-    ctx.setLineDash([5,4]);
-    ctx.stroke();
-    ctx.setLineDash([]);
-  }
-
-  FRAMEWORK.forEach((domain,i)=>{
-    const[x,y]=pt(angles[i],R+28);
-    const da=domainAvg(domain);
-    ctx.textAlign='center';
-    ctx.font='bold 11px IBM Plex Mono,monospace';ctx.fillStyle='#e2e8f0';
-    ctx.fillText(domain.label,x,y);
-    if(da!==null){ctx.font='9px IBM Plex Mono,monospace';ctx.fillStyle=COLORS[Math.round(da)];ctx.fillText(LEVELS[Math.round(da)],x,y+13);}
-  });
-
-  // next level label
-  if (next) {
-    ctx.textAlign='center';
-    ctx.font='10px IBM Plex Mono,monospace';
-    ctx.fillStyle='#10b981';
-    ctx.fillText('── next: ' + next.level.label, CX, CY+R+52);
-  }
-}
-function calculate(){
-  updateAll();
-  showGapAnalysis();
-  const panel=document.getElementById('results-panel');
-  panel.classList.add('visible');
-  document.getElementById('reset-bar').style.display='block';
-  setTimeout(()=>scrollToEl(panel), 50);
-}
-
-function showGapAnalysis(){
-  const gapSection = document.getElementById('gap-section');
-  const gapList    = document.getElementById('gap-list');
-  const nextLabel  = document.getElementById('next-label');
-  const nextName   = document.getElementById('next-level-name');
-
-  if(!currentTrack){ gapSection.style.display='none'; return; }
-
-  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
-  if(!allSet){ gapSection.style.display='none'; return; }
-
-  // Compute current level label
-  const levels = BASE_LEVELS[currentTrack];
-  let reachedIdx2 = -1;
-  for(let i=0; i<levels.length; i++){
-    const meetsAll = FRAMEWORK.every(domain=>{
-      const da=domainAvg(domain);
-      return da!==null && da>=levels[i].scores[domain.id];
-    });
-    if(meetsAll) reachedIdx2=i; else break;
-  }
-  const currentLevelLabel = reachedIdx2>=0 ? levels[reachedIdx2].label : levels[0].label;
-
-  // Find next level
-  let nextLevel = null;
-  for(let i=0; i<levels.length; i++){
-    const meetsAll = FRAMEWORK.every(domain=>{
-      const da=domainAvg(domain);
-      return da!==null && da>=levels[i].scores[domain.id];
-    });
-    if(!meetsAll){ nextLevel=levels[i]; break; }
-  }
-
-  if(!nextLevel){
-    nextLabel.style.display='none';
-    nextName.textContent='';
-    gapList.innerHTML='<div class="gap-empty">You meet all criteria for the top level. Keep it up!</div>';
-    gapSection.style.display='block';
-    return;
-  }
-
-  nextLabel.style.display='block';
-  nextName.textContent=nextLevel.label;
-  // Blue if approaching, green if improving
-  const isAppr3 = currentTrack && (()=>{
-    const lvls=BASE_LEVELS[currentTrack];
-    return !FRAMEWORK.every(d=>{const da=domainAvg(d);return da!==null&&da>=lvls[0].scores[d.id];});
-  })();
-  nextName.style.color = isAppr3 ? '#4f8ef7' : '#10b981';
-
-  // Check if current == next (person is AT this level but not above)
-  const levels2 = BASE_LEVELS[currentTrack];
-  const currentIdx = levels2.findIndex(l => l.label === currentLevelLabel);
-  const nextIdx    = levels2.findIndex(l => l.label === nextLevel.label);
-  // isMaintain only when person actually reached that level (reachedIdx2 >= 0) AND next == current
-  const isMaintain = reachedIdx2 >= 0 && currentIdx >= 0 && nextIdx === currentIdx;
-  const isApproaching = reachedIdx2 === -1;
-  document.querySelector('.gap-title').textContent = isApproaching
-    ? 'Criteria to reach ' + nextLevel.label
-    : isMaintain
-      ? 'Criteria to maintain this level'
-      : 'Criteria to improve for next level';
-
-  // Find criteria gaps — split into high and low priority
-  const highGaps = [];
-  const lowGaps  = [];
-
-  FRAMEWORK.forEach(domain=>{
-    const required = nextLevel.scores[domain.id];
-    const domainScore = domainAvg(domain);
-    const domainMet = domainScore !== null && domainScore >= required;
-
-    domain.competencies.forEach(comp=>{
-      comp.criteria.forEach(cr=>{
-        const val = scores[cr.id];
-        if(val === null || val < required){
-          const gap = { domain, comp, cr, current: val, required };
-          // High priority: domain score itself is below target
-          // Low priority: domain score is met overall, but this specific criteria is below
-          if(!domainMet) highGaps.push(gap);
-          else lowGaps.push(gap);
-        }
-      });
-    });
-  });
-
-  if(!highGaps.length && !lowGaps.length){
-    gapList.innerHTML='<div class="gap-empty">No gaps found for the next level.</div>';
-  } else {
-    const colorMap = ['#9ca3af','#3b82f6','#10b981','#f97316','#ff4d3d'];
-
-    function renderGapGroup(gaps, label, labelColor, subtitle){
-      if(!gaps.length) return '';
-      // Group by domain
-      const byDomain = {};
-      gaps.forEach(g=>{
-        if(!byDomain[g.domain.id]) byDomain[g.domain.id]={ domain:g.domain, items:[] };
-        byDomain[g.domain.id].items.push(g);
-      });
-      let html = `<div class="gap-group-header" style="color:${labelColor}">${label}<span class="gap-group-subtitle">${subtitle||''}</span></div>`;
-      Object.values(byDomain).forEach(({domain,items})=>{
-        html+=`<div class="gap-domain"><div class="gap-domain-name" style="color:${labelColor}"><span style="display:inline-flex;align-items:center;margin-right:8px;">${DOMAIN_ICONS[domain.id]||''}</span>${domain.label}</div>`;
-        items.forEach(({cr,current,required})=>{
-          const curLabel = current===null ? 'Not set' : LEVELS[current];
-          const curColor = current===null ? '#555555' : colorMap[current];
-          const reqLabel = LEVELS[required];
-          const reqColor = colorMap[required];
-          html+=`<div class="gap-item" style="border-left-color:${labelColor}40;">
-            <span class="gap-item-name">${cr.label}</span>
-            <span class="gap-item-current" style="background:${curColor}22;color:${curColor};border:1px solid ${curColor}55">${curLabel}</span>
-            <span class="gap-arrow">→</span>
-            <span class="gap-item-required" style="background:${reqColor}22;color:${reqColor};border:1px solid ${reqColor}55">${reqLabel}</span>
-          </div>`;
-        });
-        html+='</div>';
-      });
-      return html;
-    }
-
-    gapList.innerHTML =
-      renderGapGroup(highGaps, '▲ High priority', '#ff4d3d', 'Domain score is below the minimum required.') +
-      renderGapGroup(lowGaps,  '▽ Low priority',  '#f97316', 'Domain score meets the minimum, but some criteria are still below the recommended level.');
-  }
-
-  gapSection.style.display='block';
-}
-drawRadar();
-
-// ── REFERENCE LEVEL RADARS ───────────────────────────────────────────────
-function drawReferenceRadars() {
+function buildRefGrids(){
   const container = document.getElementById('ref-grids');
   if (!container) return;
   container.innerHTML = '';
 
+  const DOMAIN_COLORS = {technical:'#3b82f6',execution:'#ff4d3d',collaboration:'#16a34a',leadership:'#d97706',strategic:'#7c3aed'};
+  const PROF_COLORS6 = ['#9ca3af','#93c5fd','#6ee7b7','#fb923c','#ff4d3d','#eab308'];
+
   const tracks = [
-    { label: 'Engineer Track', levels: BASE_LEVELS.engineer },
-    { label: 'Manager Track',  levels: BASE_LEVELS.manager  },
+    { label: 'Technology Track', levels: BASE_LEVELS.technology },
+    { label: 'Business Track',  levels: BASE_LEVELS.business  },
   ];
 
   tracks.forEach(track => {
     const section = document.createElement('div');
 
+    const trackColor = track.label.includes('Technology') ? '#3b82f6' : '#7c3aed';
     const trackLabel = document.createElement('div');
-    trackLabel.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;";
+    trackLabel.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.12em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-left:3px solid " + trackColor + ";background:var(--surface2);border-radius:2px;display:inline-block;margin-bottom:24px;";
     trackLabel.textContent = track.label;
     section.appendChild(trackLabel);
 
-    const grid = document.createElement('div');
-    grid.style.cssText = 'display:flex;flex-direction:column;gap:32px;width:100%;';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;flex-wrap:wrap;gap:32px;justify-content:flex-start;';
 
-    const rows = [track.levels];
-    rows.forEach(rowLevels => {
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;flex-wrap:wrap;gap:32px;justify-content:flex-start;';
-      rowLevels.forEach(level => {
+    track.levels.forEach((level, lvlIdx) => {
+      const nextLevel = track.levels[lvlIdx + 1] || null;
       const wrap = document.createElement('div');
       wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:10px;';
 
@@ -1346,49 +1083,70 @@ function drawReferenceRadars() {
 
       row.appendChild(wrap);
 
-      // draw
       const c  = cvs.getContext('2d');
       const cx = 130, cy = 130, r = 85;
       const N  = 5;
       const ang = Array.from({length:N}, (_,i) => (i/N)*2*Math.PI - Math.PI/2);
       const pt  = (a, rv) => [cx + rv*Math.cos(a), cy + rv*Math.sin(a)];
-      const domains = FRAMEWORK.map(d => d.id);
 
-      // grid rings
-      for (let ring = 1; ring <= 4; ring++) {
-        const rv = (ring/4)*r;
+      // 6 grid rings (Foundation to Specialist)
+      for (let ring = 1; ring <= 6; ring++) {
+        const rv = (ring/6)*r;
         c.beginPath();
         ang.forEach((a,i) => { const [x,y]=pt(a,rv); i===0?c.moveTo(x,y):c.lineTo(x,y); });
         c.closePath();
         c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
       }
 
-      // axes
       ang.forEach(a => {
         const [x,y]=pt(a,r);
         c.beginPath();c.moveTo(cx,cy);c.lineTo(x,y);
         c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
       });
 
-      // level polygon
+      // level polygon (scores are 0-4, map to 6-level scale: val/5*r)
       c.beginPath();
       FRAMEWORK.forEach((domain,i) => {
         const val = level.scores[domain.id];
-        const rv  = val > 0 ? ((val)/4)*r : 4;
+        const rv  = ((val+1)/6)*r;
         const [x,y] = pt(ang[i], rv);
         i===0?c.moveTo(x,y):c.lineTo(x,y);
       });
       c.closePath();
-      c.fillStyle='rgba(79,142,247,0.18)';c.strokeStyle='#4f8ef7';c.lineWidth=2;
+      const polyColor = track.label.includes('Technology') ? '#3b82f6' : '#7c3aed';
+      const polyFill = track.label.includes('Technology') ? 'rgba(59,130,246,0.12)' : 'rgba(124,58,237,0.12)';
+      c.fillStyle=polyFill;c.strokeStyle=polyColor;c.lineWidth=1.5;
       c.fill();c.stroke();
 
-      // dots
+      // next level dotted polygon (green)
+      if (nextLevel) {
+        c.beginPath();
+        FRAMEWORK.forEach((domain,i) => {
+          const val = nextLevel.scores[domain.id];
+          const rv  = ((val+1)/6)*r;
+          const [x,y] = pt(ang[i], rv);
+          i===0?c.moveTo(x,y):c.lineTo(x,y);
+        });
+        c.closePath();
+        c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#16a34a';c.lineWidth=1.5;
+        c.setLineDash([5,4]);c.fill();c.stroke();c.setLineDash([]);
+        FRAMEWORK.forEach((domain,i) => {
+          const val = nextLevel.scores[domain.id];
+          const rv  = ((val+1)/6)*r;
+          const [x,y] = pt(ang[i], rv);
+          c.beginPath();c.arc(x,y,3,0,Math.PI*2);
+          c.fillStyle=DOMAIN_COLORS[domain.id]||'#16a34a';c.strokeStyle='#0f1117';c.lineWidth=1;
+          c.fill();c.stroke();
+        });
+      }
+
+      // domain-colored dots
       FRAMEWORK.forEach((domain,i) => {
         const val = level.scores[domain.id];
-        const rv  = val > 0 ? ((val)/4)*r : 4;
+        const rv  = ((val+1)/6)*r;
         const [x,y] = pt(ang[i], rv);
         c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);
-        c.fillStyle=COLORS[val];c.strokeStyle='#0f1117';c.lineWidth=1.5;
+        c.fillStyle=DOMAIN_COLORS[domain.id]||'#4f8ef7';c.strokeStyle='#0f1117';c.lineWidth=1.5;
         c.fill();c.stroke();
       });
 
@@ -1400,37 +1158,21 @@ function drawReferenceRadars() {
         c.fillStyle='#7d8ba8';
         c.fillText(domain.label, x, y);
       });
-
-      // level score labels inside
-      FRAMEWORK.forEach((domain,i) => {
-        const val  = level.scores[domain.id];
-        const rv   = val > 0 ? ((val)/4)*r : 4;
-        const [x,y]= pt(ang[i], rv);
-        c.textAlign='center';
-        c.font='bold 8px IBM Plex Mono,monospace';
-        c.fillStyle=COLORS[val];
-        c.fillText(LEVELS[val].substring(0,3), x, y - 8);
-      });
-      });
-      grid.appendChild(row);
     });
 
-    section.appendChild(grid);
+    section.appendChild(row);
+
+    // horizontal divider after each track except the last
+    const divider = document.createElement('div');
+    divider.style.cssText = 'width:100%;height:1px;background:var(--border);margin:40px 0 8px;';
     container.appendChild(section);
+    container.appendChild(divider);
   });
+  // remove last divider
+  if (container.lastChild && container.lastChild.style && container.lastChild.style.height === '1px') {
+    container.removeChild(container.lastChild);
+  }
 }
-
-
-function scrollToEl(el, extraOffset=0){
-  const header = document.querySelector('.header');
-  const headerH = header ? header.offsetHeight : 0;
-  const footer = document.querySelector('.footer-bar');
-  const footerH = footer ? footer.offsetHeight : 0;
-  const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16 - extraOffset;
-  window.scrollTo({top, behavior:'smooth'});
-}
-
-drawReferenceRadars();
 
 function drawExampleRadar(){
   const cvs=document.getElementById('example-radar');
@@ -1442,31 +1184,33 @@ function drawExampleRadar(){
   const domains=['Technical','Execution','Collaboration','Leadership','Strategic'];
 
   // grid
-  for(let ring=1;ring<=5;ring++){
-    const r=(ring/5)*R;
+  for(let ring=1;ring<=6;ring++){
+    const r=(ring/6)*R;
     c.beginPath();
     ang.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
     c.closePath();c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
   }
   ang.forEach(a=>{const[x,y]=pt(a,R);c.beginPath();c.moveTo(CX,CY);c.lineTo(x,y);c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();});
 
-  // next level dotted — Senior Engineer: T=4,E=3,C=3,L=2,S=1
+  // next level dotted — Senior: T=4,E=3,C=3,L=2,S=1
   const next=[4,3,3,2,1];
   c.setLineDash([6,4]);
   c.beginPath();
-  next.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
-  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#10b981';c.lineWidth=1.5;c.fill();c.stroke();
+  next.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#16a34a';c.lineWidth=1.5;c.fill();c.stroke();
   c.setLineDash([]);
+  const domCols=['#3b82f6','#ff4d3d','#16a34a','#d97706','#7c3aed'];
+  next.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);c.fillStyle=domCols[i];c.strokeStyle='#1e1e1e';c.lineWidth=1.5;c.fill();c.stroke();});
 
-  // current — Engineer: T=3,E=3,C=2,L=1,S=1
+  // current — Mid: T=3,E=3,C=2,L=1,S=1
   const cur=[3,3,2,1,1];
   c.beginPath();
-  cur.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  cur.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
   c.closePath();c.fillStyle='rgba(79,142,247,0.15)';c.strokeStyle='#4f8ef7';c.lineWidth=2.5;c.fill();c.stroke();
   cur.forEach((v,i)=>{
-    const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);
-    c.beginPath();c.arc(x,y,4.5,0,Math.PI*2);
-    c.fillStyle='#4f8ef7';c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
+    const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);
+    c.beginPath();c.arc(x,y,5,0,Math.PI*2);
+    c.fillStyle=domCols[i];c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
   });
 
   // labels
@@ -1478,7 +1222,7 @@ function drawExampleRadar(){
 
   // scale
   c.font='9px IBM Plex Mono,monospace';c.fillStyle='#3a4558';c.textAlign='left';
-  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;c.fillText(ring,CX+4,CY-r+4);}
+  for(let ring=1;ring<=6;ring++){const r=(ring/6)*R;c.fillText(ring,CX+4,CY-r+4);}
 }
 
 function drawExampleRadarMgr(){
@@ -1489,29 +1233,31 @@ function drawExampleRadarMgr(){
   const ang=Array.from({length:N},(_,i)=>(i/N)*2*Math.PI-Math.PI/2);
   const pt=(a,r)=>[CX+r*Math.cos(a),CY+r*Math.sin(a)];
   const domains=['Technical','Execution','Collaboration','Leadership','Strategic'];
-  for(let ring=1;ring<=5;ring++){
-    const r=(ring/5)*R;
+  for(let ring=1;ring<=6;ring++){
+    const r=(ring/6)*R;
     c.beginPath();
     ang.forEach((a,i)=>{const[x,y]=pt(a,r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
     c.closePath();c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();
   }
   ang.forEach(a=>{const[x,y]=pt(a,R);c.beginPath();c.moveTo(CX,CY);c.lineTo(x,y);c.strokeStyle='#2a3145';c.lineWidth=1;c.stroke();});
-  // Manager next dotted: T=1,E=2,C=3,L=3,S=3
-  const next=[1,2,3,3,3];
+  // Lead next dotted: T=1,E=3,C=3,L=4,S=3
+  const next=[1,3,3,4,3];
   c.setLineDash([5,4]);
   c.beginPath();
-  next.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
-  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#10b981';c.lineWidth=1.5;c.fill();c.stroke();
+  next.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(16,185,129,0.06)';c.strokeStyle='#16a34a';c.lineWidth=1.5;c.fill();c.stroke();
   c.setLineDash([]);
-  // Manager current solid: T=1,E=2,C=2,L=3,S=2
-  const cur=[1,2,2,3,2];
+  const domCols=['#3b82f6','#ff4d3d','#16a34a','#d97706','#7c3aed'];
+  next.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);c.fillStyle=domCols[i];c.strokeStyle='#1e1e1e';c.lineWidth=1.5;c.fill();c.stroke();});
+  // Senior current solid: T=1,E=2,C=3,L=3,S=3
+  const cur=[1,2,3,3,3];
   c.beginPath();
-  cur.forEach((v,i)=>{const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
-  c.closePath();c.fillStyle='rgba(79,142,247,0.15)';c.strokeStyle='#4f8ef7';c.lineWidth=2.5;c.fill();c.stroke();
+  cur.forEach((v,i)=>{const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);i===0?c.moveTo(x,y):c.lineTo(x,y);});
+  c.closePath();c.fillStyle='rgba(124,58,237,0.12)';c.strokeStyle='#7c3aed';c.lineWidth=2.5;c.fill();c.stroke();
   cur.forEach((v,i)=>{
-    const r=((v+1)/5)*R;const[x,y]=pt(ang[i],r);
-    c.beginPath();c.arc(x,y,4,0,Math.PI*2);
-    c.fillStyle='#4f8ef7';c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
+    const r=((v+1)/6)*R;const[x,y]=pt(ang[i],r);
+    c.beginPath();c.arc(x,y,5,0,Math.PI*2);
+    c.fillStyle=domCols[i];c.strokeStyle='#1e1e1e';c.lineWidth=2;c.fill();c.stroke();
   });
   domains.forEach((name,i)=>{
     const[x,y]=pt(ang[i],R+30);
@@ -1519,74 +1265,10 @@ function drawExampleRadarMgr(){
     c.fillText(name,x,y);
   });
   c.font='9px IBM Plex Mono,monospace';c.fillStyle='#3a4558';c.textAlign='left';
-  for(let ring=1;ring<=5;ring++){const r=(ring/5)*R;c.fillText(ring,CX+4,CY-r+4);}
+  for(let ring=1;ring<=6;ring++){const r=(ring/6)*R;c.fillText(ring,CX+4,CY-r+4);}
 }
-window.addEventListener('load', ()=>{ drawExampleRadar(); drawExampleRadarMgr(); });
 
-
+window.addEventListener('load', ()=>{ drawExampleRadar(); drawExampleRadarMgr(); buildRefGrids(); });
 </script>
-
-<!-- INSPIRATION -->
-<div class="inspiration-section">
-  <div class="intro-inner">
-    <div class="intro-label">References</div>
-    <h2 class="intro-title">Where this framework comes from</h2>
-    <div class="inspiration-layout">
-      <div class="inspiration-book">
-        <img
-          src="https://covers.openlibrary.org/b/isbn/1491973897-L.jpg"
-          alt="The Manager's Path — Camille Fournier"
-          class="book-cover"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-        />
-        <div class="book-cover-fallback" style="display:none;">
-          <span>The Manager&#x2019;s Path</span>
-          <span class="book-cover-author">Camille Fournier</span>
-        </div>
-        <div class="book-meta">
-          <div class="book-title">The Manager&#x2019;s Path</div>
-          <div class="book-author">Camille Fournier · O&#x2019;Reilly, 2017</div>
-        </div>
-      </div>
-      <div class="inspiration-text">
-        <p class="intro-desc">This framework is grounded in <em>The Manager&#x2019;s Path</em> by Camille Fournier — a practical guide that maps each stage of the technical leadership journey, from engineer to CTO. It defines what good looks like at every level and remains one of the most widely referenced books on engineering management in the industry.</p>
-        <p class="intro-desc" style="margin-top:16px;">Many technology companies have used the book as a foundation for their own career frameworks. Spotify, Rent the Runway, CircleCI, and Dropbox are among those that published engineering ladders and competency matrices that trace back to the same thinking. Rent the Runway&#x2019;s multi-track ladder served as a direct structural reference when shaping this framework.</p>
-        <div class="inspiration-refs">
-          <a class="inspiration-ref" href="https://www.amazon.com.au/dp/1491973897" target="_blank" rel="noopener">
-            <span class="ref-icon">↗</span> The Manager&#x2019;s Path on Amazon
-          </a>
-          <a class="inspiration-ref" href="https://dresscode.renttherunway.com/blog/ladder" target="_blank" rel="noopener">
-            <span class="ref-icon">↗</span> Rent the Runway Engineering Ladder
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="footer-bar">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <img class="footer-logo" src="https://april9.com.au/img/logo-white.svg" alt="April9" />
-      <span class="footer-divider"></span>
-      <span class="footer-name">Competency Framework</span>
-    </div>
-    <div class="footer-meta">
-      <span class="footer-item"><span class="footer-item-label">Version</span>0.1</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-item"><span class="footer-item-label">Tracks</span>Engineer · Manager</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-item"><span class="footer-item-label">Domains</span>5</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-item"><span class="footer-item-label">Competencies</span>14</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-item"><span class="footer-item-label">Criteria</span>25</span>
-      <span class="footer-sep">·</span>
-      <span class="footer-item"><span class="footer-item-label">Levels</span>5</span>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
