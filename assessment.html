@@ -237,12 +237,38 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .footer-sep{color:var(--border);}
 
 /* RESPONSIVE */
+/* RESPONSIVE */
 @media(max-width:900px){
-  .header-inner,.intro-inner,.track-selector-inner,.left-inner,.calculate-bar-inner,.results-inner,.reset-bar-inner,.footer-inner,.idp-outer-inner{padding-left:24px;padding-right:24px;}
+  .header-inner,.intro-inner,.track-selector-inner,.left-inner,.calculate-bar-inner,.results-inner,.reset-bar-inner,.idp-outer-inner{padding-left:24px;padding-right:24px;}
   .comp-block{margin-left:0;}
   .results-grid{grid-template-columns:1fr;}
   .idp-two-col{grid-template-columns:1fr;}
   .footer-meta{display:none;}
+}
+@media print {
+  body * { visibility: hidden !important; }
+  #idp-print-root, #idp-print-root * { visibility: visible !important; }
+  #idp-print-root { position: absolute; top: 0; left: 0; width: 100%; padding: 40px; background: #ffffff; color: #111111; }
+  #idp-print-root .idp-section-header { margin-bottom: 32px; }
+  #idp-print-root .idp-section-title { font-size: 22px; color: #111 !important; }
+  #idp-print-root .idp-section-label { color: #888 !important; }
+  #idp-print-root .idp-section-desc { color: #555 !important; }
+  #idp-print-root .idp-section-meta { border-color: #ddd !important; color: #666 !important; }
+  #idp-print-root .idp-group { margin-bottom: 24px; }
+  #idp-print-root .idp-group-label { color: #333 !important; border-bottom: 1px solid #eee !important; }
+  #idp-print-root .idp-group-sub { color: #666 !important; }
+  #idp-print-root .idp-card { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ddd !important; border-top: 24px solid #ffffff !important; border-radius: 4px; margin-bottom: 16px; background: #fff !important; }
+  #idp-print-root .idp-card-header { background: #f5f5f5 !important; border-bottom: 1px solid #eee !important; }
+  #idp-print-root .idp-card-criterion { color: #111 !important; }
+  #idp-print-root .idp-card-context { background: #fafafa !important; border-bottom: 1px solid #eee !important; }
+  #idp-print-root .idp-context-label { color: #888 !important; }
+  #idp-print-root .idp-context-text { color: #444 !important; }
+  #idp-print-root .idp-card-body { background: #fff !important; }
+  #idp-print-root label { color: #666 !important; }
+  #idp-print-root .idp-textarea, #idp-print-root .idp-input { border: 1px solid #ccc !important; color: #111 !important; background: #fff !important; min-height: 60px; }
+  #idp-print-root .idp-select { border: 1px solid #ccc !important; color: #333 !important; background: #fff !important; }
+  #idp-print-root .idp-level-pill { background: transparent !important; }
+  #idp-print-bar { display: none !important; }
 }
 </style>
 </head>
@@ -353,6 +379,10 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="idp-section-meta" id="idp-subtitle"></div>
     </div>
     <div id="idp-cards"></div>
+    <div id="idp-print-bar" style="display:none;padding-top:32px;border-top:1px solid var(--border);margin-top:32px;display:flex;align-items:center;gap:16px;">
+      <button class="calculate-btn" onclick="printIDP()">⬇ Export Individual Development Plan</button>
+      <span class="calculate-hint">Opens a print-ready view — use your browser's Save as PDF option.</span>
+    </div>
   </div>
 </div>
 
@@ -1231,6 +1261,8 @@ function showGapAnalysis() {
 
   idpCards.innerHTML = idpHtml;
   idpSection.style.display = 'block';
+  const printBar = document.getElementById('idp-print-bar');
+  if (printBar) printBar.style.display = 'flex';
 }
 
 function renderIDPCard(g) {
@@ -1300,6 +1332,8 @@ function resetAll() {
   document.getElementById('results-panel').classList.remove('visible');
   document.getElementById('gap-section').style.display = 'none';
   document.getElementById('idp-section').style.display = 'none';
+  const printBar = document.getElementById('idp-print-bar');
+  if (printBar) printBar.style.display = 'none';
   currentTrack = null;
   currentTechProfile = null;
   document.getElementById('profile-selector').style.display = 'none';
@@ -1340,6 +1374,40 @@ function scrollToEl(el, extraOffset = 0) {
   const headerH = header ? header.offsetHeight : 0;
   const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16 - extraOffset;
   window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ── PRINT IDP ─────────────────────────────────────────────────────────────────
+function printIDP() {
+  const idpOuter = document.getElementById('idp-section');
+  if (!idpOuter) return;
+
+  // Capture live values into DOM attributes before cloning
+  idpOuter.querySelectorAll('textarea').forEach(el => el.setAttribute('data-val', el.value));
+  idpOuter.querySelectorAll('input').forEach(el => el.setAttribute('data-val', el.value));
+  idpOuter.querySelectorAll('select').forEach(el => el.setAttribute('data-val', el.value));
+
+  const existing = document.getElementById('idp-print-root');
+  if (existing) existing.remove();
+
+  const root = document.createElement('div');
+  root.id = 'idp-print-root';
+  root.innerHTML = idpOuter.querySelector('.idp-outer-inner').innerHTML;
+
+  // Restore values into cloned elements
+  root.querySelectorAll('textarea[data-val]').forEach(el => { el.value = el.getAttribute('data-val'); });
+  root.querySelectorAll('input[data-val]').forEach(el => { el.value = el.getAttribute('data-val'); });
+  root.querySelectorAll('select[data-val]').forEach(el => {
+    const val = el.getAttribute('data-val');
+    Array.from(el.options).forEach(opt => { opt.selected = opt.value === val; });
+  });
+
+  // Remove the print bar from the clone
+  const printBar = root.querySelector('#idp-print-bar');
+  if (printBar) printBar.remove();
+
+  document.body.appendChild(root);
+  window.print();
+  setTimeout(() => root.remove(), 1000);
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
