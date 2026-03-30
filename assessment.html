@@ -18,20 +18,20 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 /* HEADER */
 .header{padding:0;border-bottom:1px solid var(--border);background:#111111;position:sticky;top:0;z-index:100;}
 .header-inner{max-width:1200px;margin:0 auto;padding:16px 64px;display:flex;align-items:center;gap:16px;}
-.logo{display:flex;align-items:center;gap:10px;}
-.logo-img{height:36px;width:auto;display:block;}
+
+
 .header-divider{width:1px;height:20px;background:var(--border);}
 .header-title{font-size:13px;color:var(--text-muted);}
-.header-spacer{flex:1;}
-.header-back{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:5px 12px;border-radius:2px;letter-spacing:.06em;transition:all .15s;}
-.header-back:hover{border-color:var(--text-muted);color:var(--text);}
+
+
+
 
 /* INTRO */
-.assess-intro{padding:40px 0 0;background:var(--bg);}
+.assess-intro{padding:56px 0 0;background:var(--bg);}
 .intro-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
 .intro-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
-.intro-title{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:10px;}
-.intro-desc{font-size:13px;color:var(--text-muted);line-height:1.8;max-width:680px;}
+.intro-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
+.intro-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:680px;}
 
 /* TRACK SELECTOR */
 .track-selector{padding:0;background:var(--bg);border-bottom:1px solid var(--border);}
@@ -228,13 +228,13 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .footer-bar{border-top:1px solid var(--border);background:#111111;padding:0;}
 .footer-inner{max-width:1200px;margin:0 auto;padding:20px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
 .footer-left{display:flex;align-items:center;gap:14px;}
-.footer-logo{height:28px;width:auto;}
+
 .footer-divider{width:1px;height:16px;background:var(--border);}
 .footer-name{font-size:12px;color:var(--text-muted);}
 .footer-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.footer-item{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:6px;}
-.footer-item-label{color:var(--text-muted);margin-right:2px;}
-.footer-sep{color:var(--border);}
+.footer-item{font-family:'Space Mono',monospace;font-size:10px;color:#aaa;display:flex;align-items:center;gap:6px;}
+.footer-item-label{color:#666;text-transform:uppercase;letter-spacing:.08em;font-size:9px;}
+.footer-sep{color:#444;font-size:12px;}
 
 /* RESPONSIVE */
 /* RESPONSIVE */
@@ -245,10 +245,33 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   .idp-two-col{grid-template-columns:1fr;}
   .footer-meta{display:none;}
 }
+@page { margin: 20mm; }
 @media print {
   body * { visibility: hidden !important; }
+  body > *:not(#profile-print-root):not(#idp-print-root) { display: none !important; }
   #idp-print-root, #idp-print-root * { visibility: visible !important; }
-  #idp-print-root { position: absolute; top: 0; left: 0; width: 100%; padding: 40px; background: #ffffff; color: #111111; }
+  #profile-print-root, #profile-print-root * { visibility: visible !important; }
+  #idp-print-root { display: block !important; padding: 40px; }
+  #profile-print-root { display: block !important; padding: 40px; }
+  #profile-print-root .results-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; }
+  #profile-print-root canvas { max-width: 320px; }
+  #profile-print-root .summary { border: 1px solid #ddd; padding: 16px; border-radius: 4px; }
+  #profile-print-root .summary-title { color: #888 !important; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+  #profile-print-root .bar-label { color: #444 !important; }
+  #profile-print-root .bar-track { background: #eee !important; }
+  #profile-print-root .bar-val { color: #333 !important; }
+  #profile-print-root .level-current-label { color: #888 !important; }
+  #profile-print-root .level-current-name { }
+  #profile-print-root .level-desc-small { color: #555 !important; }
+  #profile-print-root .level-next-label { color: #888 !important; }
+  #profile-print-root .gap-title { color: #b45309 !important; border-top: 1px solid #eee !important; }
+  #profile-print-root .gap-domain-name { color: #333 !important; }
+  #profile-print-root .gap-item { background: #fafafa !important; border: 1px solid #eee !important; }
+  #profile-print-root .gap-item-name { color: #111 !important; }
+  #profile-print-root .gap-item-desc { color: #555 !important; }
+  #profile-print-root .gap-group-header { color: #333 !important; border-bottom: 1px solid #eee !important; }
+  #profile-print-root .gap-group-subtitle { color: #888 !important; }
+  #profile-export-bar, #idp-print-bar, #reset-bar { display: none !important; }
   #idp-print-root .idp-section-header { margin-bottom: 32px; }
   #idp-print-root .idp-section-title { font-size: 22px; color: #111 !important; }
   #idp-print-root .idp-section-label { color: #888 !important; }
@@ -291,7 +314,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <span class="footer-sep">·</span>
       <span class="footer-item"><span class="footer-item-label">Levels</span>6</span>
     </div>
-    <div class="header-spacer"></div>
   </div>
 </div>
 
@@ -359,6 +381,13 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="gap-title" id="gap-title">Criteria to improve</div>
       <div id="gap-list"></div>
     </div>
+  </div>
+</div>
+
+<div class="reset-bar" id="profile-export-bar" style="display:none">
+  <div class="reset-bar-inner">
+    <button class="calculate-btn" onclick="printProfile()">⬇ Export Profile & Criteria to Improve</button>
+    <span class="calculate-hint">Opens a print-ready view of your profile and gap analysis.</span>
   </div>
 </div>
 
@@ -982,6 +1011,7 @@ function generateRandomProfile() {
   const panel = document.getElementById('results-panel');
   panel.classList.add('visible');
   document.getElementById('reset-bar').style.display = 'block';
+  document.getElementById('profile-export-bar').style.display = 'block';
   showGapAnalysis();
   setTimeout(() => scrollToEl(panel), 100);
 }
@@ -1009,16 +1039,18 @@ const CX = 250, CY = 250, R = 155, N = 5;
 const angles = Array.from({ length: N }, (_, i) => (i / N) * 2 * Math.PI - Math.PI / 2);
 function pt(a, r) { return [CX + r * Math.cos(a), CY + r * Math.sin(a)]; }
 
+let _printMode = false;
 function drawRadar() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const PM = _printMode;
   // Grid rings (6 rings for 6 levels)
   for (let ring = 1; ring <= 6; ring++) {
     const r = (ring / 6) * R;
     ctx.beginPath();
     angles.forEach((a, i) => { const [x, y] = pt(a, r); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
-    ctx.closePath(); ctx.strokeStyle = '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.closePath(); ctx.strokeStyle = PM ? '#d1d5db' : '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
   }
-  ctx.font = '9px Space Mono,monospace'; ctx.fillStyle = '#3a4558'; ctx.textAlign = 'left';
+  ctx.font = '9px Space Mono,monospace'; ctx.fillStyle = PM ? '#9ca3af' : '#3a4558'; ctx.textAlign = 'left';
   for (let ring = 1; ring <= 6; ring++) {
     const r = (ring / 6) * R;
     ctx.fillText(LEVELS[ring - 1].substring(0, 3), CX + 4, CY - r + 4);
@@ -1026,7 +1058,7 @@ function drawRadar() {
   angles.forEach(a => {
     const [x, y] = pt(a, R);
     ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(x, y);
-    ctx.strokeStyle = '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.strokeStyle = PM ? '#d1d5db' : '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
   });
 
   const hasAny = FRAMEWORK.some(d => domainAvg(d) !== null);
@@ -1056,7 +1088,7 @@ function drawRadar() {
       const [x, y] = pt(angles[i], r);
       ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
       ctx.fillStyle = isApproach ? '#888' : domain.color;
-      ctx.strokeStyle = '#0f1117'; ctx.lineWidth = 2; ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = PM ? '#ffffff' : '#0f1117'; ctx.lineWidth = 2; ctx.fill(); ctx.stroke();
     });
   }
 
@@ -1089,7 +1121,7 @@ function drawRadar() {
     const [x, y] = pt(angles[i], R + 28);
     const da = domainAvg(domain);
     ctx.textAlign = 'center';
-    ctx.font = 'bold 11px Space Mono,monospace'; ctx.fillStyle = '#e2e8f0';
+    ctx.font = 'bold 11px Space Mono,monospace'; ctx.fillStyle = PM ? '#111827' : '#e2e8f0';
     ctx.fillText(domain.label, x, y);
     if (da !== null) {
       ctx.font = '9px Space Mono,monospace';
@@ -1106,6 +1138,7 @@ function calculate() {
   const panel = document.getElementById('results-panel');
   panel.classList.add('visible');
   document.getElementById('reset-bar').style.display = 'block';
+  document.getElementById('profile-export-bar').style.display = 'block';
   setTimeout(() => scrollToEl(panel), 50);
 }
 
@@ -1328,6 +1361,7 @@ function renderIDPCard(g) {
 // ── RESET ─────────────────────────────────────────────────────────────────────
 function resetAll() {
   document.getElementById('reset-bar').style.display = 'none';
+  document.getElementById('profile-export-bar').style.display = 'none';
   document.getElementById('results-panel').classList.remove('visible');
   document.getElementById('gap-section').style.display = 'none';
   document.getElementById('idp-section').style.display = 'none';
@@ -1373,6 +1407,82 @@ function scrollToEl(el, extraOffset = 0) {
   const headerH = header ? header.offsetHeight : 0;
   const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16 - extraOffset;
   window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ── PRINT PROFILE ─────────────────────────────────────────────────────────────
+function printProfile() {
+  const gapSection = document.getElementById('gap-section');
+
+  // Capture radar with white background and print-friendly colors
+  _printMode = true;
+  drawRadar();
+  const radarCanvas = document.getElementById('radar');
+  const printCanvas = document.createElement('canvas');
+  printCanvas.width  = radarCanvas.width;
+  printCanvas.height = radarCanvas.height;
+  const pCtx = printCanvas.getContext('2d');
+  pCtx.fillStyle = '#ffffff';
+  pCtx.fillRect(0, 0, printCanvas.width, printCanvas.height);
+  pCtx.drawImage(radarCanvas, 0, 0);
+  const radarDataUrl = printCanvas.toDataURL('image/png');
+  _printMode = false;
+  drawRadar();
+
+  // Collect domain scores text
+  const barRows = document.getElementById('bar-rows');
+  const scoresHtml = barRows ? barRows.innerHTML : '';
+
+  // Level info
+  const levelLabel = document.getElementById('level-current-label')?.textContent || '';
+  const levelName  = document.getElementById('overall-level')?.textContent || '';
+  const levelNameColor = getComputedStyle(document.getElementById('overall-level')).color || '#ff4d3d';
+  const levelDesc  = document.getElementById('overall-desc')?.textContent || '';
+  const nextLabel  = document.getElementById('next-label')?.style.display !== 'none' ? (document.getElementById('next-label')?.textContent || '') : '';
+  const nextName   = document.getElementById('next-level-name')?.textContent || '';
+  const nextColor  = document.getElementById('next-level-name')?.style.color || '#10b981';
+
+  // Gap analysis
+  const gapHtml = (gapSection && gapSection.style.display !== 'none') ? gapSection.innerHTML : '';
+
+  const track = currentTrack ? (currentTrack.charAt(0).toUpperCase()+currentTrack.slice(1)) : '';
+  const profile = currentTechProfile ? ' · ' + TECH_PROFILES[currentTechProfile].label : '';
+
+  const existing = document.getElementById('profile-print-root');
+  if (existing) existing.remove();
+
+  const root = document.createElement('div');
+  root.id = 'profile-print-root';
+  root.innerHTML = `
+    <div style="margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid #eee;">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#888;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Career Progression</div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:#111;">Profile Assessment</div>
+      <div style="font-size:12px;color:#666;">Track: ${track}${profile}</div>
+    </div>
+    <div class="results-grid" style="margin-bottom:28px;">
+      <img src="${radarDataUrl}" style="width:320px;height:320px;" />
+      <div class="summary">
+        <div class="summary-title">Domain Scores</div>
+        <div class="bar-rows">${scoresHtml}</div>
+      </div>
+    </div>
+    <div style="margin-bottom:24px;">
+      <div class="level-current-label">${levelLabel}</div>
+      <div class="level-current-name" style="color:${levelNameColor}">${levelName}</div>
+      <div class="level-desc-small">${levelDesc}</div>
+      ${nextLabel ? `<div class="level-next-label">${nextLabel}</div><div class="level-next-name" style="color:${nextColor}">${nextName}</div>` : ''}
+    </div>
+    ${gapHtml ? `<div class="gap-section">${gapHtml}</div>` : ''}
+  `;
+
+  document.body.appendChild(root);
+  const radarImg = root.querySelector('img');
+  const doPrint = () => { window.print(); setTimeout(() => root.remove(), 1000); };
+  if (radarImg && !radarImg.complete) {
+    radarImg.onload = doPrint;
+    radarImg.onerror = doPrint;
+  } else {
+    setTimeout(doPrint, 80);
+  }
 }
 
 // ── PRINT IDP ─────────────────────────────────────────────────────────────────
