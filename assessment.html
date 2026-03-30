@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Progression: Self Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1e1e1e;--surface:#2a2a2a;--surface2:#333333;--border:#3a3a3a;
+  --accent:#ff4d3d;--text:#ffffff;--text-muted:#a0a0a0;--text-dim:#555;
+  --c-technical:#3b82f6;--c-execution:#ff4d3d;--c-collaboration:#16a34a;
+  --c-leadership:#d97706;--c-strategic:#7c3aed;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.6;}
+
+/* HEADER */
+.header{padding:0;border-bottom:1px solid var(--border);background:#111111;position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:16px 64px;display:flex;align-items:center;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-img{height:36px;width:auto;display:block;}
+.header-divider{width:1px;height:20px;background:var(--border);}
+.header-title{font-size:13px;color:var(--text-muted);}
+.header-spacer{flex:1;}
+.header-back{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:5px 12px;border-radius:2px;letter-spacing:.06em;transition:all .15s;}
+.header-back:hover{border-color:var(--text-muted);color:var(--text);}
+
+/* INTRO */
+.assess-intro{padding:40px 0 0;background:var(--bg);}
+.intro-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
+.intro-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.intro-title{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:10px;}
+.intro-desc{font-size:13px;color:var(--text-muted);line-height:1.8;max-width:680px;}
+
+/* TRACK SELECTOR */
+.track-selector{padding:0;background:var(--bg);border-bottom:1px solid var(--border);}
+.track-selector-inner{max-width:1200px;margin:0 auto;padding:20px 64px;display:flex;align-items:center;gap:16px;}
+.track-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;}
+.track-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;padding:8px 24px;border-radius:24px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;letter-spacing:.01em;transition:all .15s;}
+.track-btn:hover{border-color:var(--accent);color:var(--accent);}
+.track-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;font-weight:700;}
+.track-desc{font-size:12px;color:var(--text-muted);margin-left:8px;}
+.random-btn{font-family:'Space Mono',monospace;font-size:10px;padding:6px 14px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;letter-spacing:.05em;transition:all .15s;margin-left:auto;}
+.random-btn:hover{border-color:var(--text-muted);color:var(--text);}
+
+/* LAYOUT */
+.layout{padding:40px 0;}
+.left-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
+
+/* DOMAIN */
+.domain-block{margin-bottom:56px;}
+.domain-heading{padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;}
+.domain-heading-top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+.domain-tag{font-family:'Space Mono',monospace;font-size:9px;color:#fff;padding:3px 8px;border-radius:20px;font-weight:700;letter-spacing:.08em;white-space:nowrap;}
+.domain-name{font-size:17px;font-weight:700;flex:1;letter-spacing:-.3px;}
+.domain-avg-badge{font-family:'Space Mono',monospace;font-size:10px;padding:4px 12px;border-radius:2px;border:1px solid var(--border);color:var(--text-muted);transition:all .2s;}
+.domain-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+/* COMPETENCY */
+.comp-block{margin-bottom:12px;margin-left:48px;background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--border);border-radius:2px;overflow:hidden;}
+.comp-header{padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);}
+.comp-header-top{display:flex;align-items:center;gap:10px;margin-bottom:5px;}
+.comp-tag{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:20px;border:1px solid;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+.comp-name{font-weight:600;font-size:13px;flex:1;}
+.comp-avg-badge{font-family:'Space Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;border:1px solid var(--border);color:var(--text-dim);transition:all .2s;white-space:nowrap;}
+.comp-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+.comp-body{padding:16px 16px 16px 20px;display:flex;flex-direction:column;gap:14px;}
+
+/* CRITERIA */
+.criteria-block{border:1px solid var(--border);border-left:2px solid var(--text-dim);border-radius:2px;overflow:hidden;}
+.criteria-header{padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border);}
+.criteria-header-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.criteria-dot-tag{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);border:1px solid var(--border);padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+.criteria-name{font-size:12px;font-weight:600;flex:1;}
+.criteria-score-lbl{font-family:'Space Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--text-dim);white-space:nowrap;transition:all .2s;}
+.criteria-desc{font-size:11px;color:var(--text-muted);line-height:1.5;padding-left:2px;}
+
+/* PROFICIENCY PILLS */
+.proficiency-row{padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface2);}
+.proficiency-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:inline-block;border:1px solid var(--border);padding:2px 8px;border-radius:2px;}
+.proficiency-pills{display:flex;flex-direction:column;gap:4px;}
+.pill{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:2px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;user-select:none;font-family:'Plus Jakarta Sans',sans-serif;}
+.pill-specialist{cursor:default;opacity:.45;}
+.pill-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+.pill-radio::after{content:'';width:6px;height:6px;border-radius:50%;background:transparent;transition:all .15s;}
+.pill-content{display:flex;flex-direction:column;gap:3px;}
+.pill-name{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.05em;}
+.pill-desc{font-size:12px;color:var(--text-muted);line-height:1.5;}
+.pill-specialist-note{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-left:auto;white-space:nowrap;padding:2px 6px;border:1px solid var(--border);border-radius:2px;}
+
+/* PILL DEFAULT: neutral */
+.pill{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:2px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;user-select:none;font-family:'Plus Jakarta Sans',sans-serif;}
+.pill-specialist{cursor:default;opacity:.45;}
+
+/* HOVER per level */
+.pill-lv-0:not(.pill-specialist):hover{border-color:#6b7280;background:rgba(107,114,128,.08);}
+.pill-lv-1:not(.pill-specialist):hover{border-color:#3b82f6;background:rgba(59,130,246,.08);}
+.pill-lv-2:not(.pill-specialist):hover{border-color:#10b981;background:rgba(16,185,129,.08);}
+.pill-lv-3:not(.pill-specialist):hover{border-color:#f97316;background:rgba(249,115,22,.08);}
+.pill-lv-4:not(.pill-specialist):hover{border-color:#ff4d3d;background:rgba(255,77,61,.08);}
+
+/* SELECTED per level: colored text, subtle bg */
+.pill.sel-0{border-color:#6b7280;}
+.pill.sel-0 .pill-radio{border-color:#6b7280;}.pill.sel-0 .pill-radio::after{background:#9ca3af;}
+.pill.sel-0 .pill-name{color:#9ca3af;}.pill.sel-0 .pill-desc{color:#9ca3af;opacity:.8;}
+.pill.sel-1{border-color:#3b82f6;}
+.pill.sel-1 .pill-radio{border-color:#3b82f6;}.pill.sel-1 .pill-radio::after{background:#3b82f6;}
+.pill.sel-1 .pill-name{color:#93c5fd;}.pill.sel-1 .pill-desc{color:#93c5fd;opacity:.8;}
+.pill.sel-2{border-color:#10b981;}
+.pill.sel-2 .pill-radio{border-color:#10b981;}.pill.sel-2 .pill-radio::after{background:#10b981;}
+.pill.sel-2 .pill-name{color:#6ee7b7;}.pill.sel-2 .pill-desc{color:#6ee7b7;opacity:.8;}
+.pill.sel-3{border-color:#f97316;}
+.pill.sel-3 .pill-radio{border-color:#f97316;}.pill.sel-3 .pill-radio::after{background:#f97316;}
+.pill.sel-3 .pill-name{color:#fb923c;}.pill.sel-3 .pill-desc{color:#fb923c;opacity:.8;}
+.pill.sel-4{border-color:#ff4d3d;}
+.pill.sel-4 .pill-radio{border-color:#ff4d3d;}.pill.sel-4 .pill-radio::after{background:#ff4d3d;}
+.pill.sel-4 .pill-name{color:#ff4d3d;}.pill.sel-4 .pill-desc{color:#ff4d3d;opacity:.8;}
+
+/* EVIDENCE */
+.evidence-row{display:none;padding:10px 14px;border-top:1px solid var(--border);background:var(--bg);align-items:center;gap:12px;flex-wrap:wrap;}
+.evidence-row.visible{display:flex;}
+.evidence-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);padding:2px 8px;border-radius:2px;white-space:nowrap;}
+.evidence-select{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:6px 10px;border-radius:2px;outline:none;cursor:pointer;transition:border-color .15s;min-width:160px;}
+.evidence-select:focus{border-color:var(--accent);}
+.evidence-select option{background:var(--surface2);color:var(--text);}
+.evidence-input{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:2px;outline:none;transition:border-color .15s;flex:1;min-width:0;}
+.evidence-input:focus{border-color:var(--accent);}
+.evidence-input::placeholder{color:var(--text-dim);}
+
+/* CALCULATE BAR */
+.calculate-bar{padding:0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.calculate-bar-inner{max-width:1200px;margin:0 auto;padding:24px 64px;display:flex;align-items:center;gap:20px;}
+.calculate-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;padding:12px 32px;border-radius:24px;border:none;background:var(--accent);color:#fff;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;}
+.calculate-btn:hover{opacity:.85;}
+.calculate-hint{font-size:12px;color:var(--text-muted);}
+
+/* RESULTS */
+.results-panel{display:none;padding:48px 0;flex-direction:column;background:var(--bg);}
+.results-panel.visible{display:flex;}
+.results-inner{max-width:1200px;margin:0 auto;padding:0 64px;width:100%;display:flex;flex-direction:column;gap:28px;}
+.results-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;width:100%;}
+.summary{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:20px 22px;}
+.summary-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+.bar-rows{display:flex;flex-direction:column;gap:10px;}
+.bar-row{display:flex;align-items:center;gap:12px;}
+.bar-label{font-size:11px;width:120px;color:var(--text-muted);}
+.bar-track{flex:1;height:4px;background:var(--surface2);border-radius:0;overflow:hidden;}
+.bar-fill{height:100%;border-radius:0;transition:width .4s,background .3s;}
+.bar-val{font-family:'Space Mono',monospace;font-size:10px;width:140px;min-width:140px;text-align:right;color:var(--text-dim);transition:color .2s;white-space:nowrap;}
+
+/* LEVEL DISPLAY */
+.results-header{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.level-display{flex:1;}
+.level-current-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.level-current-name{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:4px;}
+.level-desc-small{font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:6px;}
+.level-next-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;margin-top:16px;}
+.level-next-name{font-size:16px;font-weight:600;}
+
+/* GAP ANALYSIS */
+.gap-section{width:100%;}
+.gap-title{font-size:18px;font-weight:700;color:#f59e0b;letter-spacing:-.3px;margin-bottom:20px;padding-top:16px;border-top:1px solid var(--border);}
+.gap-domain{margin-bottom:20px;}
+.gap-domain-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.gap-domain-name::after{content:'';flex:1;height:1px;background:var(--border);}
+.gap-item{display:flex;align-items:center;gap:16px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-left:3px solid transparent;border-radius:2px;margin-bottom:8px;}
+.gap-item-info{display:flex;flex-direction:column;gap:3px;flex:1;}
+.gap-item-name{font-size:12px;font-weight:600;color:var(--text);}
+.gap-item-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+.gap-item-pills{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.idp-card-context{padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--border);}
+.idp-context-item{display:flex;flex-direction:column;gap:5px;}
+.idp-context-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;}
+.idp-context-text{font-size:12px;color:var(--text-muted);line-height:1.6;}
+.gap-item-current{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
+.gap-arrow{color:var(--text-dim);font-size:12px;}
+.gap-item-required{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
+.gap-empty{font-size:13px;color:#10b981;padding:16px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:2px;text-align:center;}
+.gap-group-header{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;margin-top:8px;border-bottom:1px solid var(--border);margin-bottom:12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.gap-group-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:0;text-transform:none;font-weight:400;}
+
+/* IDP OUTER SECTION */
+.idp-outer{background:var(--surface);border-top:3px solid var(--accent);}
+.idp-outer-inner{max-width:1200px;margin:0 auto;padding:64px 64px;}
+.idp-section-header{margin-bottom:48px;}
+.idp-section-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.idp-section-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
+.idp-section-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:640px;margin-bottom:16px;}
+.idp-section-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);padding:8px 14px;border:1px solid var(--border);border-radius:2px;display:inline-block;}
+
+/* IDP CARDS */
+.idp-group{margin-bottom:28px;}
+.idp-group-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;border-bottom:1px solid var(--border);margin-bottom:16px;display:flex;align-items:baseline;gap:12px;}
+.idp-group-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:0;text-transform:none;font-weight:400;}
+.idp-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-bottom:12px;}
+.idp-card-header{padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.idp-card-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
+.idp-card-criterion{font-size:13px;font-weight:600;white-space:nowrap;}
+.idp-card-domain{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.06em;}
+.idp-card-gap{display:flex;align-items:center;gap:8px;}
+.idp-level-pill{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;border:1px solid;}
+.idp-arrow{color:var(--text-dim);font-size:12px;}
+.idp-card-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
+.idp-fields-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.idp-field{display:flex;flex-direction:column;gap:6px;}
+.idp-field label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;}
+.idp-textarea{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:2px;outline:none;resize:vertical;min-height:72px;transition:border-color .15s;line-height:1.6;}
+.idp-textarea:focus{border-color:var(--accent);}
+.idp-textarea::placeholder{color:var(--text-dim);}
+.idp-input{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:2px;outline:none;transition:border-color .15s;}
+.idp-input:focus{border-color:var(--accent);}
+.idp-input::placeholder{color:var(--text-dim);}
+.idp-select{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:8px 10px;border-radius:2px;outline:none;cursor:pointer;transition:border-color .15s;}
+.idp-select:focus{border-color:var(--accent);}
+.idp-select option{background:var(--surface2);color:var(--text);}
+.idp-two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.idp-col-left{display:flex;flex-direction:column;gap:14px;}
+.idp-col-right{display:flex;flex-direction:column;gap:14px;}
+
+/* RESET BAR */
+.reset-bar{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);width:100%;}
+.reset-bar-inner{max-width:1200px;margin:0 auto;padding:24px 64px;display:flex;align-items:center;gap:20px;}
+.reset-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;padding:12px 32px;border-radius:24px;border:none;background:var(--surface2);color:var(--text-muted);cursor:pointer;letter-spacing:.02em;transition:all .15s;border:1px solid var(--border);}
+.reset-btn:hover{border-color:var(--text-muted);color:var(--text);}
+
+/* FOOTER */
+.footer-bar{border-top:1px solid var(--border);background:#111111;padding:0;}
+.footer-inner{max-width:1200px;margin:0 auto;padding:20px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-left{display:flex;align-items:center;gap:14px;}
+.footer-logo{height:28px;width:auto;}
+.footer-divider{width:1px;height:16px;background:var(--border);}
+.footer-name{font-size:12px;color:var(--text-muted);}
+.footer-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.footer-item{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:6px;}
+.footer-item-label{color:var(--text-muted);margin-right:2px;}
+.footer-sep{color:var(--border);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .header-inner,.intro-inner,.track-selector-inner,.left-inner,.calculate-bar-inner,.results-inner,.reset-bar-inner,.footer-inner,.idp-outer-inner{padding-left:24px;padding-right:24px;}
+  .comp-block{margin-left:0;}
+  .results-grid{grid-template-columns:1fr;}
+  .idp-two-col{grid-template-columns:1fr;}
+  .footer-meta{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-title" style="font-size:14px;font-weight:600;color:var(--text);">Career Progression Framework</div>
+    <div class="header-divider"></div>
+    <div class="footer-meta" style="margin-left:0;">
+      <span class="footer-item"><span class="footer-item-label">Version</span>1.0</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Tracks</span>Technology · Business</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Domains</span>5</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Competencies</span>14</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Criteria</span>48</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Levels</span>6</span>
+    </div>
+    <div class="header-spacer"></div>
+    <a class="header-back" href="Career_Progression_Framework_v1.0.html">← Framework</a>
+  </div>
+</div>
+
+<div class="assess-intro">
+  <div class="intro-inner" style="padding-bottom:28px;">
+    <div class="intro-label">Self Assessment</div>
+    <h1 class="intro-title">Assess your proficiency</h1>
+    <p class="intro-desc">Select your track, then rate yourself on each criterion. Your results will show your current level, next level, and the gaps to focus on — followed by an Individual Development Plan.</p>
+  </div>
+</div>
+
+<div class="track-selector">
+  <div class="track-selector-inner">
+    <span class="track-label">Track</span>
+    <button class="track-btn" id="btn-technology" onclick="setTrack('technology')">Technology</button>
+    <button class="track-btn" id="btn-business" onclick="setTrack('business')">Business</button>
+    <span class="track-desc" id="track-desc">Select your track to begin.</span>
+    <button class="random-btn" id="random-btn" style="display:none" onclick="generateRandomProfile()">↺ Random profile</button>
+  </div>
+</div>
+
+<div id="profile-selector" style="display:none;" class="track-selector" style="border-top:none;">
+  <div class="track-selector-inner">
+    <span class="track-label">Profile</span>
+    <button class="track-btn" id="btn-engineer" onclick="setTechProfile('engineer')">Engineer & Architect</button>
+    <button class="track-btn" id="btn-support"  onclick="setTechProfile('support')">Support & QA</button>
+    <button class="track-btn" id="btn-devops"   onclick="setTechProfile('devops')">Infra & DevOps</button>
+    <span class="track-desc" id="profile-desc" style="margin-left:8px;">Select your profile to weight the Technical domain.</span>
+  </div>
+</div>
+
+<div id="assessment-content" style="display:none">
+  <div class="layout">
+    <div class="left-inner" id="left-panel"></div>
+  </div>
+  <div class="calculate-bar">
+    <div class="calculate-bar-inner">
+      <button class="calculate-btn" onclick="calculate()">Calculate Results</button>
+      <span class="calculate-hint">Complete the assessment above and click to see your profile, radar, and development plan.</span>
+    </div>
+  </div>
+</div>
+
+<div class="results-panel" id="results-panel">
+  <div class="results-inner">
+    <div class="results-grid">
+      <div><canvas id="radar" width="500" height="500"></canvas></div>
+      <div>
+        <div class="summary">
+          <div class="summary-title">Domain Scores</div>
+          <div class="bar-rows" id="bar-rows"></div>
+        </div>
+      </div>
+    </div>
+    <div class="results-header">
+      <div class="level-display">
+        <div class="level-current-label" id="level-current-label">Current level</div>
+        <div class="level-current-name" id="overall-level" style="color:var(--accent)">—</div>
+        <div class="level-desc-small" id="overall-desc">Complete the assessment to see your profile.</div>
+        <div class="level-next-label" id="next-label" style="display:none">Next level</div>
+        <div class="level-next-name" id="next-level-name"></div>
+      </div>
+    </div>
+    <div class="gap-section" id="gap-section" style="display:none">
+      <div class="gap-title" id="gap-title">Criteria to improve</div>
+      <div id="gap-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="reset-bar" id="reset-bar" style="display:none">
+  <div class="reset-bar-inner">
+    <button class="reset-btn" onclick="resetAll()">Reset assessment</button>
+    <span class="calculate-hint">Clears all selections and collapses the results panel.</span>
+  </div>
+</div>
+
+<div class="idp-outer" id="idp-section" style="display:none">
+  <div class="idp-outer-inner">
+    <div class="idp-section-header">
+      <div class="idp-section-label">Development Plan</div>
+      <h2 class="idp-section-title">Individual Development Plan</h2>
+      <p class="idp-section-desc">One goal card per identified gap. Fill in the action plan, expected outcomes, evidence type, and timeframe for each criterion you need to develop.</p>
+      <div class="idp-section-meta" id="idp-subtitle"></div>
+    </div>
+    <div id="idp-cards"></div>
+  </div>
+</div>
+
+
+
+<script>
+// ── CONSTANTS ────────────────────────────────────────────────────────────────
+const LEVELS = ['Novice','Foundation','Working','Independent','Expert','Specialist'];
+const LEVEL_COLORS = ['#6b7280','#3b82f6','#10b981','#f97316','#ff4d3d','#888888'];
+const LEVEL_SELECTABLE = [true,true,true,true,true,false];
+
+const DOMAIN_COLORS = {
+  technical:'#3b82f6', execution:'#ff4d3d', collaboration:'#16a34a',
+  leadership:'#d97706', strategic:'#7c3aed'
+};
+
+// ── BASE LEVELS ──────────────────────────────────────────────────────────────
+// Score values: 0=Novice 1=Foundation 2=Working 3=Independent 4=Expert
+const BASE_LEVELS = {
+  technology:[
+    {label:'Junior',   scores:{technical:2,execution:2,collaboration:1,leadership:1,strategic:1}},
+    {label:'Mid',      scores:{technical:3,execution:3,collaboration:2,leadership:1,strategic:1}},
+    {label:'Senior',   scores:{technical:4,execution:3,collaboration:3,leadership:2,strategic:1}},
+    {label:'Lead',     scores:{technical:4,execution:4,collaboration:3,leadership:3,strategic:1}},
+    {label:'Principal',scores:{technical:4,execution:4,collaboration:4,leadership:3,strategic:2}},
+  ],
+  business:[
+    {label:'Junior',   scores:{technical:1,execution:2,collaboration:2,leadership:1,strategic:1}},
+    {label:'Mid',      scores:{technical:1,execution:2,collaboration:3,leadership:2,strategic:2}},
+    {label:'Senior',   scores:{technical:1,execution:2,collaboration:3,leadership:3,strategic:3}},
+    {label:'Lead',     scores:{technical:1,execution:3,collaboration:3,leadership:4,strategic:3}},
+    {label:'Principal',scores:{technical:1,execution:3,collaboration:4,leadership:4,strategic:4}},
+  ],
+};
+
+// ── FRAMEWORK DATA ───────────────────────────────────────────────────────────
+const FRAMEWORK = [
+  {id:'technical',label:'Technical',color:'#3b82f6',tag:'01',
+   desc:'Applies technical capability to build, improve, and maintain effective solutions.',
+   competencies:[
+    {id:'swdev',label:'Software Development',
+     desc:'Writes, reviews, and maintains quality code while managing source history and documentation effectively.',
+     criteria:[
+      {id:'wccv',label:'Writing Code & Version Control',
+       desc:'Produces clean, maintainable code and manages source history effectively using version control.',
+       levels:['Has no knowledge of coding standards, version control tools, or why they matter.','Understands what clean, readable code looks like, why version control exists, and the basics of committing and branching.','Writes readable, testable code and uses branches, commits, and pull requests with some support when needed.','Consistently writes production-ready code, manages complex branching strategies, and maintains a clean repository history without needing guidance.','Sets coding and version control standards for the team, defines branching conventions, and develops others across the organisation.','Has defined coding and version control standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'crqc',label:'Code Review & Code Quality',
+       desc:'Reviews code constructively and maintains high quality standards across the codebase.',
+       levels:['Has no knowledge of what a code review involves or why code quality matters.','Understands the purpose of code review, what makes code maintainable, and why quality standards exist.','Participates in reviews as author and reviewer, raises relevant issues, and responds to feedback with some support when needed.','Conducts thorough reviews that identify bugs, design issues, and improvement opportunities without needing guidance.','Sets code review culture and quality standards for the team, defines review guidelines, and develops others across the organisation.','Has defined code review and quality frameworks across multiple organisations and contributes to industry-level practice.']},
+      {id:'tdoc',label:'Technical Documentation',
+       desc:'Writes clear and accurate documentation that helps others understand, use, and maintain code and systems.',
+       levels:['Has no knowledge of what technical documentation involves or why it reduces friction for others.','Understands the difference between good and poor documentation and why keeping it current matters.','Documents their own code and contributions consistently, including inline comments and READMEs, with some support when needed.','Produces clear, appropriately detailed documentation across all contexts — inline, READMEs, and technical guides — without needing guidance.','Sets documentation standards for the team, reviews and improves others\' documentation, and develops others across the organisation.','Has defined documentation standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'s9cd',label:'Stack9 & Codebase Development',
+       desc:'Builds deep knowledge of the Stack9 product, its codebase, and its package ecosystem, actively contributing to its evolution, maintainability, and technical growth.',
+       levels:['Has no knowledge of the Stack9 product, its codebase structure, or its package ecosystem.','Understands what Stack9 is, its core purpose, and how its main components and packages relate to each other.','Works productively within the Stack9 codebase, understands key packages, and contributes to its evolution with some support when needed.','Navigates the full Stack9 codebase confidently, manages package dependencies, and drives technical improvements without needing guidance.','Sets the standard for Stack9 development practices, defines package conventions, and develops others across the organisation.','Has defined product codebase and package standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'qa',label:'Quality Assurance',
+     desc:'Designs and executes testing strategies to validate software correctness, reliability, and quality.',
+     criteria:[
+      {id:'uint',label:'Unit & Integration Testing',
+       desc:'Writes and maintains unit and integration tests to verify software correctness and prevent regressions.',
+       levels:['Has no knowledge of unit or integration testing or what they verify.','Understands the difference between unit and integration tests, why both matter, and when to use each.','Writes unit tests independently and integration tests with some support, covering edge cases and error paths.','Writes comprehensive unit and integration tests across all scenarios, including complex dependencies, without needing guidance.','Sets testing standards for the team, identifies gaps in coverage, and develops others across the organisation.','Has defined unit and integration testing standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'tpcv',label:'Test Planning & Coverage',
+       desc:'Designs test strategies that provide confidence across requirements, edge cases, and risk areas.',
+       levels:['Has no knowledge of test planning or how to define testing scope.','Understands what a test plan is, why mapping requirements to test cases matters, and what coverage means.','Produces test plans for defined requirements, identifies main scenarios, but may miss edge cases, with some support when needed.','Designs comprehensive, risk-based test plans that map fully to requirements and identify coverage gaps without needing guidance.','Sets test planning standards and coverage frameworks for the team and develops others across the organisation.','Has defined test planning standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'atpt',label:'Automation & Performance Testing',
+       desc:'Builds automated test suites and validates performance requirements to improve release confidence and reduce manual effort.',
+       levels:['Has no knowledge of test automation or performance testing tools or techniques.','Understands what automated and performance tests are, why they improve release confidence, and what tools exist.','Writes automated tests for defined scenarios and executes basic performance tests with some support when needed.','Designs and implements end-to-end automation frameworks and performance test suites without needing guidance.','Sets automation and performance testing strategy for the team, selects tooling, and develops others across the organisation.','Has defined automation and performance testing standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'imqm',label:'Issue Management & Quality Metrics',
+       desc:'Tracks, analyses, and reports issues and quality metrics to drive continuous improvement in software quality.',
+       levels:['Has no knowledge of issue tracking systems or quality measurement practices.','Understands what defect tracking is, why quality metrics matter, and how they inform release decisions.','Logs and manages issues accurately and produces basic quality reports with some support when needed.','Manages the full issue lifecycle, analyses trends, and produces quality metrics that drive decisions without needing guidance.','Sets issue management practices and quality dashboards for the team and develops others across the organisation.','Has defined quality measurement standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'sda',label:'Software Design & Architecture',
+     desc:'Designs systems, services, and integrations that are robust, scalable, and aligned with platform standards.',
+     criteria:[
+      {id:'swar',label:'Software Architecture',
+       desc:'Designs systems and services that are robust, scalable, and aligned with long-term technical goals.',
+       levels:['Has no knowledge of software architecture concepts, design patterns, or why they matter.','Understands what software architecture is, why long-term design decisions have consequences, and what common patterns exist.','Designs components aligned with the overall architecture, sometimes needing guidance on broader implications.','Designs robust, scalable systems and services aligned with long-term technical goals without needing guidance.','Sets architecture standards and practices for the team, guides design decisions, and develops others across the organisation.','Has defined architecture standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'cnar',label:'Cloud Native Architecture',
+       desc:'Designs and operates systems using cloud native patterns, containerisation, and modern platform technologies.',
+       levels:['Has no knowledge of cloud native concepts, containerisation, or modern platform technologies.','Understands what cloud native architecture is, why containers and orchestration matter, and what key patterns exist.','Applies cloud native patterns and containerisation to existing systems with some support when needed.','Designs and operates full cloud native systems, including container orchestration and platform tooling, without needing guidance.','Sets cloud native architecture standards for the team, introduces patterns, and develops others across the organisation.','Has defined cloud native standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'aipt',label:'API & Integration Patterns',
+       desc:'Designs and implements integration patterns that enable reliable, secure, and maintainable communication between systems.',
+       levels:['Has no knowledge of API design principles or integration patterns.','Understands what APIs and integration patterns are, why they enable system communication, and what common approaches exist.','Designs and implements integrations using established patterns with some support when needed.','Designs secure, maintainable, and scalable API and integration patterns across all contexts without needing guidance.','Sets API and integration design standards for the team and develops others across the organisation.','Has defined API and integration standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'wmst',label:'Web & Mobile Standards',
+       desc:'Applies web and mobile development standards to deliver consistent, accessible, and high-quality user experiences across platforms.',
+       levels:['Has no knowledge of web or mobile development standards or why they matter.','Understands what web and mobile standards cover — responsiveness, accessibility, browser compatibility — and why they ensure consistent experiences.','Applies web and mobile standards across common platforms and devices with some support when needed.','Delivers consistent, accessible, high-performance web and mobile experiences across all platforms without needing guidance.','Sets web and mobile development standards for the team and develops others across the organisation.','Has defined web and mobile standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'infra',label:'Infrastructure & Platforms',
+     desc:'Manages cloud infrastructure, deployment pipelines, data storage, and platform operations.',
+     criteria:[
+      {id:'cscm',label:'Cloud Services & Cost Management',
+       desc:'Manages cloud services and resource costs to ensure efficiency, reliability, and financial sustainability.',
+       levels:['Has no knowledge of cloud services or how resource choices affect cost and reliability.','Understands what cloud services are, how pricing models work, and why cost visibility matters.','Manages cloud services and identifies cost inefficiencies with some support when needed.','Proactively monitors cloud spend, right-sizes resources, and implements cost controls across all environments without needing guidance.','Sets cloud services and cost management standards for the team, establishes FinOps practices, and develops others across the organisation.','Has defined cloud cost management standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'cicd',label:'CI/CD Pipelines & Deployment',
+       desc:'Builds and maintains automated pipelines that enable fast, safe, and reliable software releases.',
+       levels:['Has no knowledge of CI/CD concepts or automated deployment pipelines.','Understands what CI/CD is, why automated and repeatable deployments matter, and what pipeline stages exist.','Configures and maintains existing pipelines and troubleshoots common failures with some support when needed.','Designs and implements end-to-end CI/CD pipelines, including testing, staging, and production promotion strategies, without needing guidance.','Sets CI/CD and deployment standards for the team, introduces tooling improvements, and develops others across the organisation.','Has defined CI/CD standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'dstm',label:'Data Storage Management',
+       desc:'Designs and manages data storage solutions including databases, caches, object stores, and data pipelines.',
+       levels:['Has no knowledge of data storage technologies or how to choose and manage them.','Understands the difference between databases, caches, object stores, and data pipelines and why choosing the right one matters.','Designs and manages data storage solutions for common use cases with some support when needed.','Designs and manages data storage across all contexts — including complex schemas, performance tuning, and migration — without needing guidance.','Sets data storage standards for the team, guides technology selection, and develops others across the organisation.','Has defined data storage standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'icob',label:'Infrastructure as Code & Observability',
+       desc:'Manages infrastructure through version-controlled code and ensures systems are instrumented for visibility.',
+       levels:['Has no knowledge of infrastructure as code tools or observability concepts.','Understands what IaC means, why it improves consistency, and what observability tools provide in terms of system visibility.','Writes and maintains IaC configurations and contributes to monitoring setup with some support when needed.','Manages full infrastructure stacks as code and designs observability solutions that provide meaningful system visibility without needing guidance.','Sets IaC and observability standards for the team, defines monitoring frameworks, and develops others across the organisation.','Has defined IaC and observability standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'bcdr',label:'Business Continuity & Disaster Recovery',
+       desc:'Ensures systems can recover from failure and operations can continue with minimal disruption.',
+       levels:['Has no knowledge of disaster recovery concepts or business continuity planning.','Understands what RTO and RPO mean, why recovery planning matters, and what DR strategies exist.','Implements backup and recovery procedures and participates in DR tests with some support when needed.','Designs and maintains end-to-end DR and BCP strategies, runs recovery tests, and documents outcomes without needing guidance.','Sets DR and BCP standards for the organisation, ensures all systems meet recovery objectives, and develops others across the organisation.','Has defined DR and BCP standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'secc',label:'Security & Compliance',
+     desc:'Applies security controls and ensures compliance across code, infrastructure, and operations.',
+     criteria:[
+      {id:'iasc',label:'Infrastructure & Access Security',
+       desc:'Applies security controls to infrastructure, cloud environments, and access management to reduce exposure.',
+       levels:['Has no knowledge of infrastructure security controls or access management concepts.','Understands what network segmentation, least-privilege access, and IAM mean and why they reduce exposure.','Applies known security controls to infrastructure and access configurations with some support when needed.','Designs infrastructure with security controls applied consistently — including IAM, network policies, and secrets management — without needing guidance.','Sets infrastructure and access security standards for the organisation and develops others across the organisation.','Has defined infrastructure security standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'sdcs',label:'Secure Development & Container Security',
+       desc:'Writes secure code and applies security practices to containers and development pipelines.',
+       levels:['Has no knowledge of secure coding practices or container security risks.','Understands common vulnerability classes such as injection and broken auth, and why container images and runtimes require hardening.','Applies secure coding principles and basic container security practices with some support when needed.','Consistently writes secure code, hardens container images and runtimes, and identifies security risks in code reviews without needing guidance.','Sets secure development and container security standards for the team and develops others across the organisation.','Has defined secure development standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'vulm',label:'Vulnerability Management',
+       desc:'Identifies, tracks, and remediates security vulnerabilities across code and infrastructure.',
+       levels:['Has no knowledge of how vulnerabilities are identified, tracked, or remediated.','Understands what SAST, DAST, and dependency scanning are and why identifying vulnerabilities before production matters.','Runs security scans, triages findings, and raises issues with some support when needed.','Manages the full vulnerability lifecycle — scanning, triage, prioritisation, and remediation — across code and infrastructure without needing guidance.','Sets vulnerability management practices for the organisation and develops others across the organisation.','Has defined vulnerability management standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'rdco',label:'Regulatory & Data Compliance',
+       desc:'Ensures engineering and operational practices meet applicable data protection, privacy, and regulatory obligations.',
+       levels:['Has no knowledge of data protection regulations or compliance obligations relevant to engineering.','Understands what regulations such as GDPR and SOC 2 require and how they affect engineering and operational decisions.','Applies compliance requirements to their own work and flags potential risks with some support when needed.','Designs systems and processes that meet all applicable compliance obligations and supports audits effectively without needing guidance.','Sets compliance standards for the organisation, leads audit programmes, and develops others across the organisation.','Has defined regulatory and data compliance standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'imso',label:'Incident Management & Support Operations',
+     desc:'Responds to incidents effectively and builds the knowledge base to prevent recurrence.',
+     criteria:[
+      {id:'ites',label:'Incident Triage & Escalation',
+       desc:'Assesses, prioritises, and escalates incidents to the right people with the right context at the right time.',
+       levels:['Has no knowledge of how to assess, prioritise, or escalate an incoming incident.','Understands what triage criteria are, what escalation paths look like, and why acting quickly with the right context matters.','Triages common incidents using defined criteria and escalates with a clear description of the problem and steps taken, with some support on ambiguous cases.','Triages and escalates all incidents accurately and consistently, including complex or novel scenarios, without needing guidance.','Sets triage criteria and escalation frameworks for the team and develops others across the organisation.','Has defined incident triage and escalation standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'kbmg',label:'Knowledge Base Management',
+       desc:'Builds and maintains documentation that captures solutions, procedures, and operational knowledge.',
+       levels:['Has no knowledge of what a knowledge base is or why capturing solutions matters.','Understands what a knowledge base is, why documenting solutions and procedures reduces recurrence, and how to contribute to one.','Contributes articles, updates runbooks, and maintains knowledge base content with some support when needed.','Builds and manages a comprehensive knowledge base, identifies gaps, and ensures content stays accurate and useful without needing guidance.','Sets knowledge management standards for the team and develops others across the organisation.','Has defined knowledge management standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'rcar',label:'Root Cause Analysis & Post-Incident Review',
+       desc:'Investigates incidents systematically to identify root causes and prevent recurrence through structured reviews.',
+       levels:['Has no knowledge of root cause analysis or post-incident review practices.','Understands what a post-incident review involves, why identifying root causes prevents recurrence, and what a blameless culture means.','Contributes to post-incident reviews, identifies immediate causes, but may miss systemic factors, with some support when needed.','Conducts thorough RCAs independently, identifies root causes and contributing factors, and proposes preventive actions without needing guidance.','Sets post-incident review culture and RCA standards for the team and develops others across the organisation.','Has defined RCA and post-incident review standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+  ]},
+
+  {id:'execution',label:'Execution',color:'#ff4d3d',tag:'02',
+   desc:'Drives reliable delivery through planning, prioritisation, and effective operation management.',
+   competencies:[
+    {id:'del',label:'Delivery',
+     desc:'Plans, scopes, and delivers work reliably using appropriate methodologies.',
+     criteria:[
+      {id:'wbeo',label:'Work Breakdown & Estimation',
+       desc:'Breaks work into clear, manageable steps and estimates effort accurately to support reliable delivery.',
+       levels:['Has no knowledge of how to decompose work or estimate the effort required.','Understands what work breakdown structures are, why estimation matters, and how sizing affects planning.','Breaks down tasks and provides estimates for their own work with some support when needed.','Breaks down complex work accurately, estimates with appropriate confidence levels, and adjusts estimates as work evolves without needing guidance.','Sets estimation and planning standards for the team and develops others across the organisation.','Has defined work breakdown and estimation standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'pada',label:'Prioritization & Adaptability',
+       desc:'Identifies what matters most and adjusts effectively when priorities, context, or requirements change.',
+       levels:['Has no knowledge of how to prioritise work or respond to changing demands.','Understands what prioritisation frameworks are, why focusing on what matters most drives outcomes, and what adaptability looks like in practice.','Prioritises their own work effectively and adjusts when priorities change with some support when needed.','Prioritises across competing demands and adapts to changing context, requirements, or priorities at any level without needing guidance.','Sets prioritisation frameworks for the team and develops others across the organisation.','Has defined prioritisation standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'cmow',label:'Commitment & Ownership',
+       desc:'Takes full ownership of commitments, follows through consistently, and holds themselves accountable for outcomes.',
+       levels:['Has no knowledge of what taking ownership of work and commitments means.','Understands what commitment and ownership mean, why following through matters, and how proactive communication builds trust.','Takes ownership of their own work and communicates proactively when support is needed.','Owns all commitments fully, follows through consistently, and holds themselves accountable without needing prompting or guidance.','Sets ownership culture and accountability standards for the team and develops others across the organisation.','Has defined commitment and ownership standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'delm',label:'Delivery Methodology',
+       desc:'Applies appropriate delivery frameworks such as Scrum, Kanban, Agile, or Waterfall to structure and manage work effectively.',
+       levels:['Has no knowledge of delivery methodologies such as Scrum, Kanban, Agile, or Waterfall.','Understands what different delivery methodologies are, when each is appropriate, and why structured frameworks improve outcomes.','Participates in ceremonies, follows agreed methodology, and contributes to sprint or delivery cycles with some support when needed.','Applies and adapts delivery methodologies to the context of the work, including facilitating ceremonies and improving processes, without needing guidance.','Sets delivery methodology standards for the team and develops others across the organisation.','Has defined delivery methodology standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'opmg',label:'Operation Management',
+     desc:'Manages resources, risk, processes, and reporting to keep operations running effectively.',
+     criteria:[
+      {id:'parm',label:'Planning & Resource Management',
+       desc:'Plans work and manages resources, capacity, and allocation to meet delivery commitments effectively.',
+       levels:['Has no knowledge of how to plan work or manage people and resources.','Understands what resource planning involves, why capacity management prevents burnout and missed commitments, and how allocation decisions are made.','Contributes to resource planning and tracks utilisation with some support when needed.','Manages resource allocation across projects or functions, anticipates capacity needs, and resolves conflicts without needing guidance.','Sets planning and resource management frameworks for the organisation and develops others across the organisation.','Has defined resource planning standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'rism',label:'Risk & Issue Management',
+       desc:'Identifies, assesses, and manages risks and issues proactively to protect delivery outcomes.',
+       levels:['Has no knowledge of risk management practices or how to identify and manage issues.','Understands what a risk register is, why proactive issue identification matters, and how mitigations are designed.','Identifies risks in familiar contexts, maintains a basic risk log, and escalates appropriately with some support when needed.','Manages risks and issues proactively across a project or function, designs mitigations, and communicates status clearly without needing guidance.','Sets risk management frameworks for the organisation and develops others across the organisation.','Has defined risk management standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'pcim',label:'Process & Continuous Improvement',
+       desc:'Identifies inefficiencies and drives improvements to ways of working, processes, and operational practices.',
+       levels:['Has no knowledge of process improvement methodologies or how to identify inefficiencies.','Understands what continuous improvement means, why eliminating waste matters, and what improvement frameworks such as Lean or Kaizen involve.','Identifies inefficiencies in their own work and contributes to process improvements with some support when needed.','Drives process improvements across their domain, defines new ways of working, and measures the impact of changes without needing guidance.','Sets continuous improvement culture and standards for the organisation and develops others across the organisation.','Has defined continuous improvement standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'opre',label:'Operational Reporting',
+       desc:'Produces clear, accurate reporting that gives the right people visibility to make informed decisions.',
+       levels:['Has no knowledge of what operational reporting involves or why visibility matters to decision makers.','Understands what dashboards and operational reports are, why accurate and timely data supports better decisions, and what key metrics to track.','Produces standard reports and maintains dashboards accurately and on time with some support when needed.','Designs and maintains reporting frameworks that surface insights — not just data — and drive informed decisions without needing guidance.','Sets reporting standards for the organisation and develops others across the organisation.','Has defined operational reporting standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+  ]},
+
+  {id:'collaboration',label:'Collaboration',color:'#16a34a',tag:'03',
+   desc:'Builds effective working relationships through communication, feedback, and teamwork.',
+   competencies:[
+    {id:'comm',label:'Communication',
+     desc:'Communicates clearly, shares knowledge, and exchanges feedback to strengthen the team.',
+     criteria:[
+      {id:'efco',label:'Effective Communication',
+       desc:'Conveys information clearly, concisely, and in a way that is appropriate for the audience.',
+       levels:['Has no knowledge of what effective communication in a professional context looks like.','Understands what audience-appropriate communication means, why clarity matters, and how tone and format affect how a message lands.','Communicates clearly in most situations, adapts to different audiences, and asks for help when the context is unfamiliar.','Communicates effectively across all contexts and audiences — written, verbal, technical, and non-technical — without needing guidance.','Sets communication standards for the team and develops others across the organisation.','Has defined communication standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'knsh',label:'Knowledge Sharing',
+       desc:'Shares knowledge proactively and contributes to documentation and team learning.',
+       levels:['Has no knowledge of what knowledge sharing involves or why it strengthens teams.','Understands why sharing context, documentation, and learnings reduces dependency and builds team capability.','Documents their work, shares learnings in team settings, and contributes to knowledge base content with some support when needed.','Proactively identifies knowledge gaps, creates documentation others rely on, and builds team learning systematically without needing guidance.','Sets knowledge sharing standards for the team and develops others across the organisation.','Has defined knowledge sharing standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'fdbk',label:'Feedback',
+       desc:'Gives and receives feedback constructively as a tool for growth and quality improvement.',
+       levels:['Has no knowledge of what constructive feedback involves or why it drives growth.','Understands the difference between useful and unhelpful feedback, why psychological safety matters, and how to frame observations constructively.','Gives and receives feedback in familiar contexts, responds constructively to input, and seeks feedback when needed.','Gives specific, actionable feedback in any context, actively seeks input, and uses feedback consistently as a growth tool without needing guidance.','Sets feedback culture standards for the team and develops others across the organisation.','Has defined feedback culture standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'twrb',label:'Teamwork & Relationships',
+     desc:'Works collaboratively and builds strong working relationships across teams and stakeholders.',
+     criteria:[
+      {id:'coll',label:'Collaboration & Initiative',
+       desc:'Proactively contributes to team success by taking initiative, helping others, sharing credit, and working effectively across functions.',
+       levels:['Has no knowledge of what effective teamwork or cross-functional collaboration looks like.','Understands what it means to contribute to team success, why taking initiative matters, and how proactivity strengthens team dynamics.','Contributes actively to team goals, takes initiative on tasks, helps others when needed, and works across functions with some support when needed.','Proactively drives team success, takes initiative without prompting, builds cross-functional relationships, and creates conditions for others to contribute fully without needing guidance.','Sets teamwork and collaboration standards for the team and develops others across the organisation.','Has defined teamwork and collaboration standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'relb',label:'Relationship Building',
+       desc:'Develops and maintains strong working relationships with teammates, stakeholders, and partners.',
+       levels:['Has no knowledge of how to build or maintain working relationships.','Understands why building strong relationships with teammates, stakeholders, and partners matters for effective collaboration.','Develops working relationships with teammates and key stakeholders, maintains regular contact, and builds trust with some support when needed.','Builds and maintains strong relationships across teams, functions, and external partners, and leverages them to drive outcomes without needing guidance.','Sets the standard for relationship building across the organisation and develops others.','Has built and sustained high-value relationships across multiple organisations and contributes to industry-level practice.']},
+    ]},
+  ]},
+
+  {id:'leadership',label:'Leadership',color:'#d97706',tag:'04',
+   desc:'Creates direction, develops others, and builds high-performing teams.',
+   competencies:[
+    {id:'pleo',label:'People Leadership',
+     desc:'Guides decisions, develops others, and resolves conflict to create high-performing teams.',
+     criteria:[
+      {id:'mntc',label:'Mentoring & Coaching',
+       desc:'Guides and supports others in their professional and technical growth through active mentoring and coaching.',
+       levels:['Has no knowledge of what mentoring or coaching involves or how it supports growth.','Understands the difference between mentoring and coaching, why investing in others\' growth matters, and what good support looks like.','Provides guidance and support to others in familiar situations, shares experience, and helps others reflect on their development with some support when needed.','Mentors and coaches others effectively across all contexts, adapts their style to the individual, and creates meaningful growth opportunities without needing guidance.','Sets mentoring and coaching standards for the team and develops others across the organisation.','Has defined mentoring and coaching standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'decm',label:'Decision Making',
+       desc:'Makes sound decisions that are objective, well-reasoned, and aligned with team and organisational goals.',
+       levels:['Has no knowledge of how to make sound, structured, well-reasoned decisions.','Understands what good decision making looks like, why evaluating trade-offs matters, and how to frame options clearly.','Makes sound decisions in familiar situations, weighs trade-offs, and seeks input when the stakes are higher with some support when needed.','Makes objective, well-reasoned decisions across complex and ambiguous situations, owns the outcome, and communicates the rationale clearly without needing guidance.','Sets decision making frameworks for the team and develops others across the organisation.','Has defined decision making standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'cnfr',label:'Conflict Resolution',
+       desc:'Navigates and resolves conflicts within and across teams in a constructive and fair manner.',
+       levels:['Has no knowledge of how to navigate or resolve conflict constructively.','Understands what constructive conflict resolution looks like, why addressing tensions early matters, and what common failure modes exist.','Navigates disagreements and interpersonal tensions in familiar situations constructively with some support when needed.','Resolves conflicts within and across teams fairly and constructively, including complex or sensitive situations, without needing guidance.','Sets conflict resolution practices for the team and develops others across the organisation.','Has defined conflict resolution standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'peop',label:'People Operations',
+     desc:'Attracts, develops, and manages talent to build and sustain a capable workforce.',
+     criteria:[
+      {id:'reob',label:'Recruitment & Onboarding',
+       desc:'Attracts, selects, and onboards talent effectively to build a capable and engaged workforce.',
+       levels:['Has no knowledge of what recruitment or onboarding processes involve.','Understands what a recruitment process looks like, why onboarding affects retention, and how candidate experience shapes employer brand.','Manages defined recruitment and onboarding steps and communicates clearly with candidates and new starters with some support when needed.','Owns the full recruitment and onboarding process end-to-end, improves candidate experience, and reduces time-to-productivity without needing guidance.','Sets recruitment and onboarding standards for the organisation and develops others across the organisation.','Has defined talent acquisition standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'pfmg',label:'Performance Management',
+       desc:'Manages and develops individual performance through clear expectations, feedback, and accountability.',
+       levels:['Has no knowledge of what performance management involves or how it supports individual growth.','Understands what performance reviews and goal setting are, why clear expectations matter, and how feedback drives accountability.','Sets goals, provides regular feedback, and manages performance conversations with some support when needed.','Manages individual performance consistently and effectively, handles underperformance constructively, and builds development plans without needing guidance.','Sets performance management standards for the organisation and develops others across the organisation.','Has defined performance management standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+  ]},
+
+  {id:'strategic',label:'Strategic',color:'#7c3aed',tag:'05',
+   desc:'Connects work to broader business, commercial, and organisational goals.',
+   competencies:[
+    {id:'bstr',label:'Business Strategy',
+     desc:'Understands the market, connects work to business outcomes, and contributes to organisational strategy.',
+     criteria:[
+      {id:'buun',label:'Business Understanding',
+       desc:'Understands how the business operates, generates value, and competes in its market.',
+       levels:['Has no knowledge of how the business operates, generates revenue, or competes in its market.','Understands what the business does, how it creates value for clients, and why commercial awareness informs better technical and operational decisions.','Applies business context to their own decisions and work, and connects technical choices to business outcomes with some support when needed.','Consistently connects work to business outcomes, understands competitive positioning, and uses commercial awareness to inform decisions without needing guidance.','Sets business understanding standards for the team and develops others across the organisation.','Has applied and developed business acumen standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'mrpr',label:'Market & Product Roadmap',
+       desc:'Analyses market trends and competitive dynamics to inform product direction and strategic decisions.',
+       levels:['Has no knowledge of market dynamics, competitive analysis, or how product roadmaps are shaped.','Understands what market analysis involves, how competitive positioning affects strategy, and what a product roadmap is designed to achieve.','Contributes to market analysis and product roadmap discussions using available data with some support when needed.','Synthesises market intelligence, identifies strategic implications, and informs product direction and roadmap prioritisation without needing guidance.','Sets market and product strategy standards for the organisation and develops others across the organisation.','Has defined market strategy and product roadmap standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'orst',label:'Organisational Strategy',
+       desc:'Develops and drives organisational strategy, translating vision into actionable priorities and outcomes.',
+       levels:['Has no knowledge of how organisational strategy is developed or what it entails.','Understands what organisational strategy is, how vision translates into priorities, and why alignment across the organisation matters.','Contributes to strategy discussions, executes against defined strategic priorities, and connects their work to organisational goals with some support when needed.','Develops and drives strategy for a significant function or team, translates goals into plans, and leads execution without needing guidance.','Sets organisational strategy end-to-end and develops others across the organisation.','Has defined and executed organisational strategy across multiple organisations and contributes to industry-level practice.']},
+    ]},
+    {id:'crel',label:'Commercial Relationship',
+     desc:'Builds and manages client and partner relationships to drive sustainable commercial growth.',
+     criteria:[
+      {id:'bdne',label:'Business Development & Negotiation',
+       desc:'Identifies, develops, and closes new business opportunities and negotiates agreements that protect the business\'s interests.',
+       levels:['Has no knowledge of business development activities or negotiation principles.','Understands what pipeline management involves, how negotiations work, and why both drive sustainable revenue growth.','Contributes to prospecting, proposal development, and negotiation discussions with some support when needed.','Manages a full pipeline from prospecting to close, leads negotiations across pricing and terms, and reaches outcomes that balance commercial and relationship interests without needing guidance.','Sets business development and negotiation standards for the team and develops others across the organisation.','Has defined business development standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'acmg',label:'Account & Customer Management',
+       desc:'Manages client relationships with a focus on retention, satisfaction, growth, and long-term value.',
+       levels:['Has no knowledge of what account or customer management involves.','Understands what account health means, why retention and satisfaction matter, and how regular business reviews build trust.','Manages routine client interactions, monitors account health signals, and identifies expansion opportunities with some support when needed.','Owns account relationships end-to-end, proactively drives satisfaction and growth, and manages renewal cycles without needing guidance.','Sets account and customer management standards for the team and develops others across the organisation.','Has defined account management standards across multiple organisations and contributes to industry-level practice.']},
+      {id:'ptmg',label:'Partnership Management',
+       desc:'Builds and manages strategic partnerships with vendors, technology providers, and industry organisations.',
+       levels:['Has no knowledge of what strategic partnerships involve or how they are developed.','Understands what partnership management involves, why building relationships with vendors and industry organisations expands capability and reach, and what makes a partnership valuable.','Contributes to partnership development and manages defined partner interactions with some support when needed.','Builds and manages strategic partnerships end-to-end, including identification, negotiation, and ongoing relationship management, without needing guidance.','Sets partnership management standards for the team and develops others across the organisation.','Has defined partnership management standards across multiple organisations and contributes to industry-level practice.']},
+    ]},
+  ]},
+];
+
+// ── TECH PROFILES ────────────────────────────────────────────────────────────
+// Weights apply only to Technical domain competencies
+// P=1.0, S=0.5, Supporting=0.25
+const TECH_PROFILES = {
+  engineer: {
+    label: 'Engineer & Architect',
+    weights: { swdev:1.0, qa:0.5, sda:1.0, infra:0.25, secc:0.5, imso:0.25 }
+  },
+  support: {
+    label: 'Support & QA',
+    weights: { swdev:0.5, qa:1.0, sda:0.25, infra:0.5, secc:0.5, imso:1.0 }
+  },
+  devops: {
+    label: 'Infra & DevOps',
+    weights: { swdev:0.25, qa:0.25, sda:0.5, infra:1.0, secc:1.0, imso:1.0 }
+  },
+};
+const WEIGHT_LABELS = { 1.0:'Primary', 0.5:'Secondary', 0.25:'Supporting' };
+
+let currentTechProfile = null;
+const scores = {};
+FRAMEWORK.forEach(d => d.competencies.forEach(c => c.criteria.forEach(cr => { scores[cr.id] = null; })));
+
+let currentTrack = null;
+
+// ── BUILD LEFT PANEL ─────────────────────────────────────────────────────────
+function buildLeftPanel() {
+  const left = document.getElementById('left-panel');
+  left.innerHTML = '';
+
+  FRAMEWORK.forEach(domain => {
+    const col = domain.color;
+    const block = document.createElement('div');
+    block.className = 'domain-block';
+    block.innerHTML = `
+      <div class="domain-heading" style="border-left:3px solid ${col};">
+        <div class="domain-heading-top">
+          <span class="domain-tag" style="background:${col};">DOMAIN</span>
+          <span class="domain-name">${domain.label}</span>
+          <span class="domain-avg-badge" id="davg-${domain.id}">—</span>
+        </div>
+        <div class="domain-desc">${domain.desc}</div>
+      </div>`;
+
+    domain.competencies.forEach(comp => {
+      const cb = document.createElement('div');
+      cb.className = 'comp-block';
+      cb.style.borderLeft = `2px solid ${col}55`;
+      const weightBadge = (() => {
+        if (domain.id !== 'technical' || !currentTechProfile) return '';
+        const w = TECH_PROFILES[currentTechProfile].weights[comp.id] ?? 1.0;
+        const wLabel = WEIGHT_LABELS[w];
+        const wColor = w === 1.0 ? '#166534;background:#dcfce7' : w === 0.5 ? '#854d0e;background:#fef9c3' : '#4b5563;background:#f3f4f6';
+        return `<span style="font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:3px;color:${wColor};margin-left:4px;">${wLabel}</span>`;
+      })();
+      cb.innerHTML = `
+        <div class="comp-header">
+          <div class="comp-header-top">
+            <span class="comp-tag" style="background:${col};color:#fff;border-color:${col};">COMPETENCY</span>
+            <span class="comp-name">${comp.label}</span>
+            ${weightBadge}
+            <span class="comp-avg-badge" id="cavg-${comp.id}">—</span>
+          </div>
+          <div class="comp-desc">${comp.desc}</div>
+        </div>
+        <div class="comp-body" id="cbody-${comp.id}"></div>`;
+      block.appendChild(cb);
+
+      const body = cb.querySelector(`#cbody-${comp.id}`);
+      comp.criteria.forEach(cr => {
+        const crEl = document.createElement('div');
+        crEl.className = 'criteria-block';
+        crEl.id = `crblock-${cr.id}`;
+
+        const pillsHtml = cr.levels.map((desc, i) => {
+          const isSpec = i === 5;
+          return `<div class="pill pill-lv-${i}${isSpec ? ' pill-specialist' : ''}" id="pill-${cr.id}-${i}" ${!isSpec ? `onclick="setScore('${cr.id}',${i})"` : ''}>
+            <div class="pill-radio"></div>
+            <div class="pill-content">
+              <span class="pill-name">${LEVELS[i]}</span>
+              <span class="pill-desc">${desc}</span>
+            </div>
+            ${isSpec ? `<span class="pill-specialist-note">industry only</span>` : ''}
+          </div>`;
+        }).join('');
+
+        crEl.innerHTML = `
+          <div class="criteria-header">
+            <div class="criteria-header-top">
+              <span class="criteria-dot-tag" style="background:${col};color:#fff;border-color:${col};border-radius:2px;">Criteria</span>
+              <span class="criteria-name">${cr.label}</span>
+              <span class="criteria-score-lbl" id="crscore-${cr.id}">not set</span>
+            </div>
+            <div class="criteria-desc">${cr.desc}</div>
+          </div>
+          <div class="proficiency-row">
+            <div class="proficiency-label">Proficiency</div>
+            <div class="proficiency-pills">${pillsHtml}</div>
+          </div>
+          <div class="evidence-row" id="evrow-${cr.id}">
+            <span class="evidence-label">Evidence</span>
+            <select class="evidence-select" id="evsel-${cr.id}">
+              <option value="">Select type</option>
+              <option value="experience">Experience</option>
+              <option value="project">Project</option>
+              <option value="training">Training</option>
+              <option value="peer-review">Peer Review</option>
+              <option value="certificate">Certificate</option>
+            </select>
+            <input class="evidence-input" type="text" id="evinput-${cr.id}" placeholder="Describe your evidence…" oninput="updateAll()" />
+          </div>`;
+        body.appendChild(crEl);
+      });
+    });
+
+    left.appendChild(block);
+  });
+}
+
+// ── BUILD BARS ────────────────────────────────────────────────────────────────
+function buildBars() {
+  const barsEl = document.getElementById('bar-rows');
+  barsEl.innerHTML = '';
+  FRAMEWORK.forEach(domain => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `<span class="bar-label">${domain.label}</span>
+      <div class="bar-track"><div class="bar-fill" id="bfill-${domain.id}" style="width:0%;background:${domain.color}"></div></div>
+      <span class="bar-val" id="bval-${domain.id}">—</span>`;
+    barsEl.appendChild(row);
+  });
+}
+
+// ── SCORE INTERACTION ─────────────────────────────────────────────────────────
+function setScore(crId, val) {
+  scores[crId] = val;
+  for (let i = 0; i < 5; i++) { // only iterate selectable levels (0-4)
+    const pill = document.getElementById(`pill-${crId}-${i}`);
+    if (pill) pill.className = `pill pill-lv-${i}` + (i === val ? ` sel-${val}` : '');
+  }
+  const lbl = document.getElementById(`crscore-${crId}`);
+  lbl.textContent = LEVELS[val];
+  lbl.style.color = LEVEL_COLORS[val];
+  lbl.style.borderColor = LEVEL_COLORS[val] + '55';
+
+  const evrow = document.getElementById(`evrow-${crId}`);
+  if (evrow) {
+    if (val >= 3) {
+      evrow.classList.add('visible');
+    } else {
+      evrow.classList.remove('visible');
+      const evsel = document.getElementById(`evsel-${crId}`);
+      if (evsel) evsel.value = '';
+      const evinput = document.getElementById(`evinput-${crId}`);
+      if (evinput) evinput.value = '';
+    }
+  }
+  updateAll();
+}
+
+// ── SCORING ───────────────────────────────────────────────────────────────────
+function avg(vals) {
+  const f = vals.filter(v => v !== null);
+  return f.length ? f.reduce((a, b) => a + b, 0) / f.length : null;
+}
+function compAvg(comp) { return avg(comp.criteria.map(cr => scores[cr.id])); }
+function domainAvg(domain) {
+  if (domain.id === 'technical' && currentTechProfile) {
+    const profile = TECH_PROFILES[currentTechProfile];
+    let weightedSum = 0, totalWeight = 0;
+    domain.competencies.forEach(comp => {
+      const a = compAvg(comp);
+      if (a === null) return;
+      const w = profile.weights[comp.id] ?? 1.0;
+      weightedSum += a * w;
+      totalWeight += w;
+    });
+    return totalWeight > 0 ? weightedSum / totalWeight : null;
+  }
+  return avg(domain.competencies.map(c => compAvg(c)));
+}
+
+function updateAll() {
+  FRAMEWORK.forEach(domain => {
+    domain.competencies.forEach(comp => {
+      const a = compAvg(comp);
+      const badge = document.getElementById(`cavg-${comp.id}`);
+      if (!badge) return;
+      if (a === null) { badge.textContent = '—'; badge.style.color = ''; badge.style.borderColor = ''; }
+      else { const i = Math.round(a); badge.textContent = LEVELS[i]; badge.style.color = LEVEL_COLORS[i]; badge.style.borderColor = LEVEL_COLORS[i] + '55'; }
+    });
+    const da = domainAvg(domain);
+    const dbadge = document.getElementById(`davg-${domain.id}`);
+    const bfill = document.getElementById(`bfill-${domain.id}`);
+    const bval = document.getElementById(`bval-${domain.id}`);
+    if (!dbadge) return;
+    if (da === null) {
+      dbadge.textContent = '—'; dbadge.style.color = ''; dbadge.style.borderColor = '';
+      if (bfill) bfill.style.width = '0%';
+      if (bval) { bval.textContent = '—'; bval.style.color = ''; }
+    } else {
+      const i = Math.round(da);
+      dbadge.textContent = LEVELS[i]; dbadge.style.color = LEVEL_COLORS[i]; dbadge.style.borderColor = LEVEL_COLORS[i] + '55';
+      if (bfill) { bfill.style.width = ((da / 4) * 100) + '%'; bfill.style.background = domain.color; }
+      if (bval) { bval.textContent = LEVELS[i] + ' (' + da.toFixed(1) + ')'; bval.style.color = LEVEL_COLORS[i]; }
+    }
+  });
+  drawRadar();
+
+  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
+  const oLevel = document.getElementById('overall-level');
+  const oDesc = document.getElementById('overall-desc');
+  const oCurrentLabel = document.getElementById('level-current-label');
+  if (!allSet) {
+    oLevel.textContent = '—'; oLevel.style.color = '';
+    oDesc.textContent = 'Complete all domains to see your profile.';
+    return;
+  }
+
+  let reachedIdx = -1;
+  if (currentTrack) {
+    const levels = BASE_LEVELS[currentTrack];
+    for (let i = 0; i < levels.length; i++) {
+      const meetsAll = FRAMEWORK.every(domain => {
+        const da = domainAvg(domain);
+        return da !== null && da >= levels[i].scores[domain.id];
+      });
+      if (meetsAll) reachedIdx = i; else break;
+    }
+  }
+
+  const next2 = getNextBaseLevel();
+  if (reachedIdx === -1) {
+    const firstLabel = currentTrack ? BASE_LEVELS[currentTrack][0].label : '';
+    if (oCurrentLabel) oCurrentLabel.textContent = 'Approaching';
+    oLevel.textContent = firstLabel;
+    oLevel.style.color = '#888';
+    oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLabel + '. Keep developing across all domains.';
+  } else {
+    const label = BASE_LEVELS[currentTrack][reachedIdx].label;
+    if (oCurrentLabel) oCurrentLabel.textContent = 'Current level';
+    oLevel.textContent = label;
+    oLevel.style.color = '#4f8ef7';
+    oDesc.textContent = levelDesc(reachedIdx);
+  }
+
+  const nextLbl = document.getElementById('next-label');
+  const nextNm  = document.getElementById('next-level-name');
+  if (next2 && nextLbl && nextNm) {
+    const isApproach = reachedIdx === -1;
+    nextLbl.style.display = 'block';
+    nextNm.textContent = next2.level.label;
+    nextNm.style.color = isApproach ? '#4f8ef7' : '#10b981';
+  }
+}
+
+function levelDesc(idx) {
+  const descs = [
+    'Building foundational skills and developing awareness across all domains.',
+    'Delivering independently on routine work within their domain.',
+    'Operating autonomously on complex work and starting to elevate others.',
+    'Leading across functions and shaping direction for others.',
+    'Setting standards across the organisation and driving strategic impact.',
+  ];
+  return descs[idx] || '';
+}
+
+// ── TRACK SELECTOR ────────────────────────────────────────────────────────────
+function setTrack(track) {
+  currentTrack = track;
+  currentTechProfile = null;
+  document.getElementById('btn-technology').className = 'track-btn' + (track === 'technology' ? ' active' : '');
+  document.getElementById('btn-business').className   = 'track-btn' + (track === 'business'   ? ' active' : '');
+  document.getElementById('track-desc').textContent = '5 levels: Junior → Mid → Senior → Lead → Principal';
+  document.getElementById('random-btn').style.display = 'inline-block';
+  // Show profile selector only for Technology
+  const ps = document.getElementById('profile-selector');
+  ps.style.display = track === 'technology' ? 'block' : 'none';
+  // Reset profile buttons
+  ['engineer','support','devops'].forEach(p => {
+    const b = document.getElementById(`btn-${p}`);
+    if (b) b.className = 'track-btn';
+  });
+  document.getElementById('profile-desc').textContent = 'Select your profile to weight the Technical domain.';
+  document.getElementById('assessment-content').style.display = track === 'business' ? 'block' : 'none';
+  buildLeftPanel();
+}
+
+function setTechProfile(profile) {
+  currentTechProfile = profile;
+  ['engineer','support','devops'].forEach(p => {
+    const b = document.getElementById(`btn-${p}`);
+    if (b) b.className = 'track-btn' + (p === profile ? ' active' : '');
+  });
+  const label = TECH_PROFILES[profile].label;
+  document.getElementById('profile-desc').textContent = label + ' — Technical domain weighted by role focus.';
+  document.getElementById('assessment-content').style.display = 'block';
+  buildLeftPanel();
+  updateAll();
+}
+
+// ── RANDOM PROFILE ────────────────────────────────────────────────────────────
+function generateRandomProfile() {
+  if (!currentTrack) return;
+  const levels = BASE_LEVELS[currentTrack];
+  const midLevels = levels.slice(1, levels.length - 1);
+  const target = midLevels[Math.floor(Math.random() * midLevels.length)];
+
+  FRAMEWORK.forEach(domain => {
+    const base = target.scores[domain.id];
+    domain.competencies.forEach(comp => {
+      comp.criteria.forEach(cr => {
+        // 30% chance: 1 below base (creates low priority gaps within a met domain)
+        // 50% chance: at base
+        // 20% chance: 1 above base
+        const roll = Math.random();
+        let val;
+        if (roll < 0.30)      val = Math.max(0, base - 1);
+        else if (roll < 0.80) val = base;
+        else                  val = Math.min(4, base + 1);
+        scores[cr.id] = val;
+        for (let i = 0; i < 5; i++) {
+          const pill = document.getElementById(`pill-${cr.id}-${i}`);
+          if (pill) pill.className = `pill pill-lv-${i}` + (i === val ? ` sel-${val}` : '');
+        }
+        const lbl = document.getElementById(`crscore-${cr.id}`);
+        if (lbl) { lbl.textContent = LEVELS[val]; lbl.style.color = LEVEL_COLORS[val]; lbl.style.borderColor = LEVEL_COLORS[val] + '55'; }
+        const evrow = document.getElementById(`evrow-${cr.id}`);
+        if (evrow) { val >= 3 ? evrow.classList.add('visible') : evrow.classList.remove('visible'); }
+      });
+    });
+  });
+
+  updateAll();
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('visible');
+  document.getElementById('reset-bar').style.display = 'block';
+  showGapAnalysis();
+  setTimeout(() => scrollToEl(panel), 100);
+}
+
+// ── NEXT LEVEL ────────────────────────────────────────────────────────────────
+function getNextBaseLevel() {
+  if (!currentTrack) return null;
+  const levels = BASE_LEVELS[currentTrack];
+  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
+  if (!allSet) return null;
+  for (let i = 0; i < levels.length; i++) {
+    const isAbove = FRAMEWORK.every(domain => {
+      const da = domainAvg(domain);
+      return da !== null && da >= levels[i].scores[domain.id];
+    });
+    if (!isAbove) return { level: levels[i], index: i };
+  }
+  return { level: levels[levels.length - 1], index: levels.length - 1 };
+}
+
+// ── RADAR ─────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('radar');
+const ctx = canvas.getContext('2d');
+const CX = 250, CY = 250, R = 155, N = 5;
+const angles = Array.from({ length: N }, (_, i) => (i / N) * 2 * Math.PI - Math.PI / 2);
+function pt(a, r) { return [CX + r * Math.cos(a), CY + r * Math.sin(a)]; }
+
+function drawRadar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Grid rings (6 rings for 6 levels)
+  for (let ring = 1; ring <= 6; ring++) {
+    const r = (ring / 6) * R;
+    ctx.beginPath();
+    angles.forEach((a, i) => { const [x, y] = pt(a, r); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+    ctx.closePath(); ctx.strokeStyle = '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
+  }
+  ctx.font = '9px Space Mono,monospace'; ctx.fillStyle = '#3a4558'; ctx.textAlign = 'left';
+  for (let ring = 1; ring <= 6; ring++) {
+    const r = (ring / 6) * R;
+    ctx.fillText(LEVELS[ring - 1].substring(0, 3), CX + 4, CY - r + 4);
+  }
+  angles.forEach(a => {
+    const [x, y] = pt(a, R);
+    ctx.beginPath(); ctx.moveTo(CX, CY); ctx.lineTo(x, y);
+    ctx.strokeStyle = '#2a3145'; ctx.lineWidth = 1; ctx.stroke();
+  });
+
+  const hasAny = FRAMEWORK.some(d => domainAvg(d) !== null);
+  if (hasAny) {
+    const isApproach = currentTrack && (() => {
+      const lvls = BASE_LEVELS[currentTrack];
+      return !FRAMEWORK.every(d => { const da = domainAvg(d); return da !== null && da >= lvls[0].scores[d.id]; });
+    })();
+
+    // Current polygon
+    ctx.beginPath();
+    FRAMEWORK.forEach((domain, i) => {
+      const da = domainAvg(domain);
+      const r = da !== null ? ((da + 1) / 6) * R : R * 0.04;
+      const [x, y] = pt(angles[i], r);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = isApproach ? 'rgba(150,150,150,0.1)' : 'rgba(79,142,247,0.15)';
+    ctx.strokeStyle = isApproach ? '#888888' : '#4f8ef7';
+    ctx.lineWidth = 2.5; ctx.fill(); ctx.stroke();
+
+    // Dots
+    FRAMEWORK.forEach((domain, i) => {
+      const da = domainAvg(domain); if (da === null) return;
+      const r = ((da + 1) / 6) * R;
+      const [x, y] = pt(angles[i], r);
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = isApproach ? '#888' : domain.color;
+      ctx.strokeStyle = '#0f1117'; ctx.lineWidth = 2; ctx.fill(); ctx.stroke();
+    });
+  }
+
+  // Next level polygon
+  const next = getNextBaseLevel();
+  if (next) {
+    const isAppr2 = currentTrack && (() => {
+      const lvls = BASE_LEVELS[currentTrack];
+      return !FRAMEWORK.every(d => { const da = domainAvg(d); return da !== null && da >= lvls[0].scores[d.id]; });
+    })();
+    ctx.beginPath();
+    FRAMEWORK.forEach((domain, i) => {
+      const r = ((next.level.scores[domain.id] + 1) / 6) * R;
+      const [x, y] = pt(angles[i], r);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,0.0)';
+    ctx.strokeStyle = isAppr2 ? '#4f8ef7' : '#10b981';
+    ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]); ctx.stroke(); ctx.setLineDash([]);
+
+    ctx.textAlign = 'center';
+    ctx.font = '10px Space Mono,monospace';
+    ctx.fillStyle = isAppr2 ? '#4f8ef7' : '#10b981';
+    ctx.fillText('── next: ' + next.level.label, CX, CY + R + 62);
+  }
+
+  // Domain labels
+  FRAMEWORK.forEach((domain, i) => {
+    const [x, y] = pt(angles[i], R + 28);
+    const da = domainAvg(domain);
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 11px Space Mono,monospace'; ctx.fillStyle = '#e2e8f0';
+    ctx.fillText(domain.label, x, y);
+    if (da !== null) {
+      ctx.font = '9px Space Mono,monospace';
+      ctx.fillStyle = LEVEL_COLORS[Math.round(da)];
+      ctx.fillText(LEVELS[Math.round(da)], x, y + 13);
+    }
+  });
+}
+
+// ── CALCULATE ─────────────────────────────────────────────────────────────────
+function calculate() {
+  updateAll();
+  showGapAnalysis();
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('visible');
+  document.getElementById('reset-bar').style.display = 'block';
+  setTimeout(() => scrollToEl(panel), 50);
+}
+
+// ── GAP ANALYSIS + IDP ────────────────────────────────────────────────────────
+function showGapAnalysis() {
+  const gapSection = document.getElementById('gap-section');
+  const gapList    = document.getElementById('gap-list');
+  const gapTitleEl = document.getElementById('gap-title');
+  const nextLabel  = document.getElementById('next-label');
+  const nextName   = document.getElementById('next-level-name');
+  const idpSection = document.getElementById('idp-section');
+
+  if (!currentTrack) { gapSection.style.display = 'none'; idpSection.style.display = 'none'; return; }
+  const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
+  if (!allSet) { gapSection.style.display = 'none'; idpSection.style.display = 'none'; return; }
+
+  const levels = BASE_LEVELS[currentTrack];
+  let reachedIdx2 = -1;
+  for (let i = 0; i < levels.length; i++) {
+    const meetsAll = FRAMEWORK.every(domain => {
+      const da = domainAvg(domain);
+      return da !== null && da >= levels[i].scores[domain.id];
+    });
+    if (meetsAll) reachedIdx2 = i; else break;
+  }
+
+  let nextLevel = null;
+  for (let i = 0; i < levels.length; i++) {
+    const meetsAll = FRAMEWORK.every(domain => {
+      const da = domainAvg(domain);
+      return da !== null && da >= levels[i].scores[domain.id];
+    });
+    if (!meetsAll) { nextLevel = levels[i]; break; }
+  }
+
+  if (!nextLevel) {
+    nextLabel.style.display = 'none';
+    nextName.textContent = '';
+    gapList.innerHTML = '<div class="gap-empty">You meet all criteria for the top level. Keep it up!</div>';
+    gapSection.style.display = 'block';
+    idpSection.style.display = 'none';
+    return;
+  }
+
+  nextLabel.style.display = 'block';
+  nextName.textContent = nextLevel.label;
+  const isApprGap = reachedIdx2 === -1;
+  nextName.style.color = isApprGap ? '#4f8ef7' : '#10b981';
+
+  const currentLevelLabel = reachedIdx2 >= 0 ? levels[reachedIdx2].label : levels[0].label;
+  const currentIdx = levels.findIndex(l => l.label === currentLevelLabel);
+  const nextIdx    = levels.findIndex(l => l.label === nextLevel.label);
+  const isMaintain = reachedIdx2 >= 0 && currentIdx >= 0 && nextIdx === currentIdx;
+
+  if (gapTitleEl) {
+    gapTitleEl.textContent = isApprGap ? 'Criteria to reach ' + nextLevel.label
+      : isMaintain ? 'Criteria to maintain this level'
+      : 'Criteria to improve for next level';
+  }
+
+  const highGaps = [], lowGaps = [];
+  FRAMEWORK.forEach(domain => {
+    const required = nextLevel.scores[domain.id];
+    const domainScore = domainAvg(domain);
+    const domainMet = domainScore !== null && domainScore >= required;
+    domain.competencies.forEach(comp => {
+      comp.criteria.forEach(cr => {
+        const val = scores[cr.id];
+        if (val === null || val < required) {
+          const gap = { domain, comp, cr, current: val, required };
+          if (!domainMet) highGaps.push(gap); else lowGaps.push(gap);
+        }
+      });
+    });
+  });
+
+  // Filter: Technical non-Primary competencies excluded when tech profile is set
+  function isPrimary(gap) {
+    if (gap.domain.id !== 'technical' || !currentTechProfile) return true;
+    return (TECH_PROFILES[currentTechProfile].weights[gap.comp.id] ?? 1.0) === 1.0;
+  }
+  const displayHighGaps = highGaps.filter(isPrimary);
+  const displayLowGaps  = lowGaps.filter(isPrimary);
+
+  if (!displayHighGaps.length && !displayLowGaps.length) {
+    gapList.innerHTML = '<div class="gap-empty">No gaps found for the next level.</div>';
+    gapSection.style.display = 'block';
+    idpSection.style.display = 'none';
+    return;
+  }
+
+  function renderGapGroup(gaps, label, labelColor, subtitle) {
+    if (!gaps.length) return '';
+    const byDomain = {};
+    gaps.forEach(g => {
+      if (!byDomain[g.domain.id]) byDomain[g.domain.id] = { domain: g.domain, items: [] };
+      byDomain[g.domain.id].items.push(g);
+    });
+    let html = `<div class="gap-group-header" style="color:${labelColor}">${label}<span class="gap-group-subtitle">${subtitle || ''}</span></div>`;
+    Object.values(byDomain).forEach(({ domain, items }) => {
+      html += `<div class="gap-domain"><div class="gap-domain-name" style="color:${domain.color}">${domain.label}</div>`;
+      items.forEach(({ cr, current, required }) => {
+        const curLabel = current === null ? 'Not set' : LEVELS[current];
+        const curColor = current === null ? '#555555' : LEVEL_COLORS[current];
+        const reqLabel = LEVELS[required];
+        const reqColor = LEVEL_COLORS[required];
+        html += `<div class="gap-item" style="border-left-color:${domain.color}40;">
+          <div class="gap-item-info">
+            <span class="gap-item-name">${cr.label}</span>
+            <span class="gap-item-desc">${cr.desc}</span>
+          </div>
+          <div class="gap-item-pills">
+            <span class="gap-item-current" style="background:${curColor}22;color:${curColor};border:1px solid ${curColor}55">${curLabel}</span>
+            <span class="gap-arrow">→</span>
+            <span class="gap-item-required" style="background:${reqColor}22;color:${reqColor};border:1px solid ${reqColor}55">${reqLabel}</span>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    });
+    return html;
+  }
+
+  gapList.innerHTML =
+    renderGapGroup(displayHighGaps, '▲ High priority', '#ff4d3d', 'Domain score is below the minimum required.') +
+    renderGapGroup(displayLowGaps,  '▽ Low priority',  '#f97316', 'Domain score meets the minimum, but some criteria are still below the recommended level.');
+
+  gapSection.style.display = 'block';
+
+  // ── RENDER IDP ──────────────────────────────────────────────────────────────
+  const allGaps = [...displayHighGaps, ...displayLowGaps];
+  if (!allGaps.length) { idpSection.style.display = 'none'; return; }
+
+  const idpCards = document.getElementById('idp-cards');
+  const idpSubtitle = document.getElementById('idp-subtitle');
+  if (idpSubtitle) idpSubtitle.textContent = allGaps.length + ' goal' + (allGaps.length !== 1 ? 's' : '') + ' identified';
+
+  let idpHtml = '';
+
+  if (displayHighGaps.length) {
+    idpHtml += `<div class="idp-group">
+      <div class="idp-group-label" style="color:#ff4d3d">High priority<span class="idp-group-sub">Domain score is below the minimum required</span></div>`;
+    displayHighGaps.forEach(g => { idpHtml += renderIDPCard(g); });
+    idpHtml += '</div>';
+  }
+  if (displayLowGaps.length) {
+    idpHtml += `<div class="idp-group">
+      <div class="idp-group-label" style="color:#f97316">Low priority<span class="idp-group-sub">Domain score is met, but specific criteria are below the recommended level</span></div>`;
+    displayLowGaps.forEach(g => { idpHtml += renderIDPCard(g); });
+    idpHtml += '</div>';
+  }
+
+  idpCards.innerHTML = idpHtml;
+  idpSection.style.display = 'block';
+}
+
+function renderIDPCard(g) {
+  const { domain, comp, cr, current, required } = g;
+  const curLabel = current === null ? 'Not set' : LEVELS[current];
+  const curColor = current === null ? '#555555' : LEVEL_COLORS[current];
+  const reqLabel = LEVELS[required];
+  const reqColor = LEVEL_COLORS[required];
+  const col = domain.color;
+  const reqDesc = cr.levels[required] || '';
+  return `<div class="idp-card">
+    <div class="idp-card-header">
+      <div class="idp-card-left">
+        <span class="idp-card-criterion">${cr.label}</span>
+        <span class="idp-card-domain" style="color:#fff;background:${col}33;border-color:${col}88;">${domain.label} · ${comp.label}</span>
+      </div>
+      <div class="idp-card-gap">
+        <span class="idp-level-pill" style="background:${curColor}22;color:${curColor};border-color:${curColor}55">${curLabel}</span>
+        <span class="idp-arrow">→</span>
+        <span class="idp-level-pill" style="background:${reqColor}22;color:${reqColor};border-color:${reqColor}55">${reqLabel}</span>
+      </div>
+    </div>
+    <div class="idp-card-context">
+      <div class="idp-context-item">
+        <span class="idp-context-label">Target — ${reqLabel}</span>
+        <span class="idp-context-text">${reqDesc}</span>
+      </div>
+    </div>
+    <div class="idp-card-body">
+      <div class="idp-field">
+        <label>Action Plan</label>
+        <textarea class="idp-textarea" placeholder="What specific actions will you take to develop this capability?"></textarea>
+      </div>
+      <div class="idp-field">
+        <label>Expected Outcomes</label>
+        <textarea class="idp-textarea" placeholder="What will be different once you have developed this capability?"></textarea>
+      </div>
+      <div class="idp-two-col">
+        <div class="idp-field">
+          <label>Evidence Type</label>
+          <select class="idp-select">
+            <option value="">Select…</option>
+            <option>Project</option>
+            <option>Training</option>
+            <option>Peer Review</option>
+            <option>Experience</option>
+            <option>Certificate</option>
+          </select>
+        </div>
+        <div class="idp-field">
+          <label>Timeframe</label>
+          <select class="idp-select">
+            <option value="">Select…</option>
+            <option>Short-term (1–3 months)</option>
+            <option>Mid-term (3–6 months)</option>
+            <option>Long-term (6–12 months)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────────────
+function resetAll() {
+  document.getElementById('reset-bar').style.display = 'none';
+  document.getElementById('results-panel').classList.remove('visible');
+  document.getElementById('gap-section').style.display = 'none';
+  document.getElementById('idp-section').style.display = 'none';
+  currentTrack = null;
+  currentTechProfile = null;
+  document.getElementById('profile-selector').style.display = 'none';
+  ['engineer','support','devops'].forEach(p => {
+    const b = document.getElementById(`btn-${p}`);
+    if (b) b.className = 'track-btn';
+  });
+  document.getElementById('btn-technology').className = 'track-btn';
+  document.getElementById('btn-business').className   = 'track-btn';
+  document.getElementById('track-desc').textContent = 'Select your track to begin.';
+  document.getElementById('assessment-content').style.display = 'none';
+  document.getElementById('random-btn').style.display = 'none';
+
+  FRAMEWORK.forEach(d => d.competencies.forEach(c => c.criteria.forEach(cr => {
+    scores[cr.id] = null;
+    for (let i = 0; i < 5; i++) {
+      const pill = document.getElementById(`pill-${cr.id}-${i}`);
+      if (pill) pill.className = `pill pill-lv-${i}`;
+    }
+    const lbl = document.getElementById(`crscore-${cr.id}`);
+    if (lbl) { lbl.textContent = 'not set'; lbl.style.color = ''; lbl.style.borderColor = ''; }
+    const evrow = document.getElementById(`evrow-${cr.id}`);
+    if (evrow) evrow.classList.remove('visible');
+    const evsel = document.getElementById(`evsel-${cr.id}`);
+    if (evsel) evsel.value = '';
+    const evinput = document.getElementById(`evinput-${cr.id}`);
+    if (evinput) evinput.value = '';
+  })));
+
+  updateAll();
+  scrollToEl(document.querySelector('.assess-intro'));
+}
+
+// ── SCROLL ────────────────────────────────────────────────────────────────────
+function scrollToEl(el, extraOffset = 0) {
+  if (!el) return;
+  const header = document.querySelector('.header');
+  const headerH = header ? header.offsetHeight : 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH - 16 - extraOffset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+buildLeftPanel();
+buildBars();
+drawRadar();
+</script>
+</body>
+</html>
