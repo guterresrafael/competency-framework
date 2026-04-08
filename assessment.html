@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Career Progression: Self Assessment</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -139,11 +140,20 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .results-panel{display:none;padding:48px 0;flex-direction:column;background:var(--bg);}
 .results-panel.visible{display:flex;}
 .results-inner{max-width:1200px;margin:0 auto;padding:0 64px;width:100%;display:flex;flex-direction:column;gap:28px;}
-.results-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;width:100%;}
-.summary{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:20px 22px;}
-.summary-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
-.bar-rows{display:flex;flex-direction:column;gap:10px;}
-.bar-row{display:flex;align-items:center;gap:12px;}
+/* Two-column header: info left, radar right */
+.results-header-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;width:100%;}
+.results-info{display:flex;flex-direction:column;gap:18px;}
+.results-name{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.3px;}
+.results-track{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.08em;margin-top:-8px;}
+.results-level-block{display:flex;flex-direction:column;gap:2px;}
+.results-level-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;}
+.results-level-value{font-size:28px;font-weight:700;letter-spacing:-.5px;line-height:1.1;}
+.results-radar-wrap{display:flex;justify-content:flex-end;}
+/* Domain scores in left column */
+.results-domain-scores{display:flex;flex-direction:column;gap:6px;margin-top:4px;border-top:1px solid var(--border);padding-top:14px;}
+.rds-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.rds-label{font-size:12px;color:var(--text-muted);}
+.rds-pill{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:2px;border:1px solid;}.bar-row{display:flex;align-items:center;gap:12px;}
 .bar-label{font-size:11px;width:120px;color:var(--text-muted);}
 .bar-track{flex:1;height:4px;background:var(--surface2);border-radius:0;overflow:hidden;}
 .bar-fill{height:100%;border-radius:0;transition:width .4s,background .3s;}
@@ -169,10 +179,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .gap-item-name{font-size:12px;font-weight:600;color:var(--text);}
 .gap-item-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
 .gap-item-pills{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.idp-card-context{padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--border);}
-.idp-context-item{display:flex;flex-direction:column;gap:5px;}
-.idp-context-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;}
-.idp-context-text{font-size:12px;color:var(--text-muted);line-height:1.6;}
 .gap-item-current{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
 .gap-arrow{color:var(--text-dim);font-size:12px;}
 .gap-item-required{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;white-space:nowrap;}
@@ -180,43 +186,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .gap-group-header{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;margin-top:8px;border-bottom:1px solid var(--border);margin-bottom:12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
 .gap-group-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:0;text-transform:none;font-weight:400;}
 
-/* IDP OUTER SECTION */
-.idp-outer{background:var(--surface);border-top:3px solid var(--accent);}
-.idp-outer-inner{max-width:1200px;margin:0 auto;padding:64px 64px;}
-.idp-section-header{margin-bottom:48px;}
-.idp-section-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
-.idp-section-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
-.idp-section-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:640px;margin-bottom:16px;}
-.idp-section-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);padding:8px 14px;border:1px solid var(--border);border-radius:2px;display:inline-block;}
-
-/* IDP CARDS */
-.idp-group{margin-bottom:28px;}
-.idp-group-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0 12px;border-bottom:1px solid var(--border);margin-bottom:16px;display:flex;align-items:baseline;gap:12px;}
-.idp-group-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:0;text-transform:none;font-weight:400;}
-.idp-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-bottom:12px;}
-.idp-card-header{padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.idp-card-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0;}
-.idp-card-criterion{font-size:13px;font-weight:600;white-space:nowrap;}
-.idp-card-domain{font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.06em;}
-.idp-card-gap{display:flex;align-items:center;gap:8px;}
-.idp-level-pill{font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;border:1px solid;}
-.idp-arrow{color:var(--text-dim);font-size:12px;}
-.idp-card-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
-.idp-fields-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-.idp-field{display:flex;flex-direction:column;gap:6px;}
-.idp-field label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;}
-.idp-textarea{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:2px;outline:none;resize:vertical;min-height:72px;transition:border-color .15s;line-height:1.6;}
-.idp-textarea:focus{border-color:var(--accent);}
-.idp-textarea::placeholder{color:var(--text-dim);}
-.idp-input{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:2px;outline:none;transition:border-color .15s;}
-.idp-input:focus{border-color:var(--accent);}
-.idp-input::placeholder{color:var(--text-dim);}
-.idp-select{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);padding:8px 10px;border-radius:2px;outline:none;cursor:pointer;transition:border-color .15s;}
-.idp-select:focus{border-color:var(--accent);}
-.idp-select option{background:var(--surface2);color:var(--text);}
-.idp-two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.idp-col-left{display:flex;flex-direction:column;gap:14px;}
-.idp-col-right{display:flex;flex-direction:column;gap:14px;}
 
 /* RESET BAR */
 .reset-bar{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);width:100%;}
@@ -241,58 +210,13 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 @media(max-width:900px){
   .header-inner,.intro-inner,.track-selector-inner,.left-inner,.calculate-bar-inner,.results-inner,.reset-bar-inner,.idp-outer-inner{padding-left:24px;padding-right:24px;}
   .comp-block{margin-left:0;}
-  .results-grid{grid-template-columns:1fr;}
+  .results-header-grid{grid-template-columns:1fr;}
+  .results-radar-wrap{justify-content:center;}
   .idp-two-col{grid-template-columns:1fr;}
   .footer-meta{display:none;}
 }
 @page { margin: 20mm; }
-@media print {
-  body * { visibility: hidden !important; }
-  body > *:not(#profile-print-root):not(#idp-print-root) { display: none !important; }
-  #idp-print-root, #idp-print-root * { visibility: visible !important; }
-  #profile-print-root, #profile-print-root * { visibility: visible !important; }
-  #idp-print-root { display: block !important; padding: 40px; }
-  #profile-print-root { display: block !important; padding: 40px; }
-  #profile-print-root .results-grid { display: grid; grid-template-columns: auto 1fr; gap: 40px; }
-  #profile-print-root canvas { max-width: 320px; }
-  #profile-print-root .summary { border: 1px solid #ddd; padding: 16px; border-radius: 4px; }
-  #profile-print-root .summary-title { color: #888 !important; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
-  #profile-print-root .bar-label { color: #444 !important; }
-  #profile-print-root .bar-track { background: #eee !important; }
-  #profile-print-root .bar-val { color: #333 !important; }
-  #profile-print-root .level-current-label { color: #888 !important; }
-  #profile-print-root .level-current-name { }
-  #profile-print-root .level-desc-small { color: #555 !important; }
-  #profile-print-root .level-next-label { color: #888 !important; }
-  #profile-print-root .gap-title { color: #b45309 !important; border-top: 1px solid #eee !important; }
-  #profile-print-root .gap-domain-name { color: #333 !important; }
-  #profile-print-root .gap-item { background: #fafafa !important; border: 1px solid #eee !important; }
-  #profile-print-root .gap-item-name { color: #111 !important; }
-  #profile-print-root .gap-item-desc { color: #555 !important; }
-  #profile-print-root .gap-group-header { color: #333 !important; border-bottom: 1px solid #eee !important; }
-  #profile-print-root .gap-group-subtitle { color: #888 !important; }
-  #profile-export-bar, #idp-print-bar, #reset-bar { display: none !important; }
-  #idp-print-root .idp-section-header { margin-bottom: 32px; }
-  #idp-print-root .idp-section-title { font-size: 22px; color: #111 !important; }
-  #idp-print-root .idp-section-label { color: #888 !important; }
-  #idp-print-root .idp-section-desc { color: #555 !important; }
-  #idp-print-root .idp-section-meta { border-color: #ddd !important; color: #666 !important; }
-  #idp-print-root .idp-group { margin-bottom: 24px; }
-  #idp-print-root .idp-group-label { color: #333 !important; border-bottom: 1px solid #eee !important; }
-  #idp-print-root .idp-group-sub { color: #666 !important; }
-  #idp-print-root .idp-card { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ddd !important; border-top: 24px solid #ffffff !important; border-radius: 4px; margin-bottom: 16px; background: #fff !important; }
-  #idp-print-root .idp-card-header { background: #f5f5f5 !important; border-bottom: 1px solid #eee !important; }
-  #idp-print-root .idp-card-criterion { color: #111 !important; }
-  #idp-print-root .idp-card-context { background: #fafafa !important; border-bottom: 1px solid #eee !important; }
-  #idp-print-root .idp-context-label { color: #888 !important; }
-  #idp-print-root .idp-context-text { color: #444 !important; }
-  #idp-print-root .idp-card-body { background: #fff !important; }
-  #idp-print-root label { color: #666 !important; }
-  #idp-print-root .idp-textarea, #idp-print-root .idp-input { border: 1px solid #ccc !important; color: #111 !important; background: #fff !important; min-height: 60px; }
-  #idp-print-root .idp-select { border: 1px solid #ccc !important; color: #333 !important; background: #fff !important; }
-  #idp-print-root .idp-level-pill { background: transparent !important; }
-  #idp-print-bar { display: none !important; }
-}
+
 </style>
 </head>
 <body>
@@ -321,7 +245,11 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="intro-inner" style="padding-bottom:28px;">
     <div class="intro-label">Self Assessment</div>
     <h1 class="intro-title">Assess your proficiency</h1>
-    <p class="intro-desc">Select your track, then rate yourself on each criterion. Your results will show your current level, next level, and the gaps to focus on, followed by an Individual Development Plan.</p>
+    <p class="intro-desc">Select your track, then rate yourself on each criterion. Your results will show your current level, next level, and the gaps to focus on.</p>
+    <div style="margin-top:24px;display:flex;align-items:center;gap:12px;">
+      <label style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;">Your Name</label>
+      <input id="assessee-name" type="text" placeholder="Enter your name…" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:4px;outline:none;width:280px;transition:border-color .15s;" onfocus="this.style.borderColor='var(--diff)'" onblur="this.style.borderColor='var(--border)'" oninput="updateNameDisplay()" />
+    </div>
   </div>
 </div>
 
@@ -359,22 +287,25 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 
 <div class="results-panel" id="results-panel">
   <div class="results-inner">
-    <div class="results-grid">
-      <div><canvas id="radar" width="500" height="500"></canvas></div>
-      <div>
-        <div class="summary">
-          <div class="summary-title">Domain Scores</div>
-          <div class="bar-rows" id="bar-rows"></div>
+    <div class="results-header-grid">
+      <!-- Left: name, track, levels, domain summary -->
+      <div class="results-info">
+        <div class="results-name" id="results-name-display" style="display:none"></div>
+        <div class="results-track" id="results-track-display"></div>
+        <div class="results-level-block">
+          <div class="results-level-label" id="current-level-label">Current Level</div>
+          <div class="results-level-value" id="overall-level" style="color:var(--diff)">—</div>
+          <div class="level-desc-small" id="overall-desc" style="display:none"></div>
         </div>
+        <div class="results-level-block" id="next-label" style="display:none">
+          <div class="results-level-label">Next Level</div>
+          <div class="results-level-value" id="next-level-name" style="color:var(--ok)"></div>
+        </div>
+        <div class="results-domain-scores" id="results-domain-scores"></div>
       </div>
-    </div>
-    <div class="results-header">
-      <div class="level-display">
-        <div class="level-current-label" id="level-current-label">Current level</div>
-        <div class="level-current-name" id="overall-level" style="color:var(--accent)">—</div>
-        <div class="level-desc-small" id="overall-desc">Complete the assessment to see your profile.</div>
-        <div class="level-next-label" id="next-label" style="display:none">Next level</div>
-        <div class="level-next-name" id="next-level-name"></div>
+      <!-- Right: radar -->
+      <div class="results-radar-wrap">
+        <canvas id="radar" width="500" height="500"></canvas>
       </div>
     </div>
     <div class="gap-section" id="gap-section" style="display:none">
@@ -385,9 +316,9 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 </div>
 
 <div class="reset-bar" id="profile-export-bar" style="display:none">
-  <div class="reset-bar-inner">
-    <button class="calculate-btn" onclick="printProfile()">⬇ Export Profile & Criteria to Improve</button>
-    <span class="calculate-hint">Opens a print-ready view of your profile and gap analysis.</span>
+  <div class="reset-bar-inner" style="flex-wrap:wrap;gap:12px;">
+    <button class="calculate-btn" onclick="generatePDF()">⬇ Export Profile PDF</button>
+    <span class="calculate-hint">Use the exported PDF to import into the Development Plan.</span>
   </div>
 </div>
 
@@ -398,21 +329,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   </div>
 </div>
 
-<div class="idp-outer" id="idp-section" style="display:none">
-  <div class="idp-outer-inner">
-    <div class="idp-section-header">
-      <div class="idp-section-label">Development Plan</div>
-      <h2 class="idp-section-title">Individual Development Plan</h2>
-      <p class="idp-section-desc">One goal card per identified gap. Fill in the action plan, expected outcomes, evidence type, and timeframe for each criterion you need to develop.</p>
-      <div class="idp-section-meta" id="idp-subtitle"></div>
-    </div>
-    <div id="idp-cards"></div>
-    <div id="idp-print-bar" style="display:none;padding-top:32px;border-top:1px solid var(--border);margin-top:32px;display:flex;align-items:center;gap:16px;">
-      <button class="calculate-btn" onclick="printIDP()">⬇ Export Individual Development Plan</button>
-      <span class="calculate-hint">Opens a print-ready view. Use your browser's Save as PDF option.</span>
-    </div>
-  </div>
-</div>
 
 
 
@@ -796,6 +712,7 @@ function buildLeftPanel() {
 // ── BUILD BARS ────────────────────────────────────────────────────────────────
 function buildBars() {
   const barsEl = document.getElementById('bar-rows');
+  if (!barsEl) return; // element removed — domain scores box no longer shown
   barsEl.innerHTML = '';
   FRAMEWORK.forEach(domain => {
     const row = document.createElement('div');
@@ -886,7 +803,37 @@ function updateAll() {
   const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
   const oLevel = document.getElementById('overall-level');
   const oDesc = document.getElementById('overall-desc');
-  const oCurrentLabel = document.getElementById('level-current-label');
+
+  // Populate name and track in results header
+  const nameEl  = document.getElementById('results-name-display');
+  const trackEl = document.getElementById('results-track-display');
+  if (nameEl) {
+    const n = document.getElementById('assessee-name')?.value.trim() || '';
+    nameEl.textContent = n;
+    nameEl.style.display = n ? '' : 'none';
+  }
+  if (trackEl) {
+    const t = currentTrack ? (currentTrack.charAt(0).toUpperCase() + currentTrack.slice(1)) : '';
+    const p = currentTechProfile ? TECH_PROFILES[currentTechProfile].label : '';
+    trackEl.textContent = t + (p ? '  ·  ' + p : '');
+  }
+
+  // Populate domain scores mini-list
+  const dsList = document.getElementById('results-domain-scores');
+  if (dsList) {
+    dsList.innerHTML = '';
+    FRAMEWORK.forEach(function(domain) {
+      const da = domainAvg(domain);
+      if (da === null) return;
+      const idx = Math.min(Math.round(da), 5);
+      const col = LEVEL_COLORS[idx];
+      const row = document.createElement('div');
+      row.className = 'rds-row';
+      row.innerHTML = `<span class="rds-label">${domain.label}</span>
+        <span class="rds-pill" style="color:${col};border-color:${col}55">${LEVELS[idx]}</span>`;
+      dsList.appendChild(row);
+    });
+  }
   if (!allSet) {
     oLevel.textContent = '—'; oLevel.style.color = '';
     oDesc.textContent = 'Complete all domains to see your profile.';
@@ -906,18 +853,19 @@ function updateAll() {
   }
 
   const next2 = getNextBaseLevel();
+  const levelLbl = document.getElementById('current-level-label');
   if (reachedIdx === -1) {
     const firstLabel = currentTrack ? BASE_LEVELS[currentTrack][0].label : '';
-    if (oCurrentLabel) oCurrentLabel.textContent = 'Approaching';
     oLevel.textContent = firstLabel;
     oLevel.style.color = '#888';
+    if (levelLbl) levelLbl.textContent = 'Approaching Level';
     oDesc.textContent = 'Profile does not yet meet all criteria for ' + firstLabel + '. Keep developing across all domains.';
   } else {
     const label = BASE_LEVELS[currentTrack][reachedIdx].label;
-    if (oCurrentLabel) oCurrentLabel.textContent = 'Current level';
     oLevel.textContent = label;
     oLevel.style.color = '#4f8ef7';
-    oDesc.textContent = levelDesc(reachedIdx);
+    if (levelLbl) levelLbl.textContent = 'Current Level';
+    oDesc.textContent = levelDesc(reachedIdx); oDesc.style.display = 'none';
   }
 
   const nextLbl = document.getElementById('next-label');
@@ -1114,6 +1062,11 @@ function drawRadar() {
     ctx.font = '10px Space Mono,monospace';
     ctx.fillStyle = isAppr2 ? '#4f8ef7' : '#10b981';
     ctx.fillText('── next: ' + next.level.label, CX, CY + R + 62);
+
+    // Note: overall level is gated by the weakest domain
+    ctx.font = '8px Space Mono,monospace';
+    ctx.fillStyle = PM ? '#6b7280' : '#4a5568';
+    ctx.fillText('Overall level gated by weakest domain', CX, CY + R + 76);
   }
 
   // Domain labels
@@ -1132,6 +1085,12 @@ function drawRadar() {
 }
 
 // ── CALCULATE ─────────────────────────────────────────────────────────────────
+function updateNameDisplay() {
+  const n = document.getElementById('assessee-name')?.value.trim() || '';
+  const nameEl = document.getElementById('results-name-display');
+  if (nameEl) { nameEl.textContent = n; nameEl.style.display = n ? '' : 'none'; }
+}
+
 function calculate() {
   updateAll();
   showGapAnalysis();
@@ -1149,11 +1108,10 @@ function showGapAnalysis() {
   const gapTitleEl = document.getElementById('gap-title');
   const nextLabel  = document.getElementById('next-label');
   const nextName   = document.getElementById('next-level-name');
-  const idpSection = document.getElementById('idp-section');
 
-  if (!currentTrack) { gapSection.style.display = 'none'; idpSection.style.display = 'none'; return; }
+  if (!currentTrack) { gapSection.style.display = 'none'; return; }
   const allSet = FRAMEWORK.every(d => domainAvg(d) !== null);
-  if (!allSet) { gapSection.style.display = 'none'; idpSection.style.display = 'none'; return; }
+  if (!allSet) { gapSection.style.display = 'none'; return; }
 
   const levels = BASE_LEVELS[currentTrack];
   let reachedIdx2 = -1;
@@ -1179,7 +1137,6 @@ function showGapAnalysis() {
     nextName.textContent = '';
     gapList.innerHTML = '<div class="gap-empty">You meet all criteria for the top level. Keep it up!</div>';
     gapSection.style.display = 'block';
-    idpSection.style.display = 'none';
     return;
   }
 
@@ -1226,7 +1183,6 @@ function showGapAnalysis() {
   if (!displayHighGaps.length && !displayLowGaps.length) {
     gapList.innerHTML = '<div class="gap-empty">No gaps found for the next level.</div>';
     gapSection.style.display = 'block';
-    idpSection.style.display = 'none';
     return;
   }
 
@@ -1268,94 +1224,43 @@ function showGapAnalysis() {
 
   gapSection.style.display = 'block';
 
-  // ── RENDER IDP ──────────────────────────────────────────────────────────────
+  // ── SAVE GAP DATA FOR DEVELOPMENT PLAN ─────────────────────────────────────
   const allGaps = [...displayHighGaps, ...displayLowGaps];
-  if (!allGaps.length) { idpSection.style.display = 'none'; return; }
+  if (!allGaps.length) { return; }
 
-  const idpCards = document.getElementById('idp-cards');
-  const idpSubtitle = document.getElementById('idp-subtitle');
-  if (idpSubtitle) idpSubtitle.textContent = allGaps.length + ' goal' + (allGaps.length !== 1 ? 's' : '') + ' identified';
+  const nextLevelLabel = nextLevel ? nextLevel.label : '';
+  const trackLabel = currentTrack ? (currentTrack.charAt(0).toUpperCase() + currentTrack.slice(1)) : '';
+  const profileLabel = currentTechProfile ? TECH_PROFILES[currentTechProfile].label : '';
 
-  let idpHtml = '';
-
-  if (displayHighGaps.length) {
-    idpHtml += `<div class="idp-group">
-      <div class="idp-group-label" style="color:#ff4d3d">High priority<span class="idp-group-sub">Domain score is below the minimum required</span></div>`;
-    displayHighGaps.forEach(g => { idpHtml += renderIDPCard(g); });
-    idpHtml += '</div>';
-  }
-  if (displayLowGaps.length) {
-    idpHtml += `<div class="idp-group">
-      <div class="idp-group-label" style="color:#f97316">Low priority<span class="idp-group-sub">Domain score is met, but specific criteria are below the recommended level</span></div>`;
-    displayLowGaps.forEach(g => { idpHtml += renderIDPCard(g); });
-    idpHtml += '</div>';
-  }
-
-  idpCards.innerHTML = idpHtml;
-  idpSection.style.display = 'block';
-  const printBar = document.getElementById('idp-print-bar');
-  if (printBar) printBar.style.display = 'flex';
-}
-
-function renderIDPCard(g) {
-  const { domain, comp, cr, current, required } = g;
-  const curLabel = current === null ? 'Not set' : LEVELS[current];
-  const curColor = current === null ? '#555555' : LEVEL_COLORS[current];
-  const reqLabel = LEVELS[required];
-  const reqColor = LEVEL_COLORS[required];
-  const col = domain.color;
-  const reqDesc = cr.levels[required] || '';
-  return `<div class="idp-card">
-    <div class="idp-card-header">
-      <div class="idp-card-left">
-        <span class="idp-card-criterion">${cr.label}</span>
-        <span class="idp-card-domain" style="color:#fff;background:${col}33;border-color:${col}88;">${domain.label} · ${comp.label}</span>
-      </div>
-      <div class="idp-card-gap">
-        <span class="idp-level-pill" style="background:${curColor}22;color:${curColor};border-color:${curColor}55">${curLabel}</span>
-        <span class="idp-arrow">→</span>
-        <span class="idp-level-pill" style="background:${reqColor}22;color:${reqColor};border-color:${reqColor}55">${reqLabel}</span>
-      </div>
-    </div>
-    <div class="idp-card-context">
-      <div class="idp-context-item">
-        <span class="idp-context-label">Target: ${reqLabel}</span>
-        <span class="idp-context-text">${reqDesc}</span>
-      </div>
-    </div>
-    <div class="idp-card-body">
-      <div class="idp-field">
-        <label>Action Plan</label>
-        <textarea class="idp-textarea" placeholder="What specific actions will you take to develop this capability?"></textarea>
-      </div>
-      <div class="idp-field">
-        <label>Expected Outcomes</label>
-        <textarea class="idp-textarea" placeholder="What will be different once you have developed this capability?"></textarea>
-      </div>
-      <div class="idp-two-col">
-        <div class="idp-field">
-          <label>Evidence Type</label>
-          <select class="idp-select">
-            <option value="">Select…</option>
-            <option>Project</option>
-            <option>Training</option>
-            <option>Peer Review</option>
-            <option>Experience</option>
-            <option>Certificate</option>
-          </select>
-        </div>
-        <div class="idp-field">
-          <label>Timeframe</label>
-          <select class="idp-select">
-            <option value="">Select…</option>
-            <option>Short-term (1–3 months)</option>
-            <option>Mid-term (3–6 months)</option>
-            <option>Long-term (6–12 months)</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>`;
+  const gapPayload = {
+    track: trackLabel,
+    profile: profileLabel,
+    nextLevel: nextLevelLabel,
+    highGaps: displayHighGaps.map(g => ({
+      criterionLabel: g.cr.label,
+      criterionDesc: g.cr.desc,
+      domainLabel: g.domain.label,
+      domainColor: g.domain.color,
+      compLabel: g.comp.label,
+      currentLabel: g.current === null ? 'Not set' : LEVELS[g.current],
+      currentColor: g.current === null ? '#555555' : LEVEL_COLORS[g.current],
+      requiredLabel: LEVELS[g.required],
+      requiredColor: LEVEL_COLORS[g.required],
+      targetDesc: g.cr.levels[g.required] || ''
+    })),
+    lowGaps: displayLowGaps.map(g => ({
+      criterionLabel: g.cr.label,
+      criterionDesc: g.cr.desc,
+      domainLabel: g.domain.label,
+      domainColor: g.domain.color,
+      compLabel: g.comp.label,
+      currentLabel: g.current === null ? 'Not set' : LEVELS[g.current],
+      currentColor: g.current === null ? '#555555' : LEVEL_COLORS[g.current],
+      requiredLabel: LEVELS[g.required],
+      requiredColor: LEVEL_COLORS[g.required],
+      targetDesc: g.cr.levels[g.required] || ''
+    }))
+  };
 }
 
 // ── RESET ─────────────────────────────────────────────────────────────────────
@@ -1364,9 +1269,6 @@ function resetAll() {
   document.getElementById('profile-export-bar').style.display = 'none';
   document.getElementById('results-panel').classList.remove('visible');
   document.getElementById('gap-section').style.display = 'none';
-  document.getElementById('idp-section').style.display = 'none';
-  const printBar = document.getElementById('idp-print-bar');
-  if (printBar) printBar.style.display = 'none';
   currentTrack = null;
   currentTechProfile = null;
   document.getElementById('profile-selector').style.display = 'none';
@@ -1410,114 +1312,456 @@ function scrollToEl(el, extraOffset = 0) {
 }
 
 // ── PRINT PROFILE ─────────────────────────────────────────────────────────────
-function printProfile() {
-  const gapSection = document.getElementById('gap-section');
+// ── GENERATE PDF (jsPDF) ─────────────────────────────────────────────────────
+function hexToRgb(hex) {
+  const h = hex.replace('#','');
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+}
 
-  // Capture radar with white background and print-friendly colors
-  _printMode = true;
-  drawRadar();
-  const radarCanvas = document.getElementById('radar');
-  const printCanvas = document.createElement('canvas');
-  printCanvas.width  = radarCanvas.width;
-  printCanvas.height = radarCanvas.height;
-  const pCtx = printCanvas.getContext('2d');
-  pCtx.fillStyle = '#ffffff';
-  pCtx.fillRect(0, 0, printCanvas.width, printCanvas.height);
-  pCtx.drawImage(radarCanvas, 0, 0);
-  const radarDataUrl = printCanvas.toDataURL('image/png');
-  _printMode = false;
-  drawRadar();
+function safe(str) {
+  return (str || '')
+    .replace(/\u2013/g,'-').replace(/\u2014/g,'-')
+    .replace(/\u2019/g,"'").replace(/\u201C/g,'"').replace(/\u201D/g,'"')
+    .replace(/[^\x20-\x7E]/g,'');
+}
 
-  // Collect domain scores text
-  const barRows = document.getElementById('bar-rows');
-  const scoresHtml = barRows ? barRows.innerHTML : '';
+function generatePDF() {
+  if (!window.jspdf) { alert('PDF library not loaded. Check your internet connection.'); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
 
-  // Level info
-  const levelLabel = document.getElementById('level-current-label')?.textContent || '';
+  const PW = 210, PH = 297, ML = 20, MR = 20, MT = 22, MB = 20;
+  const UW = PW - ML - MR;
+
+  const track   = currentTrack ? (currentTrack.charAt(0).toUpperCase() + currentTrack.slice(1)) : '';
+  const profile = currentTechProfile ? TECH_PROFILES[currentTechProfile].label : '';
+  const trackStr = 'Track: ' + track + (profile ? ' \u00b7 ' + profile : '');
+
+  let y = MT;
+
+  // ── HEADER ──────────────────────────────────────────────────────────────────
+  const assesseeName = document.getElementById('assessee-name')?.value.trim() || '';
+
+  // ── RADAR CHART (jsPDF-drawn, same style as IDP PDF) ─────────────────────────
+  // Radar right-aligned in header (same layout as IDP PDF)
+  const radarCX = PW - MR - 28;
+  const radarCY = MT + 26;
+  const radarR  = 24;
+
+  (function drawPdfRadar() {
+    const DOMAIN_IDS  = ['technical','execution','collaboration','leadership','strategic'];
+    const DOMAIN_LBL  = ['Technical','Execution','Collab.','Leadership','Strategic'];
+    const DOMAIN_COLS = {'technical':'#3b82f6','execution':'#ff4d3d','collaboration':'#16a34a','leadership':'#d97706','strategic':'#7c3aed'};
+    const N = DOMAIN_IDS.length;
+    const maxVal = 5;
+
+    // Domain averages — current and next (from BASE_LEVELS required scores)
+    const curAvg = {}, nxtAvg = {};
+    FRAMEWORK.forEach(function(domain) {
+      const a = domainAvg(domain);
+      curAvg[domain.id] = (a !== null) ? a : 0;
+    });
+    // Next level polygon: use actual required scores from BASE_LEVELS
+    const nxtData = getNextBaseLevel();
+    FRAMEWORK.forEach(function(domain) {
+      nxtAvg[domain.id] = nxtData ? (nxtData.level.scores[domain.id] || 0) : Math.min(curAvg[domain.id] + 1, maxVal);
+    });
+
+    function hexRgbLocal(hex) {
+      const h = (hex||'#888').replace('#','');
+      if (h.length===3) return [parseInt(h[0]+h[0],16),parseInt(h[1]+h[1],16),parseInt(h[2]+h[2],16)];
+      return [parseInt(h.slice(0,2),16)||136,parseInt(h.slice(2,4),16)||136,parseInt(h.slice(4,6),16)||136];
+    }
+    function polarToXY(ang, r) {
+      return [radarCX + r * Math.sin(ang), radarCY - r * Math.cos(ang)];
+    }
+    function dashedLine(x1, y1, x2, y2, dl, gl) {
+      const dx=x2-x1, dy=y2-y1, total=Math.sqrt(dx*dx+dy*dy);
+      const ux=dx/total, uy=dy/total;
+      let pos=0, on=true;
+      while(pos<total){
+        const seg=Math.min(on?dl:gl,total-pos);
+        if(on) doc.line(x1+ux*pos,y1+uy*pos,x1+ux*(pos+seg),y1+uy*(pos+seg));
+        pos+=seg; on=!on;
+      }
+    }
+
+    // Grid rings
+    for (var lvl = 1; lvl <= maxVal; lvl++) {
+      const r = radarR * lvl / maxVal;
+      doc.setDrawColor(210,210,210);
+      doc.setLineWidth(0.15);
+      const pts = [];
+      for (var i = 0; i < N; i++) pts.push(polarToXY((2*Math.PI*i)/N, r));
+      for (var i = 0; i < N; i++) {
+        doc.line(pts[i][0],pts[i][1],pts[(i+1)%N][0],pts[(i+1)%N][1]);
+      }
+    }
+
+    // Axes
+    for (var i = 0; i < N; i++) {
+      const outer = polarToXY((2*Math.PI*i)/N, radarR);
+      doc.setDrawColor(190,190,190);
+      doc.setLineWidth(0.2);
+      doc.line(radarCX, radarCY, outer[0], outer[1]);
+    }
+
+    // Next-level polygon (green dashed)
+    doc.setDrawColor(16,185,129);
+    doc.setLineWidth(0.6);
+    const nxtPts = DOMAIN_IDS.map(function(did,i){
+      return polarToXY((2*Math.PI*i)/N, radarR * Math.min(nxtAvg[did],maxVal) / maxVal);
+    });
+    for (var i = 0; i < N; i++) dashedLine(nxtPts[i][0],nxtPts[i][1],nxtPts[(i+1)%N][0],nxtPts[(i+1)%N][1],1.5,1.2);
+    nxtPts.forEach(function(pt){
+      doc.setDrawColor(16,185,129);
+      doc.setFillColor(255,255,255);
+      doc.setLineWidth(0.5);
+      doc.circle(pt[0],pt[1],1,'FD');
+    });
+
+    // Current polygon (blue)
+    doc.setDrawColor(59,130,246);
+    doc.setLineWidth(0.6);
+    const curPts = DOMAIN_IDS.map(function(did,i){
+      return polarToXY((2*Math.PI*i)/N, radarR * Math.min(curAvg[did],maxVal) / maxVal);
+    });
+    for (var i = 0; i < N; i++) doc.line(curPts[i][0],curPts[i][1],curPts[(i+1)%N][0],curPts[(i+1)%N][1]);
+    curPts.forEach(function(pt){
+      doc.setFillColor(59,130,246);
+      doc.circle(pt[0],pt[1],0.9,'F');
+    });
+
+    // Axis labels
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(6.5);
+    DOMAIN_IDS.forEach(function(did,i){
+      const ang  = (2*Math.PI*i)/N;
+      const lpt  = polarToXY(ang, radarR + 5.5);
+      const col  = hexRgbLocal(DOMAIN_COLS[did]);
+      doc.setTextColor(col[0],col[1],col[2]);
+      doc.text(DOMAIN_LBL[i], lpt[0], lpt[1], {align:'center'});
+    });
+
+    // Legend
+    const legX = radarCX - radarR;
+    const legY2 = radarCY + radarR + 9;
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(6.5);
+    doc.setFillColor(59,130,246);
+    doc.circle(legX, legY2-1, 1,'F');
+    doc.setTextColor(80,80,80);
+    doc.text('Current', legX+3, legY2);
+    doc.setDrawColor(16,185,129);
+    doc.setLineWidth(0.6);
+    doc.setFillColor(255,255,255);
+    doc.setDrawColor(16,185,129);
+    doc.setLineWidth(0.5);
+    doc.circle(legX, legY2+3, 1, 'FD');
+    doc.setTextColor(80,80,80);
+    doc.text('Next level', legX+3, legY2+4.5);
+  })();
+
+  // ── LEFT COLUMN: title, name, track, then levels — alongside radar ──────────
   const levelName  = document.getElementById('overall-level')?.textContent || '';
-  const levelNameColor = getComputedStyle(document.getElementById('overall-level')).color || '#ff4d3d';
-  const levelDesc  = document.getElementById('overall-desc')?.textContent || '';
-  const nextLabel  = document.getElementById('next-label')?.style.display !== 'none' ? (document.getElementById('next-label')?.textContent || '') : '';
   const nextName   = document.getElementById('next-level-name')?.textContent || '';
-  const nextColor  = document.getElementById('next-level-name')?.style.color || '#10b981';
+  const hasNext    = document.getElementById('next-label')?.style.display !== 'none' && nextName;
 
-  // Gap analysis
-  const gapHtml = (gapSection && gapSection.style.display !== 'none') ? gapSection.innerHTML : '';
+  let ly = MT;  // start from very top, same as radar
 
-  const track = currentTrack ? (currentTrack.charAt(0).toUpperCase()+currentTrack.slice(1)) : '';
-  const profile = currentTechProfile ? ' · ' + TECH_PROFILES[currentTechProfile].label : '';
+  // "CAREER PROGRESSION" eyebrow label
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(100,100,100);
+  doc.text('CAREER PROGRESSION', ML, ly);
+  ly += 10;
 
-  const existing = document.getElementById('profile-print-root');
-  if (existing) existing.remove();
+  // "Profile Assessment" title
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(18);
+  doc.setTextColor(20,20,20);
+  doc.text('Profile Assessment', ML, ly);
+  ly += 7;
 
-  const root = document.createElement('div');
-  root.id = 'profile-print-root';
-  root.innerHTML = `
-    <div style="margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid #eee;">
-      <div style="font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#888;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Career Progression</div>
-      <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:#111;">Profile Assessment</div>
-      <div style="font-size:12px;color:#666;">Track: ${track}${profile}</div>
-    </div>
-    <div class="results-grid" style="margin-bottom:28px;">
-      <img src="${radarDataUrl}" style="width:320px;height:320px;" />
-      <div class="summary">
-        <div class="summary-title">Domain Scores</div>
-        <div class="bar-rows">${scoresHtml}</div>
-      </div>
-    </div>
-    <div style="margin-bottom:24px;">
-      <div class="level-current-label">${levelLabel}</div>
-      <div class="level-current-name" style="color:${levelNameColor}">${levelName}</div>
-      <div class="level-desc-small">${levelDesc}</div>
-      ${nextLabel ? `<div class="level-next-label">${nextLabel}</div><div class="level-next-name" style="color:${nextColor}">${nextName}</div>` : ''}
-    </div>
-    ${gapHtml ? `<div class="gap-section">${gapHtml}</div>` : ''}
-  `;
-
-  document.body.appendChild(root);
-  const radarImg = root.querySelector('img');
-  const doPrint = () => { window.print(); setTimeout(() => root.remove(), 1000); };
-  if (radarImg && !radarImg.complete) {
-    radarImg.onload = doPrint;
-    radarImg.onerror = doPrint;
-  } else {
-    setTimeout(doPrint, 80);
+  // Person name (if present)
+  if (assesseeName) {
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(10);
+    doc.setTextColor(40,40,40);
+    doc.text(safe(assesseeName), ML, ly);
+    ly += 6;
   }
+
+  // Track + Profile
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(100,100,100);
+  doc.text(safe(trackStr), ML, ly);
+  ly += 10;
+
+  // Current level
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(6.5);
+  doc.setTextColor(120,120,120);
+  const isApproachingPdf = (document.getElementById('current-level-label')?.textContent || '') === 'Approaching Level';
+  doc.text(isApproachingPdf ? 'APPROACHING LEVEL' : 'CURRENT LEVEL', ML, ly);
+  ly += 7;
+  doc.setFontSize(20);
+  doc.setTextColor(59,130,246);
+  doc.text(safe(levelName) || '-', ML, ly);
+  ly += 10;
+
+  // Next level
+  if (hasNext) {
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(6.5);
+    doc.setTextColor(120,120,120);
+    doc.text('NEXT LEVEL', ML, ly);
+    ly += 7;
+    doc.setFontSize(14);
+    doc.setTextColor(16,185,129);
+    doc.text(safe(nextName), ML, ly);
+    ly += 8;
+  }
+
+  // Advance y to below whichever is taller: left column or radar
+  const radarBottom = radarCY + radarR + 18;
+  y = Math.max(ly, radarBottom);
+
+  doc.setDrawColor(200,200,200);
+  doc.setLineWidth(0.3);
+  doc.line(ML, y, PW - MR, y);
+  y += 7;
+
+  // ── GAP ANALYSIS ─────────────────────────────────────────────────────────────
+  if (currentTrack) {
+    const levels = BASE_LEVELS[currentTrack];
+    let nextLevel = null;
+    for (let i = 0; i < levels.length; i++) {
+      const meetsAll = FRAMEWORK.every(d => {
+        const da = domainAvg(d);
+        return da !== null && da >= levels[i].scores[d.id];
+      });
+      if (!meetsAll) { nextLevel = levels[i]; break; }
+    }
+
+    if (nextLevel) {
+      // Collect gaps
+      const highGaps = [], lowGaps = [];
+      FRAMEWORK.forEach(function(domain) {
+        const required    = nextLevel.scores[domain.id];
+        const domainScore = domainAvg(domain);
+        const domainMet   = domainScore !== null && domainScore >= required;
+        domain.competencies.forEach(function(comp) {
+          comp.criteria.forEach(function(cr) {
+            const val = scores[cr.id];
+            if (val !== null && val >= required) return;
+            if (domain.id === 'technical' && currentTechProfile) {
+              if ((TECH_PROFILES[currentTechProfile].weights[comp.id] || 1.0) !== 1.0) return;
+            }
+            (!domainMet ? highGaps : lowGaps).push({ domain, comp, cr, current: val, required });
+          });
+        });
+      });
+
+      // ── IDP-style section header ────────────────────────────────────────────
+      function sectionHdr(label, sub, r, g2, b) {
+        if (y > PH - MB - 30) { doc.addPage(); y = MT; }
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(8);
+        doc.setTextColor(r, g2, b);
+        doc.text(label.toUpperCase(), ML, y);
+        doc.setFont('helvetica','normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(100,100,100);
+        doc.text(sub, ML + doc.getTextWidth(label.toUpperCase()) + 4, y);
+        y += 3;
+        doc.setDrawColor(r, g2, b);
+        doc.setLineWidth(0.4);
+        doc.line(ML, y, PW - MR, y);
+        y += 5;
+        doc.setLineWidth(0.2);
+      }
+
+      // ── IDP-style card ──────────────────────────────────────────────────────
+      const LH = 4.5, PAD = 5;
+      const CW  = UW - PAD * 2;
+
+      function drawGapCard(item) {
+        const { domain, comp, cr, current, required } = item;
+
+        const curLabel = current === null ? 'Not set' : LEVELS[current];
+        const reqLabel = LEVELS[Math.min(current !== null ? current + 1 : required, 5)];
+        const [cr1,cg1,cb1] = hexToRgb(current === null ? '#555555' : LEVEL_COLORS[current]);
+        const [rr,rg,rb]    = hexToRgb(current === null ? '#ff4d3d' : LEVEL_COLORS[Math.min((current||0)+1, 5)]);
+        const [dr,dg,db]    = hexToRgb(domain.color);
+
+        // Measure card height
+        doc.setFont('helvetica','normal');
+        doc.setFontSize(8.5);
+        const descLines = doc.splitTextToSize(cr.desc || '', CW);
+        const h = 5 + 5 + 4 + 1 + 4 + descLines.length * LH + 4;
+
+        if (y + h > PH - MB) { doc.addPage(); y = MT; }
+
+        // Card bg + border
+        doc.setFillColor(255,255,255);
+        doc.setDrawColor(220,220,220);
+        doc.setLineWidth(0.25);
+        doc.rect(ML, y, UW, h, 'FD');
+
+        // Left accent bar in domain colour
+        doc.setFillColor(dr,dg,db);
+        doc.rect(ML, y, 1.2, h, 'F');
+
+        let cy = y + 5.5;
+
+        // Criterion name
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(10.5);
+        doc.setTextColor(18,18,18);
+        doc.text(cr.label, ML + PAD + 2, cy);
+        cy += 5;
+
+        // Domain · Competency
+        doc.setFont('helvetica','normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(70,70,70);
+        doc.text(domain.label + ' - ' + comp.label, ML + PAD + 2, cy);
+
+        // Pills — right aligned, both outline
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(7.5);
+        const reqW  = doc.getTextWidth(reqLabel) + 8;
+        const consW = doc.getTextWidth(curLabel) + 8;
+        const arW   = doc.getTextWidth('->') + 5;
+        let   px    = PW - MR - 2;
+        const pillTop = cy - 3.5;
+
+        // Required pill — outline
+        doc.setFillColor(255,255,255);
+        doc.setDrawColor(rr,rg,rb);
+        doc.setLineWidth(0.5);
+        doc.rect(px - reqW, pillTop, reqW, 5, 'FD');
+        doc.setTextColor(rr,rg,rb);
+        doc.text(reqLabel, px - reqW/2, cy, {align:'center'});
+        px -= reqW + 2;
+
+        // Arrow
+        doc.setFont('helvetica','normal');
+        doc.setLineWidth(0.25);
+        doc.setTextColor(140,140,140);
+        doc.text('->', px - arW/2, cy, {align:'center'});
+        px -= arW + 2;
+
+        // Current pill — outline
+        doc.setFillColor(255,255,255);
+        doc.setDrawColor(cr1,cg1,cb1);
+        doc.setLineWidth(0.5);
+        doc.rect(px - consW, pillTop, consW, 5, 'FD');
+        doc.setFont('helvetica','bold');
+        doc.setTextColor(cr1,cg1,cb1);
+        doc.text(curLabel, px - consW/2, cy, {align:'center'});
+        doc.setLineWidth(0.25);
+        cy += 4;
+
+        // Divider
+        doc.setDrawColor(225,225,225);
+        doc.setLineWidth(0.2);
+        doc.line(ML + 1.2, cy, PW - MR, cy);
+        cy += 4;
+
+        // Description
+        doc.setFont('helvetica','normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(40,40,40);
+        doc.text(descLines, ML + PAD + 2, cy);
+
+        y += h + 5;
+      }
+
+      function renderGapGroup(gaps, label, r, g2, b, sub) {
+        if (!gaps.length) return;
+        sectionHdr(label, sub, r, g2, b);
+        gaps.forEach(drawGapCard);
+        y += 2;
+      }
+
+      renderGapGroup(highGaps, 'High Priority', 200, 50, 40, '— domain score below minimum required');
+      renderGapGroup(lowGaps,  'Lower Priority', 220, 120, 40, '— domain score met, criteria below recommended level');
+
+      // End-of-doc marker
+      const markerH2 = 18;
+      if (y + markerH2 > PH - MB) { doc.addPage(); y = MT; } else { y += 10; }
+      doc.setDrawColor(210,210,210);
+      doc.setLineWidth(0.3);
+      doc.line(ML, y, PW - MR, y);
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(8);
+      doc.setTextColor(80,80,80);
+      doc.text('End of Profile Assessment  -  Career Progression Framework v1.0', ML, y + 6);
+
+      // Page numbers
+      const totalPgs = doc.getNumberOfPages();
+      for (var pg = 1; pg <= totalPgs; pg++) {
+        doc.setPage(pg);
+        doc.setFont('helvetica','normal');
+        doc.setFontSize(8);
+        doc.setTextColor(80,80,80);
+        doc.text('Page ' + pg + ' / ' + totalPgs, PW - MR, PH - 8, {align:'right'});
+      }
+    }
+  }
+
+  // ── EMBED METADATA IN PDF KEYWORDS ───────────────────────────────────────────
+  try {
+    const nextLevelData = getNextBaseLevel();
+    const allCriteria   = [];
+    FRAMEWORK.forEach(domain => {
+      const domainScore = domainAvg(domain);
+      domain.competencies.forEach(comp => {
+        comp.criteria.forEach(cr => {
+          const val      = scores[cr.id];
+          const required = nextLevelData ? nextLevelData.level.scores[domain.id] : null;
+          const isGap    = required !== null && (val === null || val < required);
+          const domainMet = required !== null && domainScore !== null && domainScore >= required;
+          allCriteria.push({
+            id: cr.id, label: cr.label, desc: cr.desc,
+            domainId: domain.id, domainLabel: domain.label, domainColor: domain.color,
+            compLabel: comp.label,
+            value: val,
+            valueLabel:    val === null ? 'Not set' : LEVELS[val],
+            valueColor:    val === null ? '#555555' : LEVEL_COLORS[val],
+            required,
+            requiredLabel: required !== null ? LEVELS[required]       : null,
+            requiredColor: required !== null ? LEVEL_COLORS[required] : null,
+            isGap, isHighGap: isGap && !domainMet,
+            targetDesc: (required !== null && cr.levels) ? (cr.levels[required] || '') : '',
+            evidenceType: document.getElementById('evsel-'   + cr.id)?.value || '',
+            evidenceNote: document.getElementById('evinput-' + cr.id)?.value || ''
+          });
+        });
+      });
+    });
+
+    const metadata = { track, profile, nextLevel: getNextBaseLevel()?.level.label || '',
+      currentLevel: document.getElementById('overall-level')?.textContent || '',
+      criteria: allCriteria };
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(metadata))));
+
+    doc.setProperties({
+      title:    'Career Progression Profile Assessment',
+      subject:  trackStr,
+      keywords: 'CPFB64START:' + b64 + ':CPFB64END',
+      creator:  'Career Progression Framework v1.0'
+    });
+  } catch(e) { console.error('Metadata embed error:', e); }
+
+  const namePrefix = assesseeName ? safe(assesseeName).replace(/\s+/g, '_') + '_' : '';
+  doc.save(namePrefix + 'Career_Progression_Profile_Assessment.pdf');
 }
 
-// ── PRINT IDP ─────────────────────────────────────────────────────────────────
-function printIDP() {
-  const idpOuter = document.getElementById('idp-section');
-  if (!idpOuter) return;
 
-  // Capture live values into DOM attributes before cloning
-  idpOuter.querySelectorAll('textarea').forEach(el => el.setAttribute('data-val', el.value));
-  idpOuter.querySelectorAll('input').forEach(el => el.setAttribute('data-val', el.value));
-  idpOuter.querySelectorAll('select').forEach(el => el.setAttribute('data-val', el.value));
-
-  const existing = document.getElementById('idp-print-root');
-  if (existing) existing.remove();
-
-  const root = document.createElement('div');
-  root.id = 'idp-print-root';
-  root.innerHTML = idpOuter.querySelector('.idp-outer-inner').innerHTML;
-
-  // Restore values into cloned elements
-  root.querySelectorAll('textarea[data-val]').forEach(el => { el.value = el.getAttribute('data-val'); });
-  root.querySelectorAll('input[data-val]').forEach(el => { el.value = el.getAttribute('data-val'); });
-  root.querySelectorAll('select[data-val]').forEach(el => {
-    const val = el.getAttribute('data-val');
-    Array.from(el.options).forEach(opt => { opt.selected = opt.value === val; });
-  });
-
-  // Remove the print bar from the clone
-  const printBar = root.querySelector('#idp-print-bar');
-  if (printBar) printBar.remove();
-
-  document.body.appendChild(root);
-  window.print();
-  setTimeout(() => root.remove(), 1000);
-}
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 buildLeftPanel();
