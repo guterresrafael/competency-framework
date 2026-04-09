@@ -1757,8 +1757,25 @@ function generatePDF() {
     });
   } catch(e) { console.error('Metadata embed error:', e); }
 
-  const namePrefix = assesseeName ? safe(assesseeName).replace(/\s+/g, '_') + '_' : '';
-  doc.save(namePrefix + 'Career_Progression_Profile_Assessment.pdf');
+  const namePrefix  = assesseeName ? safe(assesseeName).replace(/\s+/g, '_') + '_' : '';
+  const fileName    = namePrefix + 'Career_Progression_Profile_Assessment.pdf';
+  const inIframe    = (() => { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    // iframes block <a download> — open PDF in a new tab instead
+    const blob = doc.output('blob');
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.target   = '_blank';
+    a.rel      = 'noopener';
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  } else {
+    doc.save(fileName);
+  }
 }
 
 
