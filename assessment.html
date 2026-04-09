@@ -1746,6 +1746,7 @@ function generatePDF() {
 
     const metadata = { track, profile, nextLevel: getNextBaseLevel()?.level.label || '',
       currentLevel: document.getElementById('overall-level')?.textContent || '',
+      assesseeName: assesseeName,
       criteria: allCriteria };
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(metadata))));
 
