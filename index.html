@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Progression Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1e1e1e;--surface:#2a2a2a;--surface2:#333333;--border:#3a3a3a;
+  --accent:#ff4d3d;--text:#ffffff;--text-muted:#a0a0a0;--text-dim:#555;
+  --c-technical:#3b82f6;--c-execution:#ff4d3d;--c-collaboration:#16a34a;
+  --c-leadership:#d97706;--c-strategic:#7c3aed;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
+
+/* HEADER */
+.header{padding:0;border-bottom:1px solid var(--border);background:#111111;position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:16px 64px;display:flex;align-items:center;gap:16px;}
+.header-title{font-size:14px;font-weight:600;color:var(--text);}
+.header-divider{width:1px;height:20px;background:var(--border);}
+.footer-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.footer-item{font-family:'Space Mono',monospace;font-size:10px;color:#aaa;display:flex;align-items:center;gap:6px;}
+.footer-item-label{color:#666;text-transform:uppercase;letter-spacing:.08em;font-size:9px;}
+.footer-sep{color:#444;font-size:12px;}
+
+/* INTRO */
+.intro{padding:56px 0 0;background:var(--bg);}
+.intro-inner{max-width:1200px;margin:0 auto;padding:0 64px 48px;}
+.intro-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.intro-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
+.intro-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:680px;}
+
+/* PIPELINE STRIP */
+.pipeline{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:0;}
+.pipeline-inner{max-width:1200px;margin:0 auto;padding:14px 64px;display:flex;align-items:center;gap:0;}
+.pipeline-step{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);}
+.pipeline-step-num{width:18px;height:18px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:#777;flex-shrink:0;}
+.pipeline-step.active .pipeline-step-num{border-color:var(--accent);color:var(--accent);}
+.pipeline-arrow{font-family:'Space Mono',monospace;font-size:11px;color:#666;margin:0 16px;}
+
+/* CARDS GRID */
+.cards-section{padding:48px 0 80px;}
+.cards-inner{max-width:1200px;margin:0 auto;padding:0 64px;}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+
+/* CARD */
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .15s;}
+.tool-card:hover{border-color:#555;transform:translateY(-2px);}
+.tool-card-top{padding:28px 28px 20px;flex:1;display:flex;flex-direction:column;gap:0;}
+.card-step{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.card-step-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;}
+.card-icon{font-size:28px;margin-bottom:16px;line-height:1;}
+.card-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.card-title{font-size:19px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;line-height:1.25;}
+.card-desc{font-size:12px;color:var(--text-muted);line-height:1.7;flex:1;}
+
+/* CARD META CHIPS */
+.card-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.chip{font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border-radius:2px;border:1px solid #4a4a4a;color:#999;letter-spacing:.06em;}
+
+/* CARD FOOTER */
+.tool-card-footer{padding:16px 28px;border-top:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.card-action-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;padding:9px 22px;border-radius:20px;border:none;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.card-action-btn:hover{opacity:.85;}
+.card-action-btn.primary{background:var(--accent);color:#fff;}
+.card-action-btn.secondary{background:transparent;border:1px solid var(--border);color:var(--text-muted);}
+.card-action-btn.secondary:hover{border-color:var(--text-muted);color:var(--text);opacity:1;}
+.card-input-hint{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.06em;color:#888;}
+
+/* FLOW NOTE */
+.flow-note{margin-top:48px;padding:20px 28px;background:var(--surface);border:1px solid var(--border);border-radius:4px;display:flex;align-items:flex-start;gap:16px;}
+.flow-note-icon{font-family:'Space Mono',monospace;font-size:9px;color:#999;letter-spacing:.1em;text-transform:uppercase;border:1px solid #4a4a4a;padding:3px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.flow-note-text{font-size:12px;color:var(--text-muted);line-height:1.7;}
+.flow-note-text strong{color:var(--text);font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .header-inner,.intro-inner,.pipeline-inner,.cards-inner{padding-left:24px;padding-right:24px;}
+  .cards-grid{grid-template-columns:1fr;}
+  .footer-meta{display:none;}
+  .pipeline-arrow{margin:0 8px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-title">Career Progression Framework</div>
+    <div class="header-divider"></div>
+    <div class="footer-meta" style="margin-left:0;">
+      <span class="footer-item"><span class="footer-item-label">Version</span>1.0</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Tracks</span>Technology · Business</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Domains</span>5</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Competencies</span>14</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Criteria</span>48</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-item"><span class="footer-item-label">Levels</span>6</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-inner">
+    <div class="intro-label">April9</div>
+    <h1 class="intro-title">Career Progression Framework</h1>
+    <p class="intro-desc">A structured system for assessing professional maturity, aligning on development gaps, and building individual development plans for both Technology and Business tracks.</p>
+  </div>
+</div>
+
+<!-- PIPELINE STRIP -->
+<div class="pipeline">
+  <div class="pipeline-inner">
+    <div class="pipeline-step active">
+      <span class="pipeline-step-num">1</span>
+      Know the Framework
+    </div>
+    <span class="pipeline-arrow">→</span>
+    <div class="pipeline-step active">
+      <span class="pipeline-step-num">2</span>
+      Self Assessment
+    </div>
+    <span class="pipeline-arrow">→</span>
+    <div class="pipeline-step active">
+      <span class="pipeline-step-num">3</span>
+      Leader Assessment
+    </div>
+    <span class="pipeline-arrow">→</span>
+    <div class="pipeline-step active">
+      <span class="pipeline-step-num">4</span>
+      Development Plan
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="cards-section">
+  <div class="cards-inner">
+    <div class="cards-grid">
+
+      <!-- Card 1: Framework Reference -->
+      <div class="tool-card">
+        <div class="tool-card-top">
+          <div class="card-step">
+            <span class="card-step-num" style="background:rgba(124,58,237,.15);color:var(--c-strategic);">1</span>
+            <span style="color:#888;">Start here</span>
+          </div>
+          <div class="card-label" style="color:var(--c-strategic);">Framework Reference</div>
+          <div class="card-title">Know the framework</div>
+          <div class="card-desc">The complete framework covering 5 domains, 14 competencies and proficiency descriptors across 6 levels for both tracks. Use for calibration, onboarding, and role definition.</div>
+          <div class="card-chips">
+            <span class="chip">Technology &amp; Business tracks</span>
+            <span class="chip">Novice → Specialist</span>
+            <span class="chip">Calibration &amp; onboarding</span>
+          </div>
+        </div>
+        <div class="tool-card-footer">
+          <span class="card-input-hint">Technology · Business</span>
+          <a class="card-action-btn primary" href="framework.html">
+            Open
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Self Assessment -->
+      <div class="tool-card">
+        <div class="tool-card-top">
+          <div class="card-step">
+            <span class="card-step-num" style="background:rgba(255,77,61,.15);color:var(--accent);">2</span>
+            <span style="color:#888;">Professional &amp; Leader</span>
+          </div>
+          <div class="card-label" style="color:var(--accent);">Self Assessment</div>
+          <div class="card-title">Assess your proficiency</div>
+          <div class="card-desc">Rate yourself across 14 competencies organised into 5 domains. Select your track and profile, provide evidence for higher-level criteria, and calculate your current level, next level, and gap analysis.</div>
+          <div class="card-chips">
+            <span class="chip">Track &amp; profile selection</span>
+            <span class="chip">Evidence capture</span>
+            <span class="chip">Radar chart &amp; gap analysis</span>
+            <span class="chip">Exports PDF with metadata</span>
+          </div>
+        </div>
+        <div class="tool-card-footer">
+          <span class="card-input-hint">Completed by the professional and the leader</span>
+          <a class="card-action-btn primary" href="assessment.html">
+            Open
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Development Plan -->
+      <div class="tool-card">
+        <div class="tool-card-top">
+          <div class="card-step">
+            <span class="card-step-num" style="background:rgba(59,130,246,.15);color:var(--c-technical);">3</span>
+            <span style="color:#888;">Requires both PDFs</span>
+          </div>
+          <div class="card-label" style="color:var(--c-technical);">Development Plan</div>
+          <div class="card-title">Build the IDP</div>
+          <div class="card-desc">Upload the professional's and leader's assessment PDFs. Compare scores, set consensus on diverging criteria, and generate individual development goals with suggested action plans, outcomes, and timeframes.</div>
+          <div class="card-chips">
+            <span class="chip">Side-by-side score comparison</span>
+            <span class="chip">Consensus scoring</span>
+            <span class="chip">Suggested action plans</span>
+            <span class="chip">Accept or defer goals</span>
+          </div>
+        </div>
+        <div class="tool-card-footer">
+          <span class="card-input-hint">Upload 2 assessment PDFs</span>
+          <a class="card-action-btn primary" href="development-plan.html">
+            Open
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FLOW NOTE -->
+    <div class="flow-note">
+      <span class="flow-note-icon">How it works</span>
+      <p class="flow-note-text">
+        Both the <strong>professional</strong> and their <strong>leader</strong> complete the Self Assessment independently and export their PDFs.
+        The Development Plan tool ingests both PDFs, surfaces where scores diverge, and generates a personalised development plan once consensus is reached.
+        All data travels via <strong>PDF metadata</strong>, no backend, no accounts.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
